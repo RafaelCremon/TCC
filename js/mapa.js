@@ -6,19 +6,19 @@ const viewer = new Marzipano.Viewer(document.getElementById('pano'), {
 });
 
 const panoData = [
-  { name: "Catraca", image: "panoramas/CATRACA.jpg" },
-  { name: "Escadaria", image: "panoramas/DOURADO_ESCADARIA.jpg" },
-  { name: "Safe_zone", image: "panoramas/SAFE_ZONE.jpg" },
-  { name: "hell", image: "panoramas/HELL.jpg" },
-  { name: "centro_patio", image: "panoramas/CENTRO_PATIOO.jpg" },
-  { name: "Bom_Gosto", image: "panoramas/BOM_GOSTO.jpg" },
-  { name: "impressao", image: "panoramas/FUNDO_IMPRESSAO.jpg" },
-  { name: "elevadores", image: "panoramas/ELEVADORES.jpg" },
-  { name: "fundo_corredor", image: "panoramas/FUNDO_CORREDOR.jpg" },
-  { name: "transporte", image: "panoramas/TRANSPORTE.jpg" },
-  { name: "escadaria_principal", image: "panoramas/ESCADAS_PRINCIPAL.jpg" },
-  { name: "secretaria", image: "panoramas/SECRETARIA.jpg" },
-  { name: "dema", image: "panoramas/DEMA.jpg" }
+  { name: "Catraca", image: "../assets/minimapa/CATRACA.jpg" },
+  { name: "Escadaria", image: "../assets/minimapa/DOURADO_ESCADARIA.jpg" },
+  { name: "Safe_zone", image: "../assets/minimapa/SAFE_ZONE.jpg" },
+  { name: "hell", image: "../assets/minimapa/HELL.jpg" },
+  { name: "centro_patio", image: "../assets/minimapa/CENTRO_PATIOO.jpg" },
+  { name: "Bom_Gosto", image: "../assets/minimapa/BOM_GOSTO.jpg" },
+  { name: "impressao", image: "../assets/minimapa/FUNDO_IMPRESSAO.jpg" },
+  { name: "elevadores", image: "../assets/minimapa/ELEVADORES.jpg" },
+  { name: "fundo_corredor", image: "../assets/minimapa/FUNDO_CORREDOR.jpg" },
+  { name: "transporte", image: "../assets/minimapa/TRANSPORTE.jpg" },
+  { name: "escadaria_principal", image: "../assets/minimapa/ESCADAS_PRINCIPAL.jpg" },
+  { name: "secretaria", image: "../assets/minimapa/SECRETARIA.jpg" },
+  { name: "dema", image: "../assets/minimapa/DEMA.jpg" }
 ];
 
 const scenes = panoData.map((data, index) => {
