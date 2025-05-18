@@ -1,0 +1,53 @@
+/* Reset e estilos básicos */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -ms-content-zooming: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+#pano {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+/* Hotspots com imagem (setas) */
+.hotspot {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilo da imagem da seta */
+.hotspot img {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.7));
+  transition: transform 0.2s ease;
+}
+
+/* Efeito hover opcional */
+.hotspot:hover img {
+  transform: scale(1.1);
+}
