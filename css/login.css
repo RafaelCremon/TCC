@@ -1,12 +1,88 @@
-.mensagem-erro {
-  color: red;
-  font-size: 0.85em;
-  margin-top: 4px;
-  height: 1em; 
+/* Fundo com gradiente e estilo */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Card de login */
+.card {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 8px 8px 0px #00000080;
+  text-align: center;
+  width: 300px;
+}
+
+/* Título */
+.card h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+/* Campo de entrada */
 .campo {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
+  margin: 15px 0;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Mensagem de erro */
+.mensagem-erro {
+  color: red;
+  font-size: 12px;
+}
+
+/* Botão */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 3px 3px 0px #00000080;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 10px 10px, rgba(255,255,255,0.1) 1px, transparent 1px),
+              radial-gradient(circle at 30px 30px, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveDots 10s linear infinite;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+@keyframes moveDots {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 100px, 100px 100px;
+  }
 }

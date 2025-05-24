@@ -8,21 +8,24 @@
 </head>
 <body>
 
-  <h1>Login</h1>
+  <div class="card">
+    <h1>Login</h1>
+    <p>Seja bem-vindo(a)! Faça login para acessar sua conta.</p>
 
-  <div class="campo">
-    <input type="text" id="usuario" placeholder="Usuário" />
-    <div class="mensagem-erro" id="erroUsuario"></div>
+    <div class="campo">
+      <label for="usuario">ID:</label>
+      <input type="text" id="usuario" placeholder="Digite seu ID" />
+      <div class="mensagem-erro" id="erroUsuario"></div>
+    </div>
+
+    <div class="campo">
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" placeholder="Digite sua senha" />
+      <div class="mensagem-erro" id="erroSenha"></div>
+    </div>
+
+    <button onclick="login()">Entrar</button>
   </div>
-
-  <div class="campo">
-    <input type="password" id="senha" placeholder="Senha" />
-    <div class="mensagem-erro" id="erroSenha"></div>
-  </div>
-
-  <p>
-      <button onclick="login()">Entrar</button>
-  </p>
 
   <script src="js/login.js"></script>
 
