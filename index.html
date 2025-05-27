@@ -1,33 +1,38 @@
+<link rel="stylesheet" href="css/login.css">
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="css/login.css">
+  <title>Tela de Login</title>
+  <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-
-  <div class="card">
-    <h1>Login</h1>
-    <p>Seja bem-vindo(a)! Faça login para acessar sua conta.</p>
-
-    <div class="campo">
-      <label for="usuario">ID:</label>
-      <input type="text" id="usuario" placeholder="Digite seu ID" />
-      <div class="mensagem-erro" id="erroUsuario"></div>
-    </div>
-
-    <div class="campo">
-      <label for="senha">Senha:</label>
-      <input type="password" id="senha" placeholder="Digite sua senha" />
-      <div class="mensagem-erro" id="erroSenha"></div>
-    </div>
-
-    <button onclick="login()">Entrar</button>
+  <!-- Bolhas animadas -->
+  <div class="background">
+    <ul class="bolhas">
+      <li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li>
+    </ul>
   </div>
 
-  <script src="js/login.js"></script>
+  <!-- Card de login -->
+  <div class="card">
+    <h1>Login</h1>
 
+    <div class="campo">
+      <label for="usuario">Usuário</label>
+      <input type="text" id="usuario" placeholder="Digite seu usuário">
+    </div>
+
+    <div class="campo">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="Digite sua senha">
+    </div>
+
+    <button>Entrar</button>
+    <button style="margin-top: 10px; background: linear-gradient(to right, #00c896, #00e3b3);">Criar Conta</button>
+  </div>
 </body>
 </html>
