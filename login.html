@@ -1,21 +1,15 @@
-<link rel="stylesheet" href="css/login.css">
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tela de Login</title>
-  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
+
   <!-- Bolhas animadas -->
-  <div class="background">
-    <ul class="bolhas">
-      <li></li><li></li><li></li><li></li><li></li>
-      <li></li><li></li><li></li><li></li><li></li>
-    </ul>
-  </div>
+  <ul class="bolhas" id="bolhas"></ul>
 
   <!-- Card de login -->
   <div class="card">
@@ -23,20 +17,41 @@
 
     <div class="campo">
       <label for="usuario">Usuário</label>
-      <input type="text" id="usuario" placeholder="Digite seu usuário">
+      <input type="text" id="usuario" placeholder="Digite seu usuário" />
       <div class="mensagem-erro" id="erroUsuario"></div>
     </div>
 
     <div class="campo">
       <label for="senha">Senha</label>
-      <input type="password" id="senha" placeholder="Digite sua senha">
+      <input type="password" id="senha" placeholder="Digite sua senha" />
       <div class="mensagem-erro" id="erroSenha"></div>
     </div>
-     <!-- on-click="login()" ao clicar executa o comando login do javascript -->
     <button onclick="login()">Entrar</button>
-    <button style="margin-top: 10px; background: linear-gradient(to right, #00c896, #00e3b3);">Criar Conta</button>
+    <button style="margin-top: 10px; background: linear-gradient(to right, #00c896, #00e3b3)">
+      Criar Conta
+    </button>
   </div>
-  <!-- conexão com o javascript -->
+
   <script src="js/login.js"></script>
+
+  <!-- Script para gerar as bolhas animadas -->
+  <script>
+    const bolhas = document.getElementById("bolhas");
+    const rows = 6;
+    const cols = 10;
+    const total = rows * cols;
+
+    for (let i = 0; i < total; i++) {
+      const li = document.createElement("li");
+
+      // calcula delay para efeito onda diagonal
+      const row = Math.floor(i / cols);
+      const col = i % cols;
+      const delay = (row + col) * 0.15;
+
+      li.style.animationDelay = `${delay}s`;
+      bolhas.appendChild(li);
+    }
+  </script>
 </body>
 </html>
