@@ -1,4 +1,4 @@
-/* === Estilização Geral === */
+/* Fundo com gradiente e estilo */
 body {
   margin: 0;
   padding: 0;
@@ -10,10 +10,9 @@ body {
   align-items: center;
   position: relative;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
-/* === Card de Login === */
+/* Card de login */
 .card {
   background: white;
   padding: 30px 40px;
@@ -23,16 +22,15 @@ body {
   width: 300px;
   position: relative;
   z-index: 1;
-  animation: entrar 0.8s ease-out;
 }
 
-/* Título do card */
+/* Título */
 .card h1 {
   margin-bottom: 10px;
   font-size: 24px;
 }
 
-/* Campos de entrada */
+/* Campo de entrada */
 .campo {
   margin: 15px 0;
   text-align: left;
@@ -44,36 +42,22 @@ input {
   margin-top: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  transition: 0.3s ease;
 }
 
-/* Input com foco */
-input:focus {
-  outline: none;
-  border-color: #348cff;
-  box-shadow: 0 0 5px #348cff55;
-}
-
-/* Estilo de erro para inputs */
-input.erro {
-  border-color: red;
-  box-shadow: 0 0 5px red;
-}
-
-/* Mensagens de erro */
+/* Mensagem de erro */
 .mensagem-erro {
-  color: red;
+  color: rgb(255, 0, 0);
   font-size: 12px;
 }
 
-/* Botão de login */
+/* Botão */
 button {
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 25px;
   background: linear-gradient(to right, #358cff, #250dbd);
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 16px;
   box-shadow: 3px 3px 0px #131032;
@@ -85,18 +69,59 @@ button:hover {
   opacity: 0.9;
 }
 
-/* Ícone para exibir/ocultar senha */
-.toggle-senha {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  user-select: none;
+.bolhas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  gap: 8px; /* gap calculado */
+  list-style: none;
+  pointer-events: none;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* === Animação do card ao entrar === */
+.bolhas li {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #1000572f;
+  opacity: 0.5;
+  transform-origin: bottom right;
+
+  animation: pulse 3s ease-in-out infinite;
+  --scale-base: 0.6; /* padrão, será sobrescrito pelo JS */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(var(--scale-base));
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(calc(var(--scale-base) * 1.));
+    opacity: 0.9;
+  }
+}
+
+/* Campo de entrada com efeito de foco */
+input:focus {
+  outline: none;
+  border-color: #348cff;
+  box-shadow: 0 0 5px #348cff55;
+  transition: 0.3s ease;
+}
+
+/* Efeito de entrada do card */
+.card {
+  animation: entrar 0.8s ease-out;
+}
+
 @keyframes entrar {
   from {
     transform: scale(0.9);
@@ -108,43 +133,19 @@ button:hover {
   }
 }
 
-/* === Fundo com bolhas animadas === */
-.bolhas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  gap: 8px;
-  list-style: none;
-  pointer-events: none;
-  z-index: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+/* Estilo de erro para o input */
+input.erro {
+  border-color: red;
+  box-shadow: 0 0 5px red;
 }
 
-/* Estilo de cada bolha */
-.bolhas li {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #1000572f;
-  opacity: 0.5;
-  transform-origin: bottom right;
-  animation: pulse 3s ease-in-out infinite;
-  --scale-base: 0.6; /* Valor padrão substituído via JS */
-}
-
-/* Animação pulsante das bolhas */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(var(--scale-base));
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(calc(var(--scale-base) * 1));
-    opacity: 0.9;
-  }
+/* Ícone de olho */
+.toggle-senha {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
 }
