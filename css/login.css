@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #2193b0, #0066ff);
+  background: linear-gradient(to right, #378cfc, #35189e);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -61,7 +61,7 @@ body::before {
   display: block;
   width: 20px;
   height: 20px;
-  background: rgba(255, 0, 212, 0.2);
+  background: rgba(37, 17, 153, 0.836);
   animation: subir 20s linear infinite;
   bottom: -150px;
   border-radius: 50%;
@@ -79,7 +79,7 @@ body::before {
   width: 20px;
   height: 20px;
   animation-duration: 20s;
-  animation-delay: 2s;
+
 }
 
 .bolhas li:nth-child(3) {
@@ -87,7 +87,7 @@ body::before {
   width: 30px;
   height: 30px;
   animation-duration: 22s;
-  animation-delay: 4s;
+
 }
 
 .bolhas li:nth-child(4) {
@@ -102,7 +102,7 @@ body::before {
   width: 60px;
   height: 60px;
   animation-duration: 30s;
-  animation-delay: 3s;
+ 
 }
 
 .bolhas li:nth-child(6) {
@@ -110,7 +110,7 @@ body::before {
   width: 20px;
   height: 20px;
   animation-duration: 25s;
-  animation-delay: 2s;
+ 
 }
 
 .bolhas li:nth-child(7) {
@@ -118,7 +118,7 @@ body::before {
   width: 30px;
   height: 30px;
   animation-duration: 17s;
-  animation-delay: 1s;
+  
 }
 
 .bolhas li:nth-child(8) {
@@ -126,7 +126,7 @@ body::before {
   width: 50px;
   height: 50px;
   animation-duration: 20s;
-  animation-delay: 7s;
+ 
 }
 
 .bolhas li:nth-child(9) {
@@ -134,7 +134,7 @@ body::before {
   width: 15px;
   height: 15px;
   animation-duration: 40s;
-  animation-delay: 15s;
+  
 }
 
 .bolhas li:nth-child(10) {
@@ -142,7 +142,7 @@ body::before {
   width: 25px;
   height: 25px;
   animation-duration: 35s;
-  animation-delay: 2s;
+
 }
 
 @keyframes subir {
@@ -200,11 +200,11 @@ button {
   padding: 12px;
   border: none;
   border-radius: 25px;
-  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  background: linear-gradient(to right, #358cff, #250dbd);
   color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 16px;
-  box-shadow: 3px 3px 0px #00000080;
+  box-shadow: 3px 3px 0px #131032;
   cursor: pointer;
   transition: 0.3s;
 }
