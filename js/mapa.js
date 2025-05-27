@@ -24,8 +24,18 @@ const panoData = [
 const scenes = panoData.map((data, index) => {
   const source = Marzipano.ImageUrlSource.fromString(data.image);
   const geometry = new Marzipano.EquirectGeometry([{ width: 4000 }]);
-  const limiter = Marzipano.RectilinearView.limit.traditional(2048, 100 * Math.PI / 180, 120 * Math.PI / 180);
-  const view = new Marzipano.RectilinearView(null, limiter);
+  const limiter = Marzipano.RectilinearView.limit.traditional(
+    2048,
+    100 * Math.PI / 180,
+    120 * Math.PI / 180
+  );
+
+  // Define o yaw inicial apenas para a segunda imagem (índice 1)
+  const initialViewParams = (index === 1)
+    ? { yaw: 10 } // Ajuste esse valor se necessário (ex: Math.PI, Math.PI/2 etc.)
+    : null;
+
+  const view = new Marzipano.RectilinearView(initialViewParams, limiter);
   const scene = viewer.createScene({ source, geometry, view });
 
   // Hotspot Avançar (próxima cena)
@@ -39,7 +49,7 @@ const scenes = panoData.map((data, index) => {
     scene.hotspotContainer().createHotspot(nextHotspot, { yaw: 1.0, pitch: 0 });
   }
 
-  // hotspot voltar (cena anterior)
+  // Hotspot Voltar (cena anterior)
   if (index > 0) {
     const prevHotspot = document.createElement('div');
     prevHotspot.className = 'hotspot arrow prev';
@@ -56,4 +66,5 @@ const scenes = panoData.map((data, index) => {
   };
 });
 
+// Inicia a primeira cena
 scenes[0].scene.switchTo();
