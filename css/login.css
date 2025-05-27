@@ -108,3 +108,45 @@ button:hover {
   }
 }
 
+/* Campo de entrada com efeito de foco */
+input:focus {
+  outline: none;
+  border-color: #348cff;
+  box-shadow: 0 0 5px #348cff55;
+  transition: 0.3s ease;
+}
+
+/* Efeito de entrada do card */
+.card {
+  animation: entrar 0.8s ease-out;
+}
+
+@keyframes entrar {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Estilo de erro para o input */
+input.erro {
+  border-color: red;
+  box-shadow: 0 0 5px red;
+}
+
+/* Ícone de olho */
+.toggle-senha {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
+

@@ -68,3 +68,49 @@ function criarBolhas() {
 
 criarBolhas();
 window.addEventListener("resize", criarBolhas);
+function login() {
+  const usuario = document.getElementById("usuario");
+  const senha = document.getElementById("senha");
+  const erroUsuario = document.getElementById("erroUsuario");
+  const erroSenha = document.getElementById("erroSenha");
+
+  // Limpa mensagens e estilos
+  erroUsuario.textContent = "";
+  erroSenha.textContent = "";
+  usuario.classList.remove("erro");
+  senha.classList.remove("erro");
+
+  const usuariosValidos = [
+    { usuario: "admin", senha: "1234" }
+  ];
+
+  const autorizado = usuariosValidos.find(u => u.usuario === usuario.value && u.senha === senha.value);
+
+  if (autorizado) {
+    document.querySelector("button").innerText = "Carregando...";
+    setTimeout(() => {
+      window.location.href = "pages/mapa.html";
+    }, 1000);
+  } else {
+    if (!usuario.value) {
+      erroUsuario.textContent = "Usuário obrigatório.";
+      usuario.classList.add("erro");
+    }
+
+    if (!senha.value) {
+      erroSenha.textContent = "Senha obrigatória.";
+      senha.classList.add("erro");
+    }
+
+    if (usuario.value && senha.value) {
+      erroSenha.textContent = "Usuário ou senha incorretos.";
+      senha.classList.add("erro");
+      usuario.classList.add("erro");
+    }
+  }
+}
+
+function toggleSenha() {
+  const senhaInput = document.getElementById("senha");
+  senhaInput.type = senhaInput.type === "password" ? "text" : "password";
+}

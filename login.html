@@ -23,13 +23,14 @@
 
     <div class="campo">
       <label for="senha">Senha</label>
-      <input type="password" id="senha" placeholder="Digite sua senha" />
+      <div style="position: relative;">
+        <input type="password" id="senha" placeholder="Digite sua senha" />
+        <span class="toggle-senha" onclick="toggleSenha()">👁️</span>
+      </div>
       <div class="mensagem-erro" id="erroSenha"></div>
     </div>
+    
     <button onclick="login()">Entrar</button>
-    <button style="margin-top: 10px; background: linear-gradient(to right, #00c896, #00e3b3)">
-      Criar Conta
-    </button>
   </div>
 
   <script src="js/login.js"></script>
@@ -44,7 +45,6 @@
     for (let i = 0; i < total; i++) {
       const li = document.createElement("li");
 
-      // calcula delay para efeito onda diagonal
       const row = Math.floor(i / cols);
       const col = i % cols;
       const delay = (row + col) * 0.15;
