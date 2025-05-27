@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
-
   <!-- Bolhas animadas -->
   <ul class="bolhas" id="bolhas"></ul>
 
@@ -15,12 +14,14 @@
   <div class="card">
     <h1>Login</h1>
 
+    <!-- Campo do Usuário -->
     <div class="campo">
       <label for="usuario">Usuário</label>
       <input type="text" id="usuario" placeholder="Digite seu usuário" />
       <div class="mensagem-erro" id="erroUsuario"></div>
     </div>
 
+    <!-- Campo da Senha -->
     <div class="campo">
       <label for="senha">Senha</label>
       <div style="position: relative;">
@@ -29,29 +30,12 @@
       </div>
       <div class="mensagem-erro" id="erroSenha"></div>
     </div>
-    
+
+    <!-- Botão entrar -->
     <button onclick="login()">Entrar</button>
   </div>
-
+  
+  <!-- Conexão JavaScript -->
   <script src="js/login.js"></script>
-
-  <!-- Script para gerar as bolhas animadas -->
-  <script>
-    const bolhas = document.getElementById("bolhas");
-    const rows = 6;
-    const cols = 10;
-    const total = rows * cols;
-
-    for (let i = 0; i < total; i++) {
-      const li = document.createElement("li");
-
-      const row = Math.floor(i / cols);
-      const col = i % cols;
-      const delay = (row + col) * 0.15;
-
-      li.style.animationDelay = `${delay}s`;
-      bolhas.appendChild(li);
-    }
-  </script>
 </body>
 </html>
