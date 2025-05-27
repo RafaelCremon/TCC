@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tela de Login</title>
-  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
   <!-- Bolhas animadas -->
@@ -24,15 +24,19 @@
     <div class="campo">
       <label for="usuario">Usuário</label>
       <input type="text" id="usuario" placeholder="Digite seu usuário">
+      <div class="mensagem-erro" id="erroUsuario"></div>
     </div>
 
     <div class="campo">
       <label for="senha">Senha</label>
       <input type="password" id="senha" placeholder="Digite sua senha">
+      <div class="mensagem-erro" id="erroSenha"></div>
     </div>
-
-    <button>Entrar</button>
+     <!-- on-click="login()" ao clicar executa o comando login do javascript -->
+    <button onclick="login()">Entrar</button>
     <button style="margin-top: 10px; background: linear-gradient(to right, #00c896, #00e3b3);">Criar Conta</button>
   </div>
+  <!-- conexão com o javascript -->
+  <script src="js/login.js"></script>
 </body>
 </html>
