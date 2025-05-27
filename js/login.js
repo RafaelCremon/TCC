@@ -60,8 +60,6 @@ function criarBolhas() {
     const scaleBase = 0.4 + (distance / maxDistance) * 1.0; // varia de 0.4 a 1.4
 
     li.style.animationDelay = `${delay}s`;
-    li.style.setProperty("--scale-base", scaleBase);
-    li.style.transformOrigin = "bottom right";
 
     bolhas.appendChild(li);
   }

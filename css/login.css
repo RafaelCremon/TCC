@@ -94,7 +94,7 @@ button:hover {
   transform-origin: bottom right;
 
   animation: pulse 3s ease-in-out infinite;
-  --scale-base: 1; /* padrão, será sobrescrito pelo JS */
+  --scale-base: 0.6; /* padrão, será sobrescrito pelo JS */
 }
 
 @keyframes pulse {
