@@ -1,88 +1,68 @@
-/* Reset e estilos básicos */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  -webkit-touch-callout: none;
-  -ms-content-zooming: none;
-}
-
+/* Garante que o body e o pano tenham um fundo visível, se não for coberto pela imagem do panorama */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  font-family: sans-serif;
+  background-color: #222; /* Um fundo escuro para o HTML/BODY */
 }
 
 #pano {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: #333; /* Um fundo escuro para o container do panorama */
 }
 
-/* Tamanho maior para facilitar clique */
-.hotspot {
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  cursor: pointer;
-  z-index: 1000;
-  user-select: none;
+
+/* Container para a seta (o círculo cinza) */
+.hotspot.arrow.forward {
+width: 80px; /* Tamanho do círculo */
+height: 80px; /* Tamanho do círculo */
+position: absolute;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%); /* A rotação será adicionada pelo JS */
+z-index: 1000;
+cursor: pointer;
+background-color: rgba(0, 0, 0, 0.5); /* Fundo cinza semi-transparente para o círculo */
+border-radius: 50%; /* Transforma o quadrado em círculo */
+display: flex; /* Usa flexbox para centralizar a seta interna */
+justify-content: center; /* Centraliza horizontalmente */
+align-items: center; /* Centraliza verticalmente */
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Sombra suave para dar profundidade */
+transition: background-color 0.2s ease; /* Transição suave para o efeito hover */
+
+/* --- LINHA TEMPORÁRIA PARA DIAGNÓSTICO --- */
+border: 1px solid red; /* Adiciona uma borda vermelha para ver o limite do elemento */
+/* --- REMOVA A LINHA ACIMA DEPOIS QUE O CÍRCULO CINZA APARECER --- */
 }
 
-/* Estilo base para as setas */
-.hotspot.arrow::before {
-  content: '';
-  display: block;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8)); /* sombra */
+/* Efeito ao passar o mouse */
+.hotspot.arrow.forward:hover {
+background-color: rgba(0, 0, 0, 0.7); /* Fica um pouco mais escuro ao passar o mouse */
 }
 
-/* Seta para direita (próxima) */
-.hotspot.arrow.next::before {
-  border-width: 18px 0 18px 30px;
-  border-color: transparent transparent transparent white;
+/* A forma da seta (o 'V' branco) */
+.hotspot.arrow.forward::before,
+.hotspot.arrow.forward::after {
+content: '';
+position: absolute;
+width: 25px;
+height: 6px;
+background-color: rgba(255, 255, 255, 0.9); /* Cor branca semi-transparente para a seta */
+border-radius: 3px;
+top: 50%;
+left: 50%;
+transform-origin: center center;
 }
 
-/* Seta para esquerda (voltar) */
-.hotspot.arrow.prev::before {
-  border-width: 18px 30px 18px 0;
-  border-color: transparent white transparent transparent;
+/* Perna esquerda do 'V' (agora apontando para baixo-esquerda) */
+.hotspot.arrow.forward::before {
+transform: translate(-50%, -50%) rotate(-45deg) translate(-10px, 0); /* Ajustado para inverter */
 }
 
-/* Reset e estilos básicos */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: sans-serif;
-}
-
-#pano {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
+/* Perna direita do 'V' (agora apontando para baixo-direita) */
+.hotspot.arrow.forward::after {
+transform: translate(-50%, -50%) rotate(45deg) translate(10px, 0); /* Ajustado para inverter */
 }

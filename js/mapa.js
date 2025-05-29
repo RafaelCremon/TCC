@@ -6,7 +6,7 @@ const viewer = new Marzipano.Viewer(document.getElementById('pano'), {
 });
 
 const panoData = [
-  { name: "Catraca", image: "../assets/minimapa/CATRACA.jpg", initialYaw: 180 },
+  { name: "Catraca", image: "../assets/minimapa/CATRACA.jpg", initialYaw: 10 },
   { name: "Escadaria", image: "../assets/minimapa/DOURADO_ESCADARIA.jpg", initialYaw: Math.PI },
   { name: "Safe_zone", image: "../assets/minimapa/SAFE_ZONE.jpg", initialYaw: 0 },
   { name: "hell", image: "../assets/minimapa/HELL.jpg", initialYaw: 0 },
@@ -24,52 +24,43 @@ const panoData = [
 const scenes = panoData.map((data, index) => {
   const source = Marzipano.ImageUrlSource.fromString(data.image);
   const geometry = new Marzipano.EquirectGeometry([{ width: 4000 }]);
-  const limiter = Marzipano.RectilinearView.limit.traditional(2048, 100 * Math.PI / 180, 120 * Math.PI / 180);
-
-  const view = new Marzipano.RectilinearView(
-    { yaw: data.initialYaw || 0 },
-    limiter
-  );
-
+  const limiter = Marzipano.RectilinearView.limit.traditional(2048, Math.PI / 2, Math.PI / 2);
+  const view = new Marzipano.RectilinearView({ yaw: data.initialYaw || 0 }, limiter);
   const scene = viewer.createScene({ source, geometry, view });
 
-  // Hotspot para próxima cena
-  if (index < panoData.length - 1) {
-    const nextHotspot = document.createElement('div');
-    nextHotspot.className = 'hotspot arrow next';
-    nextHotspot.title = "Próxima";
+  scene.view = view;
 
-    nextHotspot.addEventListener('click', () => {
-      scenes[index + 1].scene.switchTo();
-    });
-
-    scene.hotspotContainer().createHotspot(nextHotspot, {
-      yaw: (data.initialYaw || 0),
-      pitch: 0
-    });
-  }
-
-  // Hotspot para cena anterior
-  if (index > 0) {
-    const prevHotspot = document.createElement('div');
-    prevHotspot.className = 'hotspot arrow prev';
-    prevHotspot.title = "Voltar";
-
-    prevHotspot.addEventListener('click', () => {
-      scenes[index - 1].scene.switchTo();
-    });
-
-    scene.hotspotContainer().createHotspot(prevHotspot, {
-      yaw: (data.initialYaw || 0) + Math.PI,
-      pitch: 0
-    });
-  }
-
-  return {
-    name: data.name,
-    scene: scene
-  };
+  return { name: data.name, scene, view };
 });
 
-// Mostra a primeira cena
-scenes[0].scene.switchTo();
+let currentIndex = 0;
+
+const forwardArrow = document.createElement('div');
+forwardArrow.className = 'hotspot arrow forward';
+forwardArrow.title = "Avançar/Retornar"; // Título pode ser mais genérico agora
+document.getElementById('pano').appendChild(forwardArrow);
+
+forwardArrow.addEventListener('click', () => {
+  const yaw = scenes[currentIndex].view.yaw();
+
+  // Lógica INVERTIDA:
+  // Se a seta aponta para "frente" (cos(yaw) >= 0), a foto RETORNA
+  if (Math.cos(yaw) >= 0 && currentIndex > 0) { // Garante que não vai para índice negativo
+    currentIndex--;
+  }
+  // Se a seta aponta para "trás" (cos(yaw) < 0), a foto AVANÇA
+  else if (Math.cos(yaw) < 0 && currentIndex < scenes.length - 1) { // Garante que não excede o array
+    currentIndex++;
+  }
+  scenes[currentIndex].scene.switchTo();
+});
+
+function updateArrowRotation() {
+  const yaw = scenes[currentIndex].view.yaw();
+  const degrees = yaw * (180 / Math.PI);
+  forwardArrow.style.transform = `translateX(-50%) rotate(${degrees}deg)`;
+  requestAnimationFrame(updateArrowRotation);
+}
+
+scenes[currentIndex].scene.switchTo();
+updateArrowRotation();
