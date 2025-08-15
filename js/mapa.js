@@ -1,27 +1,40 @@
 const viewer = new Marzipano.Viewer(document.getElementById('pano'), {
   controls: {
     mouseViewMode: 'drag',
-    scrollZoom: true // Habilita o zoom com o scroll do mouse
+    scrollZoom: true
   }
 });
 
+// Apenas fotos do Bloco A cadastradas
 const panoData = [
-  { name: "Catraca", image: "../assets/minimapa/CATRACA.jpg" },
-  { name: "Escadaria", image: "../assets/minimapa/DOURADO_ESCADARIA.jpg" },
-  { name: "Safe_zone", image: "../assets/minimapa/SAFE_ZONE.jpg" },
-  { name: "hell", image: "../assets/minimapa/HELL.jpg" },
-  { name: "centro_patio", image: "../assets/minimapa/CENTRO_PATIOO.jpg" },
-  { name: "Bom_Gosto", image: "../assets/minimapa/BOM_GOSTO.jpg" },
-  { name: "impressao", image: "../assets/minimapa/FUNDO_IMPRESSAO.jpg" },
-  { name: "elevadores", image: "../assets/minimapa/ELEVADORES.jpg" },
-  { name: "fundo_corredor", image: "../assets/minimapa/FUNDO_CORREDOR.jpg" },
-  { name: "transporte", image: "../assets/minimapa/TRANSPORTE.jpg" },
-  { name: "escadaria_principal", image: "../assets/minimapa/ESCADAS_PRINCIPAL.jpg" },
-  { name: "secretaria", image: "../assets/minimapa/SECRETARIA.jpg" },
-  { name: "dema", image: "../assets/minimapa/DEMA.jpg" }
+  { name: "Catraca", image: "../assets/minimapa/CATRACA.jpg", bloco: "A" },
+  { name: "Escadaria", image: "../assets/minimapa/DOURADO_ESCADARIA.jpg", bloco: "A" },
+  { name: "fundo_corredor", image: "../assets/minimapa/FUNDO_CORREDOR.jpg", bloco: "A" },
+  { name: "dema", image: "../assets/minimapa/DEMA.jpg", bloco: "A" },
+   { name: "Safe_zone", image: "../assets/minimapa/SAFE_ZONE.jpg", bloco: "A" },
+  { name: "hell", image: "../assets/minimapa/HELL.jpg", bloco: "A" },
+  { name: "transporte", image: "../assets/minimapa/TRANSPORTE.jpg", bloco: "A" },
+  { name: "centro_patio", image: "../assets/minimapa/CENTRO_PATIOO.jpg", bloco: "A" },
+ { name: "Bom_Gosto", image: "../assets/minimapa/BOM_GOSTO.jpg", bloco: "A" },
+  { name: "escadaria_principal", image: "../assets/minimapa/ESCADAS_PRINCIPAL.jpg", bloco: "A" },
+  { name: "impressao", image: "../assets/minimapa/FUNDO_IMPRESSAO.jpg", bloco: "A" },
+  { name: "elevadores", image: "../assets/minimapa/ELEVADORES.jpg", bloco: "A" },
+  { name: "secretaria", image: "../assets/minimapa/SECRETARIA.jpg", bloco: "A" },
 ];
 
-const scenes = panoData.map((data, index) => {
+// Função para pegar o parâmetro da URL
+function getBlocoFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('bloco');
+}
+
+const blocoSelecionado = getBlocoFromUrl();
+const panoFiltrado = blocoSelecionado
+  ? panoData.filter(data => data.bloco === blocoSelecionado)
+  : [];
+
+// Só cria cenas se houver fotos para o bloco selecionado
+const scenes = panoFiltrado.map((data, index) => {
   const source = Marzipano.ImageUrlSource.fromString(data.image);
   const geometry = new Marzipano.EquirectGeometry([{ width: 4000 }]);
   const limiter = Marzipano.RectilinearView.limit.traditional(
@@ -30,16 +43,15 @@ const scenes = panoData.map((data, index) => {
     120 * Math.PI / 180
   );
 
-  // Define o yaw inicial apenas para a segunda imagem (índice 1)
   const initialViewParams = (index === 1)
-    ? { yaw: 10 } // Ajuste esse valor se necessário (ex: Math.PI, Math.PI/2 etc.)
+    ? { yaw: 10 }
     : null;
 
   const view = new Marzipano.RectilinearView(initialViewParams, limiter);
   const scene = viewer.createScene({ source, geometry, view });
 
   // Hotspot Avançar (próxima cena)
-  if (index < panoData.length - 1) {
+  if (index < panoFiltrado.length - 1) {
     const nextHotspot = document.createElement('div');
     nextHotspot.className = 'hotspot arrow next';
     nextHotspot.title = "Próxima";
@@ -66,5 +78,7 @@ const scenes = panoData.map((data, index) => {
   };
 });
 
-// Inicia a primeira cena
-scenes[0].scene.switchTo();
+// Só inicia se houver cenas (fotos)
+if (scenes.length > 0) {
+  scenes[0].scene.switchTo();
+}

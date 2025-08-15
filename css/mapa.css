@@ -86,3 +86,21 @@ html, body {
   height: 100%;
   background-color: #000;
 }
+.blocos {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+.blocos button {
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  border: none;
+  background: #2d89ef;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.blocos button:hover {
+  background: #1b5fa7;
+}
