@@ -18,7 +18,7 @@ function login() {
 
   // Se foi os autorizados levar para a página mapa
   if (autorizado) {
-    window.location.href = "pages/mapa.html"; // Redireciona para o mapa
+    window.location.href = "pages/inicial.html"; // Redireciona para o mapa
   } 
   else //Se não...
   {
