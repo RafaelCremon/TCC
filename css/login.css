@@ -149,3 +149,13 @@ input.erro {
   font-size: 18px;
   user-select: none;
 }
+.bolhas li {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  opacity: 0.35;
+  box-shadow: 0 0 16px 4px #348cff55;
+  transform-origin: bottom right;
+  animation: pulse 4s ease-in-out infinite;
+  --scale-base: 0.7;
+}
