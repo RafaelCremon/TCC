@@ -8,38 +8,44 @@ function login() {
   // Limpa mensagens anteriores
   erroUsuario.textContent = "";
   erroSenha.textContent = "";
-  
+
   // Usuário e Senha Válidos para entrar
-  const usuariosValidos = [
-    { usuario: "admin", senha: "1234" }
-  ];
+  const usuariosValidos = [{ usuario: "admin", senha: "1234" }];
+
   // Autoriza caso o Usuário e Senha inseridos forem os de cima
   const autorizado = usuariosValidos.find(u => u.usuario === usuario && u.senha === senha);
 
   // Se foi os autorizados levar para a página mapa
   if (autorizado) {
-    window.location.href = "pages/mapa.html"; // Redireciona para o mapa
-  } 
-  else //Se não...
-  {
-    if (!usuario) erroUsuario.textContent = "Usuário obrigatório.";
-    else erroUsuario.textContent = "";
+  const card = document.querySelector(".card");
+  card.classList.add("hide");
 
-    if (!senha) erroSenha.textContent = "Senha obrigatória.";
-    else erroSenha.textContent = "";
-
-    if (usuario && senha) {
-      erroSenha.textContent = "Usuário ou senha incorretos.";
-    }
-  }
+  setTimeout(() => {
+    window.location.href = "pages/inicial.html";
+  }, 400); // 400ms (tempo da animação de saída)
+}
 }
 
+// NOVO: manter o ícone de olho funcionando
+function toggleSenha() {
+  const input = document.getElementById("senha");
+  if (!input) return;
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+/* =======================
+   Bolhas originais (decorativas)
+   Mantidas, porém desativadas por padrão para evitar travamentos.
+   Para reativar, mude ENABLE_BUBBLES para true.
+======================= */
+const ENABLE_BUBBLES = false;
 const bolhas = document.getElementById("bolhas");
 const bubbleSize = 20;
 const maxScale = 1.4;
 const gap = bubbleSize * (maxScale - 1); // 8px
 
 function criarBolhas() {
+  if (!bolhas) return;
   bolhas.innerHTML = "";
 
   const width = window.innerWidth;
@@ -61,14 +67,14 @@ function criarBolhas() {
     const delay = (row + col) * 0.05;
 
     const distance = col + row;
-    // Escala base: menor no canto superior esquerdo (distance=0), maior no inferior direito (distance=maxDistance)
     const scaleBase = 0.4 + (distance / maxDistance) * 1.0; // varia de 0.4 a 1.4
-
+    li.style.setProperty("--scale-base", scaleBase);
     li.style.animationDelay = `${delay}s`;
-
     bolhas.appendChild(li);
   }
 }
 
-criarBolhas();
-window.addEventListener("resize", criarBolhas);
+if (ENABLE_BUBBLES && bolhas) {
+  criarBolhas();
+  window.addEventListener("resize", criarBolhas);
+}
