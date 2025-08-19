@@ -15,9 +15,16 @@
       <span class="logo"></span>
       <h1>Quantum Edu.</h1>
     </div>
-    <div class="admin-profile">
+    <div class="admin-profile" id="adminProfile" style="position: relative; cursor: pointer;">
       <img src="URL_DA_FOTO_DO_ADMIN" alt="Admin" class="admin-avatar">
       <span>Admin</span>
+      <!-- Menu suspenso -->
+      <div id="profileMenu" style="display:none; position:absolute; right:0; top:110%; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); min-width:120px; z-index:100;">
+        <button id="toggleThemeBtn" style="width:100%; background:none; border:none; padding:10px; text-align:left; cursor:pointer;">
+          Alternar modo claro/escuro
+        </button>
+        <button onclick="window.location.href='../login.html'" style="width:100%; background:none; border:none; padding:10px; text-align:left; cursor:pointer;">Sair</button>
+      </div>
     </div>
   </header>
 
@@ -59,12 +66,26 @@
 
   <main class="content">
     <div class="shortcuts-card">
-      <h3>Atalhos</h3>
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h3 style="margin: 0;">Atalhos</h3>
+        <button 
+          onclick="window.location.href='atalhos.html'" 
+          title="Editar atalhos" 
+          style="background: none; border: none; cursor: pointer; padding: 4px;"
+          aria-label="Editar atalhos"
+        >
+          <!-- Ícone caneta e papel (editar) -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0057ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+          </svg>
+        </button>
+      </div>
       <div class="shortcut-buttons">
-        <button class="add-shortcut-btn">+</button>
-        <button class="add-shortcut-btn">+</button>
-        <button class="add-shortcut-btn">+</button>
-        <button class="add-shortcut-btn">+</button>
+        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
       </div>
     </div>
   </main>
@@ -72,5 +93,68 @@
   <div class="overlay" id="overlay"></div>
   
   <script src="/js/inicial.js"></script>
+  <script>
+  // Função para carregar atalhos salvos
+  function carregarAtalhos() {
+    const atalhos = JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
+    const container = document.querySelector('.shortcut-buttons');
+    container.innerHTML = ''; // Limpa os atalhos atuais
+
+    atalhos.slice(0, 4).forEach(atalho => {
+      if (atalho && atalho.nome && atalho.src) {
+        // Cria botão de atalho preenchido
+        const btn = document.createElement('button');
+        btn.className = 'add-shortcut-btn atalho-preenchido';
+        btn.title = atalho.nome;
+        btn.style.display = 'flex';
+        btn.style.flexDirection = 'column';
+        btn.style.alignItems = 'center';
+        btn.style.justifyContent = 'center';
+        btn.innerHTML = `
+          <img src="${atalho.src}" alt="${atalho.alt || ''}" style="width:28px;height:28px;margin-bottom:2px;">
+          <span style="font-size:11px;color:#222;">${atalho.nome}</span>
+        `;
+        // Adiciona ação especial para Mini Mapa
+        if (atalho.nome === "Mini Mapa") {
+          btn.onclick = () => window.location.href = 'tour.html?bloco=A';
+        }
+        container.appendChild(btn);
+      } else {
+        // Cria botão de adicionar atalho
+        const btn = document.createElement('button');
+        btn.className = 'add-shortcut-btn';
+        btn.textContent = '+';
+        btn.onclick = () => window.location.href = 'atalhos.html';
+        container.appendChild(btn);
+      }
+    });
+
+    // Se tiver menos de 4 atalhos, completa com botões "+"
+    for (let i = atalhos.length; i < 4; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'add-shortcut-btn';
+      btn.textContent = '+';
+      btn.onclick = () => window.location.href = 'atalhos.html';
+      container.appendChild(btn);
+    }
+  }
+
+  // Chama ao carregar a página
+  carregarAtalhos();
+
+  // Menu do perfil
+  const adminProfile = document.getElementById('adminProfile');
+  const profileMenu = document.getElementById('profileMenu');
+
+  adminProfile.addEventListener('click', function(e) {
+    e.stopPropagation();
+    profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Fecha o menu ao clicar fora
+  document.addEventListener('click', function() {
+    profileMenu.style.display = 'none';
+  });
+</script>
 </body>
 </html>

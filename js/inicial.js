@@ -25,3 +25,21 @@ toggleButton.addEventListener('click', toggleSidebar);
 
 // Adiciona o evento de clique ao overlay para fechar a sidebar quando clicar fora dela
 overlay.addEventListener('click', toggleSidebar);
+
+// Alternância de tema claro/escuro
+const toggleThemeBtn = document.getElementById('toggleThemeBtn');
+toggleThemeBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  document.body.classList.toggle('dark-mode');
+  // Salva preferência no localStorage
+  if(document.body.classList.contains('dark-mode')) {
+    localStorage.setItem('theme', 'dark');
+  } else {
+    localStorage.setItem('theme', 'light');
+  }
+});
+
+// Aplica o tema salvo ao carregar
+if(localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+}

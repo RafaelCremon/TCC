@@ -139,3 +139,74 @@ body::before{
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+/* --- MODO ESCURO IRADO --- */
+body.dark-mode {
+  --bg-1: #181c2f;
+  --bg-2: #232a4d;
+  --card: #232a4d;
+  --ink: #f1f1f1;
+  --muted: #8fa2d9;
+  --brand: #7f5cff;
+  --brand-2: #00e0ff;
+  --ring: #3a4a7a;
+  --shadow: 0 24px 48px rgba(0,0,0,.45);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #2e1a47 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 60%);
+  color: var(--ink);
+}
+
+body.dark-mode .top-bar,
+body.dark-mode .sidebar,
+body.dark-mode .shortcuts-card,
+body.dark-mode #profileMenu {
+  background: linear-gradient(135deg, #232a4d 80%, #2e1a47 100%) !important;
+  color: var(--ink) !important;
+  border-color: #3a4a7a !important;
+}
+
+body.dark-mode .sidebar-item,
+body.dark-mode .sidebar-icon {
+  color: #c3bfff !important;
+  fill: #7f5cff !important;
+}
+
+body.dark-mode .sidebar-item:hover {
+  background: rgba(127,92,255,0.12);
+}
+
+body.dark-mode .add-shortcut-btn {
+  background: linear-gradient(135deg, #2e1a47 60%, #00e0ff 100%);
+  border: 1px dashed #7f5cff;
+  color: #00e0ff;
+}
+
+body.dark-mode .add-shortcut-btn.atalho-preenchido {
+  background: linear-gradient(135deg, #7f5cff 60%, #00e0ff 100%);
+  color: #fff;
+}
+
+body.dark-mode .shortcuts-card h3,
+body.dark-mode .shortcuts-card span {
+  color: #00e0ff;
+}
+
+body.dark-mode .options {
+  background: #232a4d;
+  border-color: #7f5cff;
+}
+
+body.dark-mode .options button {
+  background: #2e1a47;
+  color: #00e0ff;
+}
+
+body.dark-mode .options button:hover {
+  background: #7f5cff;
+  color: #fff;
+}
+
+body.dark-mode .overlay {
+  background-color: rgba(0,0,0,0.7);
+}

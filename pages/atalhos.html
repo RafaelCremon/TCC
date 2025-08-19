@@ -1,11 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atalhos</title>
+  <meta charset="UTF-8" />
+  <title>Edição de Atalhos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fb;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .salvar-btn {
+      float: right;
+      background-color: #0057ff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 30px 0 10px;
+      font-weight: bold;
+    }
+
+    .atalhos-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .atalho-slot {
+      background-color: #f0f2f5;
+      border: 2px dashed #ccc;
+      border-radius: 12px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      padding: 10px;
+      position: relative;
+      flex-direction: column;
+    }
+
+    .atalho-slot.preenchido {
+      background-color: #eef2ff;
+      border: 1px solid #cdd5f5;
+    }
+
+    .atalho-slot .remover {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ffeded;
+      border: none;
+      color: #e00;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .opcoes-grid {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .opcao-atalho {
+      background-color: #eef2ff;
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+      position: relative;
+    }
+
+    .opcao-atalho img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 5px;
+      object-fit: contain;
+    }
+
+    .opcao-atalho span {
+      font-size: 13px;
+      color: #333;
+      text-align: center;
+    }
+
+    .opcao-atalho button {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background-color: #d7fadb;
+      color: #1b8f3a;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .atalho-slot img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 5px;
+      object-fit: contain;
+    }
+
+    .atalho-slot .nome {
+      font-size: 13px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    <h1>Atalhos:</h1>
+
+  <button class="salvar-btn" id="salvarAtalhosBtn">Salvar</button>
+  <h1>Edição de atalhos</h1>
+  <p>Adicione, remova e ordene os seus atalhos favoritos.</p>
+
+  <div class="section-title">Selecionados <span style="font-weight: normal;">0 de 6</span></div>
+  <div class="atalhos-grid" id="slots">
+    <div class="atalho-slot vazio">Escolha uma opção</div>
+    <div class="atalho-slot vazio">Escolha uma opção</div>
+    <div class="atalho-slot vazio">Escolha uma opção</div>
+    <div class="atalho-slot vazio">Escolha uma opção</div>
+    <div class="atalho-slot vazio">Escolha uma opção</div>
+    <div class="atalho-slot vazio">Escolha uma opção</div>
+  </div>
+
+  <div class="section-title">Atalhos:</div>
+  <div class="opcoes-grid" id="opcoes">
+
+    <div class="opcao-atalho" data-nome="Acadêmico" data-src="../assets/imagens/desempenho.png" data-alt="estatísticas">
+      <img src="../assets/imagens/desempenho.png" alt="estatísticas" />
+      <span>Acadêmico</span>
+      <button>+</button>
+    </div>
+
+    <div class="opcao-atalho" data-nome="Mini Mapa" data-src="../assets/imagens/mapa.png" data-alt="Mapa">
+      <img src="../assets/imagens/mapa.png" alt="Mapa" />
+      <span>Mini Mapa</span>
+      <button>+</button>
+    </div>
+
+    <div class="opcao-atalho" data-nome="Lanchonetes" data-src="../assets/imagens/lanchonetes.png" data-alt="Lanchonetes">
+      <img src="../assets/imagens/lanchonetes.png" alt="Lanchonetes" />
+      <span>Lanchonetes</span>
+      <button>+</button>
+    </div>
+
+    <div class="opcao-atalho" data-nome="Financeiro" data-src="../assets/imagens/financeiro.png" data-alt="Financeiro">
+      <img src="../assets/imagens/financeiro.png" alt="Financeiro" />
+      <span>Financeiro</span>
+      <button>+</button>
+    </div>
+
+    <div class="opcao-atalho" data-nome="Preferências" data-src="../assets/imagens/preferencias.png" data-alt="Preferências">
+      <img src="../assets/imagens/preferencias.png" alt="Preferências" />
+      <span>Preferências</span>
+      <button>+</button>
+    </div>
+
+  </div>
+
+  <script>
+  const opcoes = document.querySelectorAll('.opcao-atalho');
+  const slots = document.querySelectorAll('.atalho-slot');
+  const contador = document.querySelector('.section-title span');
+
+  function atualizarContador() {
+    const preenchidos = document.querySelectorAll('.atalho-slot.preenchido').length;
+    contador.textContent = `${preenchidos} de 6`;
+  }
+
+  function atualizarBotoes() {
+    opcoes.forEach(opcao => {
+      const nome = opcao.dataset.nome;
+      const botao = opcao.querySelector('button');
+      // Verifica se já existe um slot com esse nome
+      const jaAdicionado = Array.from(slots).some(slot =>
+        slot.classList.contains('preenchido') &&
+        slot.querySelector('.nome') &&
+        slot.querySelector('.nome').textContent === nome
+      );
+      botao.disabled = jaAdicionado;
+      botao.style.opacity = jaAdicionado ? 0.5 : 1;
+      botao.style.cursor = jaAdicionado ? 'not-allowed' : 'pointer';
+    });
+  }
+
+  opcoes.forEach(opcao => {
+    const botao = opcao.querySelector('button');
+    botao.addEventListener('click', () => {
+      const nome = opcao.dataset.nome;
+      const src = opcao.dataset.src;
+      const alt = opcao.dataset.alt;
+
+      // Encontrar primeiro slot vazio
+      const slotLivre = Array.from(slots).find(slot => slot.classList.contains('vazio'));
+      if (!slotLivre) {
+        alert("Você já adicionou 6 atalhos.");
+        return;
+      }
+
+      slotLivre.innerHTML = `
+        <button class="remover">−</button>
+        <img src="${src}" alt="${alt}" />
+        <div class="nome">${nome}</div>
+      `;
+      slotLivre.classList.remove('vazio');
+      slotLivre.classList.add('preenchido');
+
+      // Adicionar evento remover
+      const removerBtn = slotLivre.querySelector('.remover');
+      removerBtn.addEventListener('click', () => {
+        slotLivre.innerHTML = 'Escolha uma opção';
+        slotLivre.classList.remove('preenchido');
+        slotLivre.classList.add('vazio');
+        atualizarContador();
+        atualizarBotoes();
+      });
+
+      atualizarContador();
+      atualizarBotoes();
+    });
+  });
+
+  // Função para obter os atalhos selecionados
+  function obterAtalhosSelecionados() {
+    return Array.from(slots).map(slot => {
+      if (slot.classList.contains('preenchido')) {
+        return {
+          nome: slot.querySelector('.nome').textContent,
+          src: slot.querySelector('img').getAttribute('src'),
+          alt: slot.querySelector('img').getAttribute('alt')
+        };
+      } else {
+        return null;
+      }
+    });
+  }
+
+  // Evento do botão salvar
+  document.getElementById('salvarAtalhosBtn').addEventListener('click', () => {
+    const atalhos = obterAtalhosSelecionados();
+    localStorage.setItem('atalhosSelecionados', JSON.stringify(atalhos));
+    // alert('Atalhos salvos com sucesso!');
+    window.location.href = 'inicial.html'; // Redireciona para a página inicial
+  });
+
+  // Atualiza ao carregar
+  atualizarContador();
+  atualizarBotoes();
+  </script>
+
 </body>
 </html>
