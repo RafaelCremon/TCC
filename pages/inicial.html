@@ -7,37 +7,86 @@
   <link rel="stylesheet" href="../css/inicial.css">
 </head>
 <body>
+   <!-- Barra do topo -->
   <header class="top-bar">
     <div class="brand">
       <span class="logo"></span>
-      <h1>Plataforma Escolar</h1>
+      <h1>Quantum Edu.</h1>
+      
     </div>
-    <form method="POST">
-      <button type="submit" name="logout" class="logout-button">
-        <a href="../login.html">Sair</a>
-      </button>
-    </form>
+
+    <!-- Botão do usuário -->
+
+    <div class="user-menu" id="userMenu">
+      <div class="user-info">
+        <img src="../assets/imagens/user.png" alt="Foto do usuário">
+        <span class="username">Admin</span>
+      </div>
+      <div class="dropdown" id="dropdownMenu">
+        <button onclick="window.location.href='perfil.html'">Meu Perfil</button>
+        <button onclick="window.location.href='config.html'">Configurações</button>
+        <button id="darkModeToggle">Modo Escuro</button>
+        <button onclick="window.location.href='../login.html'">Sair</button>
+      </div>
+    </div>
   </header>
 
-  <aside class="sidebar">
-    <img src="../assets/imagens/mapa.png" alt="Mapa" id="mapButton">
-    <span>Mini Mapa</span>
-
-    <div class="options" id="optionsMenu">
-      <button onclick="window.location.href='tour.html?bloco=A'">Bloco A</button>
-      <button onclick="window.location.href='tour.html?bloco=B'">Bloco B</button>
-      <button onclick="window.location.href='tour.html?bloco=D'">Bloco D</button>
-      <button onclick="window.location.href='tour.html?bloco=INFANTIL'">Infantil</button>
-    </div>
-  </aside>
-
-  <main class="content">
+  <!-- Centro da página -->
+    <main class="content">
     <section class="welcome">
       <h2>Bem-vindo à plataforma escolar</h2>
       <p>Selecione uma opção na barra lateral para começar.</p>
     </section>
-  </main>
+    
+    <section class="atalhos">
+  <h2>Atalhos</h2>
+  <div class="shortcut-container">
+    <button class="shortcut" onclick="window.location.href='atalhos.html'">
+      <img src="/assets/imagens/add.png" alt="Adicionar atalho">
+    </button>
+    <button class="shortcut" onclick="window.location.href='atalhos.html'">
+      <img src="/assets/imagens/add.png" alt="Adicionar atalho">
+    </button>
+    <button class="shortcut" onclick="window.location.href='atalhos.html'">
+      <img src="/assets/imagens/add.png" alt="Adicionar atalho">
+    </button>
+    <button class="shortcut" onclick="window.location.href='atalhos.html'">
+      <img src="/assets/imagens/add.png" alt="Adicionar atalho">
+    </button>
+  </div>
+</section>
+</main>
+  
+  <!-- Barra lateral -->
+<aside class="sidebar">
 
-  <script src="/js/inicial.js"></script>
+    <img src="../assets/imagens/desempenho.png" alt="estatísticas" id="academicButton">
+    <span>Acadêmico</span>
+    <div class="options" id="optionsAcademico">
+      <button>Desempenho</button>
+      <button>Faltas</button>
+      <button>Requisitos</button>
+    </div>
+
+    <img src="../assets/imagens/mapa.png" alt="Mapa" id="mapButton">
+    <span>Mini Mapa</span>
+    <div class="options" id="optionsMapa">
+      <button onclick="window.location.href='mapa.html?bloco=A'">Bloco A</button>
+      <button onclick="window.location.href='mapa.html?bloco=B'">Bloco B</button>
+      <button onclick="window.location.href='mapa.html?bloco=D'">Bloco D</button>
+      <button onclick="window.location.href='mapa.html?bloco=INFANTIL'">Infantil</button>
+    </div>
+    
+    <img src="../assets/imagens/lanchonetes.png" alt="Lanchonetes" id="">
+    <span>Lanchonetes</span>
+
+    <img src="../assets/imagens/financeiro.png" alt="Financeiro" id="">
+    <span>Financeiro</span>
+
+    <img src="../assets/imagens/preferencias.png" alt="Preferências" id="">
+    <span>Preferências</span>
+</aside>
+
+  <script src="../js/inicial.js"></script>
 </body>
 </html>
