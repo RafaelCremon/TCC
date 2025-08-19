@@ -1,227 +1,141 @@
-:root {
-  --bg-1: #0e1b4d;
-  --bg-2: #2a5cff;
-  --card: #ffffff;
-  --ink: #0b1020;
-  --muted: #5b6b8b;
-  --brand: #5b8cff;
-  --brand-2: #7049ff;
-  --ring: #cfe0ff;
-  --shadow: 0 24px 48px rgba(15,25,80,.2);
-  --radius: 16px;
+:root{
+  --bg-1:#0e1b4d;
+  --bg-2:#2a5cff;
+  --card:#ffffff;
+  --ink:#0b1020;
+  --muted:#5b6b8b;
+  --brand:#5b8cff;
+  --brand-2:#7049ff;
+  --ring:#cfe0ff;
+  --shadow:0 24px 48px rgba(15,25,80,.2);
+  --radius:16px;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-
-body {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  color: var(--ink);
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--ink);
   background:
     radial-gradient(1200px 600px at 10% -10%, #14266f 0%, transparent 60%),
     linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 60%);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x: hidden;
 }
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.22;
+  background-image: radial-gradient(circle at center, rgba(255,255,255,.22) 0 2px, transparent 2.5px);
+  background-size:28px 28px;
+  animation:dots 36s linear infinite;
+}
+@keyframes dots{ to{ background-position:180px 160px } }
+@media (prefers-reduced-motion: reduce){ body::before{ animation:none } }
 
-.top-bar {
-  position: sticky; top: 0; z-index: 10;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 14px 22px;
-  background: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.7));
-  border-bottom: 1px solid rgba(176,198,255,.4);
-  backdrop-filter: saturate(1.1) blur(8px);
+/* Top-bar com vidro */
+.top-bar{
+  position:sticky; top:0; z-index:998;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px 22px;
+  background:linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.7));
+  border-bottom:1px solid rgba(176,198,255,.4);
+  backdrop-filter:saturate(1.1) blur(8px);
 }
+.brand{ display:flex; align-items:center; gap:16px }
+.logo{ width:24px; height:24px; border-radius:8px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:0 6px 18px rgba(76,92,255,.35) }
+.top-bar h1{ font-size:18px; margin:0 }
 
-.brand { 
-  display: flex;
-  align-items: center;
-  gap: 10px 
-}
-.logo { 
-  width: 24px;
-  height: 24px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--brand), var(--brand-2));
-  box-shadow: 0 6px 18px rgba(76,92,255,.35) 
-}
-.top-bar h1 {
-  font-size: 18px;
-  margin: 0 
-}
+.admin-profile { display: flex; align-items: center; gap: 8px; }
+.admin-avatar { width: 32px; height: 32px; border-radius: 99px; background: #eee; border: 2px solid #fff; }
 
-.user-menu {
-  position: relative;
+.menu-button {
+  background: transparent; border: none; cursor: pointer; padding: 4px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink); border-radius: 99px; transition: background-color 0.2s;
 }
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.8);
-  cursor: pointer;
-  transition: all .2s ease;
-}
-.user-info:hover { background: rgba(255,255,255,0.95); transform: scale(1.02); }
-.user-info img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
-.username { font-weight: 600; color: #1a2d6a; }
+.menu-button:hover { background-color: rgba(0, 0, 0, 0.05); }
 
-.dropdown {
-  position: absolute;
-  top: 110%; right: 0;
-  display: flex; flex-direction: column;
-  background: #fff;
-  border: 1px solid #e4ecff;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  min-width: 180px;
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
-  transition: all .25s ease;
-}
-.dropdown.active { opacity: 1; transform: translateY(0); pointer-events: auto }
-.dropdown button {
-  background: none;
-  border: none;
-  padding: 10px 14px;
-  text-align: left;
-  cursor: pointer;
-  color: #1a2d6a;
-  transition: background .2s, transform .2s;
-}
-.dropdown button:hover { background: #f2f6ff; transform: scale(1.03); }
-
-.sidebar {
-  position: fixed; top: 64px; left: 0; width: 88px; height: calc(100vh - 64px);
-  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.7));
-  border-right: 1px solid rgba(176,198,255,.4);
-  backdrop-filter: saturate(1.1) blur(8px);
-  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 8px;
-  box-shadow: 2px 0 12px rgba(0,0,0,.1);
-}
-
-.sidebar img {
-  width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
-  box-shadow: 0 10px 20px rgba(20,30,120,.25);
-  transition: transform .2s;
-}
-.sidebar img:hover { transform: scale(1.1); }
-
-.sidebar span { font-size: 12px; color: #1b2b66 }
-
-.options {
-  position: absolute;
-  top: 10px; left: 96px; 
-  display: flex;
-  flex-direction: column; gap: 8px;
-  background: #ffffff;
-  border: 1px solid #e4ecff; border-radius: 14px;
-  padding: 10px; 
-  min-width: 180px;
-  box-shadow: var(--shadow);
-  transform: translateX(-8px); opacity: 0; pointer-events: none; transition: all .25s ease;
+/* --- ESTILO DA SIDEBAR --- */
+.sidebar{
+  position:fixed; top: 0; left: 0; width: 88px; height: 100vh;
+  padding: 80px 8px 12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.8));
+  border-right:1px solid rgba(176,198,255,.4);
+  backdrop-filter:saturate(1.1) blur(10px);
+  display:flex; flex-direction:column; align-items:center; gap: 16px;
+  box-shadow:4px 0 24px rgba(0,0,0,.15);
   z-index: 1000;
+  transform: translateX(-100%); transition: transform 0.3s ease-in-out;
 }
-.options.active { 
-  transform: none;
-  opacity: 1;
-  pointer-events: auto 
-}
-
-.options button {
-  text-align: left;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 12px;
-  cursor: pointer;
-  color: #1a2d6a;
-  background: #f2f6ff;
-  transition: background .2s, transform .2s;
+.sidebar.visible {
+  transform: translateX(0);
 }
 
-.options button:hover { 
-  background: #e6efff;
-  transform: scale(1.03); 
+/* Estilo para cada item/atalho na sidebar */
+.sidebar-item {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  cursor: pointer; text-decoration: none; color: #1b2b66; font-size: 12px;
+  font-weight: 500; padding: 8px; border-radius: 12px; width: 100%;
+  transition: background-color 0.2s;
+}
+.sidebar-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.content { 
-  margin-left: 88px; 
-  padding: 22px; 
+/* --- NOVO ESTILO PARA OS ÍCONES SVG --- */
+.sidebar-icon {
+  width: 36px; height: 36px;
+  fill: #2a5cff; /* Cor do preenchimento do ícone */
+  filter: drop-shadow(0 4px 8px rgba(20,30,120,.2));
 }
 
-.welcome {
-  background: #fff;
-  border: 1px solid #e4ecff;
-  border-radius: var(--radius);
-  padding: 22px;
-  box-shadow: var(--shadow);
+/* Container do Mini Mapa (necessário para o posicionamento do menu dropdown) */
+.sidebar-item-container {
+  position: relative; display: flex;
+  justify-content: center; width: 100%;
 }
 
-.welcome h2 { 
-  margin: 0 0 6px 
+/* Menu de opções (abre ao lado, como no original) */
+.options{
+  position:absolute; top:0; left: 88px; /* Posição ao lado da sidebar */
+  display:flex; flex-direction:column; gap:8px;
+  background:#ffffff; border:1px solid #e4ecff; border-radius:14px; padding:10px; min-width:180px;
+  box-shadow:var(--shadow); 
+  transform: translateX(-8px); opacity:0; pointer-events:none; transition:.2s ease;
+  z-index: 1001;
+}
+.options.active{ transform:none; opacity:1; pointer-events:auto }
+.options button{
+  text-align:left; border:none; border-radius:10px; padding:10px 12px; cursor:pointer; color:#1a2d6a;
+  background:#f2f6ff; transition:background .2s;
+}
+.options button:hover{ background:#e6efff }
+
+.content{ 
+  margin-left: 0; padding: 22px; display: flex;
+  justify-content: center; padding-top: 50px;
 }
 
-.welcome p { 
-  margin: 0;
-  color: var(--muted)
+.shortcuts-card {
+  background-color: #fff; border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); width: min(400px, 90vw);
+  animation: fadeInUp 0.6s ease-out forwards; animation-delay: 0.4s;
 }
-
-.atalhos {
-  background-color: #f7f9fc;
-  border-radius: 12px;
-  padding: 20px 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 420px;
-  margin: 40px auto;
+.shortcuts-card h3 { margin: 0 0 16px; font-weight: 600; color: var(--ink); }
+.shortcut-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.add-shortcut-btn {
+  background-color: #f0f4ff; border: 1px dashed #cdd8f3; border-radius: 12px;
+  font-size: 24px; font-weight: bold; color: #849ae0; cursor: pointer;
+  aspect-ratio: 1 / 1; transition: background-color 0.2s;
 }
+.add-shortcut-btn:hover { background-color: #e6efff; border-color: #b4c7f0; }
 
-.atalhos h2 {
-  font-size: 18px;
-  color: #111;
-  margin-bottom: 15px;
+.overlay {
+  position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.4); z-index: 999;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out;
 }
-
-.shortcut-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-.shortcut {
-  background-color: #f0f2f5;
-  border: none;
-  border-radius: 10px;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-}
-
-.shortcut:hover {
-  background-color: #e3e6ec;
-}
-
-.shortcut img {
-  width: 28px;
-  height: 28px;
-}
-
+.overlay.visible { opacity: 1; pointer-events: auto; }
 
 @keyframes fadeInUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
-.top-bar,
-.sidebar,
-.content,
-.welcome {
-  animation: fadeInUp 0.6s ease-out forwards;
-  animation-delay: 0s;
-}
-
