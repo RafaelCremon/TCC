@@ -210,3 +210,47 @@ body.dark-mode .options button:hover {
 body.dark-mode .overlay {
   background-color: rgba(0,0,0,0.7);
 }
+
+/* Novos estilos para o cartão de boas-vindas */
+.welcome-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(44, 92, 255, 0.10);
+  padding: 28px 36px;
+  max-width: 420px;
+  margin: 32px auto 0 auto;
+  animation: fadeInUp 0.7s;
+}
+.welcome-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(44,92,255,0.10);
+  background: #eaf2ff;
+}
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1b2b66;
+  margin: 0 0 6px 0;
+  line-height: 1.1;
+}
+.welcome-desc {
+  font-size: 1rem;
+  color: #5b6b8b;
+  margin: 0;
+}
+body.dark-mode .welcome-card {
+  background: linear-gradient(135deg, #232a4d 80%, #2e1a47 100%);
+  color: #fff;
+}
+body.dark-mode .welcome-title {
+  color: #00e0ff;
+}
+body.dark-mode .welcome-desc {
+  color: #8fa2d9;
+}
