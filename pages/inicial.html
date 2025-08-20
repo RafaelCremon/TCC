@@ -16,6 +16,18 @@
         filter: blur(2px);
       }
     }
+
+    /* Adicione ao seu CSS */    /* Adicione ao seu CSS */
+    .atalho-slot.preenchido {
+      transition: background 0.3s, box-shadow 0.3s;
+      background: #eaf2ff;
+      box-shadow: 0 2px 12px rgba(44,92,255,0.10);
+    }
+    .atalho-slot.preenchido {
+      transition: background 0.3s, box-shadow 0.3s;
+      background: #eaf2ff;
+      box-shadow: 0 2px 12px rgba(44,92,255,0.10);
+    }
   </style>
 </head>
 <body>
@@ -110,6 +122,11 @@
         <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
       </div>
     </div>
+
+
+    <div class="opcoes-grid" id="opcoes">
+      <!-- Cada opção de atalho deve ter uma classe .opcao-atalho e um id único, ex: id="opcao-1" -->
+    </div>
   </main>
 
   <div class="overlay" id="overlay"></div>
@@ -139,6 +156,10 @@
         // Adiciona ação especial para Mini Mapa
         if (atalho.nome === "Mini Mapa") {
           btn.onclick = () => window.location.href = 'tour.html?bloco=A';
+        }
+        // Adiciona ação especial para Lanchonetes
+        else if (atalho.nome === "Lanchonetes") {
+          btn.onclick = () => window.location.href = 'lanchonetes.html';
         }
         container.appendChild(btn);
       } else {
@@ -185,6 +206,52 @@
       window.location.href = 'atalhos.html';
     }, 480); // tempo igual ao da animação
   };
+
+  document.querySelectorAll('.opcao-atalho').forEach((opcao, idx) => {
+    opcao.addEventListener('click', function() {
+      // Encontra o primeiro slot vazio
+      const slot = document.querySelector('.atalho-slot.vazio');
+      if (!slot) return;
+
+      // Clona o ícone do atalho
+      const icon = opcao.querySelector('img');
+      const flyingIcon = icon.cloneNode(true);
+      flyingIcon.style.position = 'absolute';
+      flyingIcon.style.zIndex = 9999;
+      flyingIcon.style.pointerEvents = 'none';
+      flyingIcon.style.transition = 'all 0.7s cubic-bezier(.4,1.4,.6,1)';
+      document.body.appendChild(flyingIcon);
+
+      // Posição inicial (ícone do atalho)
+      const iconRect = icon.getBoundingClientRect();
+      flyingIcon.style.left = iconRect.left + 'px';
+      flyingIcon.style.top = iconRect.top + 'px';
+      flyingIcon.style.width = iconRect.width + 'px';
+      flyingIcon.style.height = iconRect.height + 'px';
+
+      // Posição final (slot alvo)
+      const slotRect = slot.getBoundingClientRect();
+      setTimeout(() => {
+        flyingIcon.style.left = slotRect.left + 'px';
+        flyingIcon.style.top = slotRect.top + 'px';
+        flyingIcon.style.width = slotRect.width + 'px';
+        flyingIcon.style.height = slotRect.height + 'px';
+        flyingIcon.style.opacity = '0.2';
+        flyingIcon.style.transform = 'scale(0.7)';
+      }, 10);
+
+      // Após animação, remove o ícone e adiciona o atalho ao slot
+      setTimeout(() => {
+        document.body.removeChild(flyingIcon);
+        // Aqui você pode adicionar o atalho ao slot normalmente
+        slot.classList.remove('vazio');
+        slot.classList.add('preenchido');
+        slot.innerHTML = opcao.innerHTML;
+        atualizarContador();
+        atualizarBotoes();
+      }, 750);
+    });
+  });
   </script>
 </body>
 </html>
