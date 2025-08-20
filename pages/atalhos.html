@@ -129,10 +129,31 @@
       font-size: 13px;
       color: #333;
     }
+
+    body.page-enter {
+      animation: pageGrowIn 0.6s cubic-bezier(.4,1.4,.6,1);
+      background: linear-gradient(180deg, #232a4d 80%, #2e1a47 100%);
+      color: #fff;
+    }
+    @keyframes pageGrowIn {
+      from {
+        opacity: 0;
+        transform: scale(0.92) translateY(30px);
+        filter: blur(2px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
   </style>
 </head>
-<body>
+<body class="page-enter">
 
+  <button class="voltar-btn" id="voltarBtn" style="margin-bottom:18px;">
+    ← Voltar
+  </button>
   <button class="salvar-btn" id="salvarAtalhosBtn">Salvar</button>
   <h1>Edição de atalhos</h1>
   <p>Adicione, remova e ordene os seus atalhos favoritos.</p>
@@ -271,6 +292,11 @@
   // Atualiza ao carregar
   atualizarContador();
   atualizarBotoes();
+  </script>
+  <script>
+  setTimeout(() => {
+    document.body.classList.remove('page-enter');
+  }, 700);
   </script>
 
 </body>
