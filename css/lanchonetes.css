@@ -1,0 +1,208 @@
+body {
+  background: radial-gradient(ellipse at top left, #232a4d 60%, #2e1a47 100%);
+  min-height: 100vh;
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
+}
+.lanchonetes-card {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(44, 92, 255, 0.10);
+  max-width: 520px;
+  margin: 60px auto 0 auto;
+  padding: 36px 40px 28px 40px;
+  animation: fadeInUp 0.8s cubic-bezier(.4,1.4,.6,1);
+}
+.lanchonetes-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1b2b66;
+  margin-bottom: 18px;
+  text-align: center;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.lanchonetes-mainicon {
+  font-size: 2.2rem;
+  color: #5b8cff;
+}
+.lanchonetes-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 10px;
+}
+.lanchonete-item {
+  background: linear-gradient(135deg, #eaf2ff 80%, #d0e2ff 100%);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(44,92,255,0.08);
+  padding: 22px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.4,1.4,.6,1), box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  animation: itemFadeIn 0.7s cubic-bezier(.4,1.4,.6,1);
+}
+.lanchonete-item:hover {
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: 0 8px 32px rgba(44,92,255,0.18);
+  background: linear-gradient(135deg, #5b8cff 80%, #eaf2ff 100%);
+  color: #fff;
+}
+.lanchonete-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(44,92,255,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #5b8cff;
+  transition: background 0.3s, color 0.3s;
+}
+.lanchonete-item:hover .lanchonete-icon {
+  background: #fff;
+  color: #0057ff;
+}
+.lanchonete-nome {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1b2b66;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+.lanchonete-item:hover .lanchonete-nome {
+  color: #fff;
+}
+.voltar-btn {
+  background: none;
+  border: none;
+  color: #0057ff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  margin-bottom: 18px;
+  margin-left: 10px;
+  margin-top: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.voltar-btn:hover {
+  background: #eaf2ff;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes itemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeOutScale {
+  to {
+    opacity: 0;
+    transform: scale(0.92) translateY(30px);
+    filter: blur(2px);
+  }
+}
+.cardapio-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+}
+.cardapio-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f7fb;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #233060;
+}
+.cardapio-list .preco {
+  color: #5b8cff;
+  font-weight: bold;
+  margin-left: 12px;
+}
+.pedido-bot {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f5f7fb;
+  border-radius: 12px;
+  padding: 18px 16px;
+  box-shadow: 0 2px 8px rgba(44,92,255,0.08);
+}
+.pedido-bot label {
+  font-weight: 600;
+  color: #1b2b66;
+}
+.pedido-bot input, .pedido-bot select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cdd5f5;
+  font-size: 15px;
+  background: #fff;
+}
+.pedido-bot button {
+  background: #5b8cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.pedido-bot button:hover {
+  background: #0057ff;
+}
+.cardapio-section-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0057ff;
+  margin: 18px 0 6px 0;
+  letter-spacing: 0.5px;
+}
+.cardapio-section-title::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #5b8cff, #0057ff);
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
