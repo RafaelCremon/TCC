@@ -133,6 +133,87 @@
         transform: none;
       }
     }
+    @keyframes fadeOutScale {
+      to {
+        opacity: 0;
+        transform: scale(0.92) translateY(30px);
+        filter: blur(2px);
+      }
+    }
+    .cardapio-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px 0;
+    }
+    .cardapio-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f5f7fb;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      font-size: 15px;
+      color: #233060;
+    }
+    .cardapio-list .preco {
+      color: #5b8cff;
+      font-weight: bold;
+      margin-left: 12px;
+    }
+    .pedido-bot {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f5f7fb;
+      border-radius: 12px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 8px rgba(44,92,255,0.08);
+    }
+    .pedido-bot label {
+      font-weight: 600;
+      color: #1b2b66;
+    }
+    .pedido-bot input, .pedido-bot select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #cdd5f5;
+      font-size: 15px;
+      background: #fff;
+    }
+    .pedido-bot button {
+      background: #5b8cff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 0;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .pedido-bot button:hover {
+      background: #0057ff;
+    }
+    .cardapio-section-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #0057ff;
+      margin: 18px 0 6px 0;
+      letter-spacing: 0.5px;
+    }
+    .cardapio-section-title::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, #5b8cff, #0057ff);
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+    }
   </style>
 </head>
 <body>
@@ -151,7 +232,7 @@
         <div class="lanchonete-icon">☕</div>
         <span class="lanchonete-nome">Café Bom Gosto</span>
       </div>
-      <div class="lanchonete-item" onclick="alert('Imperatriz selecionada!')">
+      <div class="lanchonete-item" onclick="mostrarImperatriz()">
         <div class="lanchonete-icon">🥪</div>
         <span class="lanchonete-nome">Imperatriz</span>
       </div>
@@ -173,6 +254,139 @@
       </div>
     </div>
   </div>
+  <!-- Imperatriz -->
+  <div id="imperatrizCard" style="display:none;">
+    <div class="lanchonete-card" style="margin-top:30px; max-width:520px; margin-left:auto; margin-right:auto;">
+      <div class="lanchonete-header" style="margin-bottom:16px;">
+        <span class="lanchonete-icon">🥪</span>
+        <span class="lanchonete-nome">Imperatriz</span>
+      </div>
+      <img src="../assets/cardapios/imperatriz.jpg" alt="Cardápio Imperatriz" class="cardapio-img" style="margin-bottom:18px;">
+      <div style="margin-bottom:18px;">
+        <div class="cardapio-section-title">Hambúrgueres</div>
+        <ul class="cardapio-list">
+          <li><span>X-Burger</span><span class="preco">R$ 15,00</span></li>
+          <li><span>X-Salada</span><span class="preco">R$ 18,00</span></li>
+          <li><span>X-Egg</span><span class="preco">R$ 19,00</span></li>
+          <li><span>X-Bacon</span><span class="preco">R$ 19,00</span></li>
+          <li><span>X-Tudo</span><span class="preco">R$ 22,00</span></li>
+          <li><span>Calabacon</span><span class="preco">R$ 22,00</span></li>
+          <li><span>Frangão</span><span class="preco">R$ 21,00</span></li>
+          <li><span>Fricassê</span><span class="preco">R$ 21,00</span></li>
+        </ul>
+        <div class="cardapio-section-title">Tapiocas Doces</div>
+        <ul class="cardapio-list">
+          <li><span>Coco c/ leite condensado</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Coco c/ chocolate</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Banana c/ canela</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Banana c/ chocolate</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Morango c/ chocolate</span><span class="preco">R$ 14,50</span></li>
+          <li><span>Morango c/ leite condensado</span><span class="preco">R$ 14,50</span></li>
+        </ul>
+        <div class="cardapio-section-title">Tapiocas Salgadas</div>
+        <ul class="cardapio-list">
+          <li><span>Mussarela</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Pizza</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Presunto c/ queijo</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Calabresa c/ queijo</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Frango c/ catupiry</span><span class="preco">R$ 12,50</span></li>
+          <li><span>Carne seca c/ queijo</span><span class="preco">R$ 12,50</span></li>
+        </ul>
+        <div class="cardapio-section-title">Pastéis</div>
+        <ul class="cardapio-list">
+          <li><span>Mussarela</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Pizza</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Calabresa</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Bauru</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Frango</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Carne moída</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Frango c/ catupiry</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Frango c/ mussarela</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Carne moída c/ mussarela</span><span class="preco">R$ 14,00</span></li>
+          <li><span>Calabresa c/ mussarela</span><span class="preco">R$ 14,00</span></li>
+          <li><span>Carne, queijo e catupiry</span><span class="preco">R$ 15,00</span></li>
+          <li><span>Especial</span><span class="preco">R$ 15,00</span></li>
+        </ul>
+        <div class="cardapio-section-title">Dog Prensado</div>
+        <ul class="cardapio-list">
+          <li><span>Dog tradicional</span><span class="preco">R$ 13,00</span></li>
+          <li><span>Dogão especial</span><span class="preco">R$ 19,00</span></li>
+        </ul>
+        <div class="cardapio-section-title">Lanches no Pão Francês</div>
+        <ul class="cardapio-list">
+          <li><span>Pão na chapa</span><span class="preco">R$ 6,00</span></li>
+          <li><span>Mortadela</span><span class="preco">R$ 10,00</span></li>
+          <li><span>Mistão quente</span><span class="preco">R$ 14,00</span></li>
+          <li><span>Pão c/ ovo</span><span class="preco">R$ 10,00</span></li>
+          <li><span>Pão c/ ovo e queijo</span><span class="preco">R$ 12,00</span></li>
+          <li><span>Americano</span><span class="preco">R$ 16,00</span></li>
+          <li><span>Bauru</span><span class="preco">R$ 14,00</span></li>
+          <li><span>Mistão quente</span><span class="preco">R$ 14,00</span></li>
+          <li><span>Mistão quente c/ queijo</span><span class="preco">R$ 14,00</span></li>
+        </ul>
+        <div class="cardapio-section-title">Batata Frita</div>
+        <ul class="cardapio-list">
+          <li><span>Pequena</span><span class="preco">R$ 14,00</span></li>
+          <li><span>Grande</span><span class="preco">R$ 16,00</span></li>
+          <li><span>Adicionais (cheddar, bacon, catupiry)</span><span class="preco">R$ 2,50</span></li>
+        </ul>
+      </div>
+      <div class="pedido-bot">
+        <label for="itemImperatriz">Item:</label>
+        <select id="itemImperatriz">
+          <option>X-Burger</option>
+          <option>X-Salada</option>
+          <option>X-Egg</option>
+          <option>X-Bacon</option>
+          <option>X-Tudo</option>
+          <option>Calabacon</option>
+          <option>Frangão</option>
+          <option>Fricassê</option>
+          <option>Coco c/ leite condensado</option>
+          <option>Coco c/ chocolate</option>
+          <option>Banana c/ canela</option>
+          <option>Banana c/ chocolate</option>
+          <option>Morango c/ chocolate</option>
+          <option>Morango c/ leite condensado</option>
+          <option>Mussarela (tapioca)</option>
+          <option>Pizza (tapioca)</option>
+          <option>Presunto c/ queijo (tapioca)</option>
+          <option>Calabresa c/ queijo (tapioca)</option>
+          <option>Frango c/ catupiry (tapioca)</option>
+          <option>Carne seca c/ queijo (tapioca)</option>
+          <option>Mussarela (pastel)</option>
+          <option>Pizza (pastel)</option>
+          <option>Calabresa (pastel)</option>
+          <option>Bauru (pastel)</option>
+          <option>Frango (pastel)</option>
+          <option>Carne moída (pastel)</option>
+          <option>Frango c/ catupiry (pastel)</option>
+          <option>Frango c/ mussarela (pastel)</option>
+          <option>Carne moída c/ mussarela (pastel)</option>
+          <option>Calabresa c/ mussarela (pastel)</option>
+          <option>Carne, queijo e catupiry (pastel)</option>
+          <option>Especial (pastel)</option>
+          <option>Dog tradicional</option>
+          <option>Dogão especial</option>
+          <option>Pão na chapa</option>
+          <option>Mortadela</option>
+          <option>Mistão quente</option>
+          <option>Pão c/ ovo</option>
+          <option>Pão c/ ovo e queijo</option>
+          <option>Americano</option>
+          <option>Bauru</option>
+          <option>Mistão quente c/ queijo</option>
+          <option>Batata frita pequena</option>
+          <option>Batata frita grande</option>
+          <option>Adicionais batata</option>
+        </select>
+        <label for="horarioImperatriz">Horário:</label>
+        <input type="time" id="horarioImperatriz">
+        <button onclick="enviarPedidoImperatriz()">Enviar pedido</button>
+        <button onclick="fecharImperatriz()" style="margin-top:8px;background:#eee;color:#0057ff;">Fechar</button>
+      </div>
+    </div>
+  </div>
   <script>
     function voltar() {
       document.body.style.animation = "fadeOutScale 0.5s cubic-bezier(.4,1.4,.6,1) forwards";
@@ -180,15 +394,30 @@
         window.location.href = "inicial.html";
       }, 480);
     }
-  </script>
-  <style>
-    @keyframes fadeOutScale {
-      to {
-        opacity: 0;
-        transform: scale(0.92) translateY(30px);
-        filter: blur(2px);
-      }
+    function mostrarImperatriz() {
+      document.querySelector('.lanchonetes-card').style.display = 'none';
+      const card = document.getElementById('imperatrizCard');
+      card.style.display = 'block';
+      card.style.animation = 'fadeInUp 0.7s cubic-bezier(.4,1.4,.6,1)';
     }
-  </style>
+    function fecharImperatriz() {
+      document.getElementById('imperatrizCard').style.display = 'none';
+      document.querySelector('.lanchonetes-card').style.display = 'block';
+    }
+    function enviarPedidoImperatriz() {
+      const item = document.getElementById('itemImperatriz').value;
+      const horario = document.getElementById('horarioImperatriz').value;
+      const numero = '5511972972199'; // WhatsApp Imperatriz (novo número)
+
+      if (!item || !horario) {
+        alert('Preencha o item e o horário!');
+        return;
+      }
+
+      const mensagem = `Olá! Gostaria de pedir na Imperatriz o item "${item}" para o horário ${horario}.`;
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>
