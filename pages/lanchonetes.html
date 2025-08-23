@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="../css/lanchonetes.css">
 </head>
 <body>
+  <script>
+    // Aplica o tema salvo ANTES de qualquer renderização
+    if(localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
   <div class="lanchonetes-card">
     <button class="voltar-btn" onclick="voltar()">← Voltar</button>
     <div class="lanchonetes-title" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
