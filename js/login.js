@@ -15,15 +15,14 @@ function login() {
   // Autoriza caso o Usuário e Senha inseridos forem os de cima
   const autorizado = usuariosValidos.find(u => u.usuario === usuario && u.senha === senha);
 
-  // Se foi os autorizados levar para a página mapa
+  // Se foi os autorizados, faz a transição Apple e redireciona
   if (autorizado) {
-  const card = document.querySelector(".card");
-  card.classList.add("hide");
-
-  setTimeout(() => {
-    window.location.href = "pages/inicial.html";
-  }, 400); // 400ms (tempo da animação de saída)
-}
+    if (window._appleLoginRedirect) {
+      window._appleLoginRedirect();
+    } else {
+      window.location.href = "pages/inicial.html";
+    }
+  }
 }
 
 // NOVO: manter o ícone de olho funcionando

@@ -6,6 +6,44 @@
   <title>Página Inicial</title>
   <link rel="stylesheet" href="../css/inicial.css">
   <style>
+  .apple-transition-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, #5b8cff 0%, #2e3192 100%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.7s cubic-bezier(.4,1.4,.6,1);
+    }
+    .apple-transition-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .shortcuts-card.apple-animate {
+      animation: appleFadeOutScale 0.7s cubic-bezier(.4,1.4,.6,1) forwards;
+    }
+      .shortcuts-card.apple-animate-in {
+        animation: appleFadeInScaleUp 0.7s cubic-bezier(.4,1.4,.6,1);
+      }
+      @keyframes appleFadeInScaleUp {
+        0% {
+          opacity: 0;
+          transform: scale(1.12) translateY(40px);
+        }
+        40% {
+          opacity: 0.7;
+          transform: scale(1.04) translateY(16px);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+    @keyframes appleFadeInScale {
+      0% { opacity: 0; transform: scale(1.12); }
+      40% { opacity: 0.7; transform: scale(1.04); }
+      100% { opacity: 1; transform: scale(1); }
+    }
     .shortcuts-card.hide {
       animation: fadeOutScale 0.5s cubic-bezier(.4,1.4,.6,1) forwards;
     }
@@ -31,16 +69,18 @@
   </style>
 </head>
 <body>
+  <div class="apple-transition-overlay" id="appleOverlay"></div>
+  <div id="welcomeAnimation" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;z-index:10000;background:rgba(44,92,255,0.18);backdrop-filter:blur(2px);transition:opacity 0.7s;opacity:1;">
+    <h2 id="welcomeText" style="margin:0;font-size:2.6rem;font-weight:600;letter-spacing:0.03em;background:linear-gradient(90deg,#5b8cff 0%,#2e3192 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;opacity:0;white-space:nowrap;overflow:hidden;border-right:2px solid #5b8cff;"></h2>
+  </div>
   <header class="top-bar">
     <div class="brand">
       <button id="toggleSidebarBtn" class="menu-button" aria-label="Abrir menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
-      <span class="logo"></span>
+  <img src="../assets/imagens/LOGO.png" alt="Logo Quantum" class="logo" id="headerLogo" style="width:32px;height:32px;border-radius:50%;margin-right:10px;vertical-align:middle;box-shadow:0 2px 8px rgba(44,92,255,0.10);">
       <h1>Quantum Edu.</h1>
-      <h2 class="welcome-header" style="font-size:16px; font-weight:400; margin:4px 0 0 0; color:#5b8cff;">
-       
-      </h2>
+  <h2 class="welcome-header" id="headerWelcome" style="font-size:16px; font-weight:400; margin:4px 0 0 0; color:#5b8cff; opacity:0; transition:opacity 0.5s;"></h2>
     </div>
     <div class="admin-profile" id="adminProfile" style="position: relative; cursor: pointer;">
       <img src="../assets/imagens/spongebob.png" alt="Admin" class="admin-avatar">
@@ -50,7 +90,7 @@
         <button id="toggleThemeBtn" style="width:100%; background:none; border:none; padding:10px; text-align:left; cursor:pointer;">
           Alternar modo claro/escuro
         </button>
-        <button onclick="window.location.href='../login.html'" style="width:100%; background:none; border:none; padding:10px; text-align:left; cursor:pointer;">Sair</button>
+  <button id="btnSair" style="width:100%; background:none; border:none; padding:10px; text-align:left; cursor:pointer;">Sair</button>
       </div>
     </div>
   </header>
@@ -58,7 +98,7 @@
   <div class="welcome-card">
     <img src="../assets/imagens/spongebob.png" alt="Avatar Admin" class="welcome-avatar">
     <div>
-      <h2 class="welcome-title">Bem-vindo,<br>Admin!</h2>
+      <h2 class="welcome-title" id="cardWelcome" style="font-size:1.3rem;font-weight:600;margin:0 0 4px 0;color:#5b8cff;opacity:0;transition:opacity 0.5s;"></h2>
       <p class="welcome-desc">Acesse e gerencie todos os recursos da plataforma Quantum Admin.</p>
     </div>
   </div>
@@ -133,125 +173,108 @@
   
   <script src="/js/inicial.js"></script>
   <script>
-  // Função para carregar atalhos salvos
-  function carregarAtalhos() {
-    const atalhos = JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
-    const container = document.querySelector('.shortcut-buttons');
-    container.innerHTML = ''; // Limpa os atalhos atuais
-
-    atalhos.slice(0, 4).forEach(atalho => {
-      if (atalho && atalho.nome && atalho.src) {
-        // Cria botão de atalho preenchido
-        const btn = document.createElement('button');
-        btn.className = 'add-shortcut-btn atalho-preenchido';
-        btn.title = atalho.nome;
-        btn.style.display = 'flex';
-        btn.style.flexDirection = 'column';
-        btn.style.alignItems = 'center';
-        btn.style.justifyContent = 'center';
-        btn.innerHTML = `
-          <img src="${atalho.src}" alt="${atalho.alt || ''}" style="width:28px;height:28px;margin-bottom:2px;">
-          <span style="font-size:11px;color:#222;">${atalho.nome}</span>
-        `;
-        // Adiciona ação especial para Mini Mapa
-        if (atalho.nome === "Mini Mapa") {
-          btn.onclick = () => window.location.href = 'tour.html?bloco=A';
-        }
-        // Adiciona ação especial para Lanchonetes
-        else if (atalho.nome === "Lanchonetes") {
-          btn.onclick = () => window.location.href = 'lanchonetes.html';
-        }
-        container.appendChild(btn);
-      } else {
-        // Cria botão de adicionar atalho
-        const btn = document.createElement('button');
-        btn.className = 'add-shortcut-btn';
-        btn.textContent = '+';
-        btn.onclick = () => window.location.href = 'atalhos.html';
-        container.appendChild(btn);
-      }
-    });
-
-    // Se tiver menos de 4 atalhos, completa com botões "+"
-    for (let i = atalhos.length; i < 4; i++) {
-      const btn = document.createElement('button');
-      btn.className = 'add-shortcut-btn';
-      btn.textContent = '+';
-      btn.onclick = () => window.location.href = 'atalhos.html';
-      container.appendChild(btn);
+  window.addEventListener('DOMContentLoaded', function() {
+    // Apple-style card animation
+    var card = document.getElementById('shortcutsCard');
+    if(card) {
+      card.classList.add('apple-animate-in');
+      // Não remove a classe, assim só anima uma vez
     }
-  }
-
-  // Chama ao carregar a página
-  carregarAtalhos();
-
-  // Menu do perfil
-  const adminProfile = document.getElementById('adminProfile');
-  const profileMenu = document.getElementById('profileMenu');
-
-  adminProfile.addEventListener('click', function(e) {
-    e.stopPropagation();
-    profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+    // Welcome animation só na primeira vez
+    var welcomeDiv = document.getElementById('welcomeAnimation');
+    var welcomeText = document.getElementById('welcomeText');
+    var cardWelcome = document.getElementById('cardWelcome');
+    var text = 'Bem-vindo, Admin!';
+    var jaViuBoasVindas = localStorage.getItem('jaViuBoasVindas');
+    function initAppFeatures() {
+      // Atalhos
+      if (typeof carregarAtalhos === 'function') carregarAtalhos();
+      // Perfil
+      const adminProfile = document.getElementById('adminProfile');
+      const profileMenu = document.getElementById('profileMenu');
+      const btnSair = document.getElementById('btnSair');
+      if (adminProfile && profileMenu) {
+        adminProfile.addEventListener('click', function(e) {
+          e.stopPropagation();
+          profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+        });
+        document.addEventListener('click', function() {
+          profileMenu.style.display = 'none';
+        });
+      }
+      // Botão sair do perfil
+      if (btnSair) {
+        btnSair.onclick = function() {
+          document.querySelector('.shortcuts-card').classList.add('apple-animate');
+          document.getElementById('appleOverlay').classList.add('apple-transition-active');
+          setTimeout(function() {
+            window.location.href = '../login.html';
+          }, 700);
+        };
+      }
+      // Editar atalhos
+      const editShortcutsBtn = document.getElementById('editShortcutsBtn');
+      if (editShortcutsBtn && card) {
+        editShortcutsBtn.onclick = function() {
+          card.classList.add('hide');
+          setTimeout(() => {
+            window.location.href = 'atalhos.html';
+          }, 480);
+        };
+      }
+    }
+    if (welcomeDiv && welcomeText && cardWelcome) {
+      if (!jaViuBoasVindas) {
+        // Executa animação de boas-vindas
+        welcomeText.textContent = '';
+        let i = 0;
+        let animationDone = false;
+        setTimeout(function() {
+          welcomeText.style.opacity = '1';
+          typeWriter();
+        }, 300);
+        function typeWriter() {
+          if (i <= text.length) {
+            welcomeText.textContent = text.slice(0, i);
+            i++;
+            setTimeout(typeWriter, 60);
+          } else {
+            setTimeout(moveToCard, 700);
+          }
+        }
+        function moveToCard() {
+          animationDone = true;
+          welcomeText.style.transition = 'all 0.7s cubic-bezier(.4,1.4,.6,1)';
+          welcomeDiv.style.transition = 'opacity 0.7s';
+          welcomeText.style.transform = 'translateY(-40px) scale(0.7)';
+          welcomeText.style.opacity = '0';
+          welcomeDiv.style.opacity = '0';
+          setTimeout(function() {
+            welcomeDiv.style.display = 'none';
+            cardWelcome.textContent = text;
+            cardWelcome.style.opacity = '1';
+            localStorage.setItem('jaViuBoasVindas', 'true');
+            initAppFeatures();
+          }, 700);
+        }
+      } else {
+        // Já viu, mostra direto no card
+        if (welcomeDiv) welcomeDiv.style.display = 'none';
+        cardWelcome.textContent = text;
+        cardWelcome.style.opacity = '1';
+        initAppFeatures();
+      }
+    } else if (cardWelcome) {
+      // Fallback: sempre mostra o texto no card
+      cardWelcome.textContent = text;
+      cardWelcome.style.opacity = '1';
+      initAppFeatures();
+    } else {
+      // Se não houver animação, inicializa recursos normalmente
+      initAppFeatures();
+    }
   });
-
-  // Fecha o menu ao clicar fora
-  document.addEventListener('click', function() {
-    profileMenu.style.display = 'none';
-  });
-
-  document.getElementById('editShortcutsBtn').onclick = function() {
-    const card = document.getElementById('shortcutsCard');
-    card.classList.add('hide');
-    setTimeout(() => {
-      window.location.href = 'atalhos.html';
-    }, 480); // tempo igual ao da animação
-  };
-
-  document.querySelectorAll('.opcao-atalho').forEach((opcao, idx) => {
-    opcao.addEventListener('click', function() {
-      // Encontra o primeiro slot vazio
-      const slot = document.querySelector('.atalho-slot.vazio');
-      if (!slot) return;
-
-      // Clona o ícone do atalho
-      const icon = opcao.querySelector('img');
-      const flyingIcon = icon.cloneNode(true);
-      flyingIcon.style.position = 'absolute';
-      flyingIcon.style.zIndex = 9999;
-      flyingIcon.style.pointerEvents = 'none';
-      flyingIcon.style.transition = 'all 0.7s cubic-bezier(.4,1.4,.6,1)';
-      document.body.appendChild(flyingIcon);
-
-      // Posição inicial (ícone do atalho)
-      const iconRect = icon.getBoundingClientRect();
-      flyingIcon.style.left = iconRect.left + 'px';
-      flyingIcon.style.top = iconRect.top + 'px';
-      flyingIcon.style.width = iconRect.width + 'px';
-      flyingIcon.style.height = iconRect.height + 'px';
-
-      // Posição final (slot alvo)
-      const slotRect = slot.getBoundingClientRect();
-      setTimeout(() => {
-        flyingIcon.style.left = slotRect.left + 'px';
-        flyingIcon.style.top = slotRect.top + 'px';
-        flyingIcon.style.width = slotRect.width + 'px';
-        flyingIcon.style.height = slotRect.height + 'px';
-        flyingIcon.style.opacity = '0.2';
-        flyingIcon.style.transform = 'scale(0.7)';
-      }, 10);
-
-      // Após animação, remove o ícone e adiciona o atalho ao slot
-      setTimeout(() => {
-        document.body.removeChild(flyingIcon);
-        // Aqui você pode adicionar o atalho ao slot normalmente
-        slot.classList.remove('vazio');
-        slot.classList.add('preenchido');
-        slot.innerHTML = opcao.innerHTML;
-        atualizarContador();
-        atualizarBotoes();
-      }, 750);
-    });
-  });
+  </script>
   </script>
 </body>
 </html>
