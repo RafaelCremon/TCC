@@ -87,6 +87,17 @@ body::before{
   fill: #2a5cff; /* Cor do preenchimento do ícone */
   filter: drop-shadow(0 4px 8px rgba(20,30,120,.2));
 }
+.profile-menu-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-right: 6px;
+}
+.profile-menu-btn {
+  padding: 8px 12px;
+  gap: 6px;
+  font-size: 14px;
+}
 
 /* Container do Mini Mapa (necessário para o posicionamento do menu dropdown) */
 .sidebar-item-container {

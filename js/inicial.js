@@ -80,7 +80,36 @@ window.carregarAtalhos = function() {
         <span style="font-size:11px;color:#222;">${atalho.nome}</span>
       `;
       if (atalho.nome === "Mini Mapa") {
-        btn.onclick = () => window.location.href = 'tour.html?bloco=A';
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          // Garante que o container do botão tem position: relative
+          if (btn.parentNode) {
+            btn.parentNode.style.position = 'relative';
+          }
+          let opcoes = document.getElementById('miniMapaOpcoes');
+          if (!opcoes) {
+            opcoes = document.createElement('div');
+            opcoes.id = 'miniMapaOpcoes';
+            opcoes.className = 'mini-mapa-opcoes-popup';
+            opcoes.innerHTML = `
+              <button onclick=\"window.location.href='tour.html?bloco=A'\"><svg viewBox='0 0 24 24' fill='none' stroke-width='2'><path d='M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z'/></svg>Bloco A</button>
+              <button onclick=\"window.location.href='tour.html?bloco=B'\"><svg viewBox='0 0 24 24' fill='none' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M8 12h8'/></svg>Bloco B</button>
+              <button onclick=\"window.location.href='tour.html?bloco=C'\"><svg viewBox='0 0 24 24' fill='none' stroke-width='2'><rect x='4' y='4' width='16' height='16' rx='4'/></svg>Bloco C</button>
+              <button onclick=\"window.location.href='tour.html?bloco=D'\"><svg viewBox='0 0 24 24' fill='none' stroke-width='2'><rect x='4' y='4' width='16' height='16' rx='4'/></svg>Bloco D</button>
+              <button onclick=\"window.location.href='tour.html?bloco=INFANTIL'\"><svg viewBox='0 0 24 24' fill='none' stroke-width='2'><ellipse cx='12' cy='12' rx='10' ry='6'/></svg>Infantil</button>
+              <button onclick=\"window.location.href='tour.html?bloco=Biblioteca'\"><svg viewBox='0 0 24 24' fill='none' stroke-width='2'><rect x='5' y='5' width='14' height='14' rx='2'/><line x1='5' y1='9' x2='19' y2='9'/><line x1='5' y1='15' x2='19' y2='15'/></svg>Biblioteca</button>
+            `;
+            opcoes.style.position = 'absolute';
+            opcoes.style.left = '50%';
+            opcoes.style.bottom = '100%';
+            opcoes.style.transform = 'translateX(-50%)';
+            btn.parentNode.insertBefore(opcoes, btn);
+            setTimeout(() => opcoes.classList.add('show'), 10);
+          } else {
+            opcoes.classList.remove('show');
+            setTimeout(() => opcoes.remove(), 180);
+          }
+        };
       } else if (atalho.nome === "Lanchonetes") {
         btn.onclick = () => window.location.href = 'lanchonetes.html';
       }
