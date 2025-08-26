@@ -1,0 +1,283 @@
+<div class="agenda-card">
+  <div class="agenda-header">
+    <h2>
+      <svg width="20" height="20" fill="none" stroke="#5b8cff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="4"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+      Agenda
+    </h2>
+    <div class="agenda-nav">
+      <button id="prevWeekBtn" class="agenda-btn">&lt;</button>
+      <button id="todayBtn" class="agenda-btn">Hoje</button>
+      <button id="nextWeekBtn" class="agenda-btn">&gt;</button>
+    </div>
+  </div>
+  <div id="weekRange" class="agenda-range"></div>
+  <div class="agenda-week" id="agendaWeek"></div>
+  <div class="agenda-events" id="agendaEvents"></div>
+  <button class="agenda-create" id="createReminderBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0057ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    Criar lembrete
+  </button>
+</div>
+<style>
+.agenda-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(44,92,255,0.10);
+  padding: 24px;
+  max-width: 420px;
+  margin: 32px auto;
+  font-family: 'Inter', Arial, sans-serif;
+}
+body.dark-mode .agenda-card {
+  background: #232a45;
+  color: #f3f3f3;
+  box-shadow: 0 2px 12px rgba(0,224,255,0.08);
+}
+.agenda-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.agenda-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2e3192;
+}
+body.dark-mode .agenda-header h2 {
+  color: #00e0ff;
+}
+.agenda-nav {
+  display: flex;
+  gap: 8px;
+}
+.agenda-btn {
+  background: #eaf2ff;
+  border: none;
+  border-radius: 7px;
+  padding: 4px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #0057ff;
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(44,92,255,0.07);
+  transition: background 0.18s, color 0.18s;
+}
+.agenda-btn:hover {
+  background: #dbeaff;
+  color: #2e3192;
+}
+body.dark-mode .agenda-btn {
+  background: #232a4d;
+  color: #00e0ff;
+}
+body.dark-mode .agenda-btn:hover {
+  background: #181c2f;
+  color: #00e0ff;
+}
+.agenda-range {
+  font-size:14px;
+  color:#888;
+  margin-bottom:8px;
+}
+body.dark-mode .agenda-range {
+  color: #bfc8e2;
+}
+.agenda-week {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 2px;
+}
+.agenda-day {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: #5b8cff;
+  padding: 4px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 500;
+}
+.agenda-day.selected {
+  background: #eaf2ff;
+  color: #0057ff;
+  font-weight: bold;
+}
+body.dark-mode .agenda-day {
+  color: #00e0ff;
+}
+body.dark-mode .agenda-day.selected {
+  background: #232a4d;
+  color: #00e0ff;
+}
+.agenda-events {
+  margin-bottom: 18px;
+  min-height: 80px;
+}
+.agenda-event {
+  background: #f7faff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  border-left: 4px solid #ff9800;
+  box-shadow: 0 1px 4px rgba(44,92,255,0.07);
+  color: #2e3192;
+}
+.agenda-event.pdf {
+  border-left: 4px solid #d32f2f;
+}
+body.dark-mode .agenda-event {
+  background: #232a4d;
+  color: #fff;
+}
+.agenda-event .event-title {
+  font-weight: bold;
+  color: #d32f2f;
+}
+.agenda-event.pdf .event-title {
+  color: #d32f2f;
+}
+.agenda-event .event-desc {
+  color: #333;
+  font-size: 13px;
+}
+body.dark-mode .agenda-event .event-desc {
+  color: #bfc8e2;
+}
+.agenda-create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #0057ff;
+  font-weight: 500;
+  font-size: 15px;
+  background: none;
+  border: none;
+  transition: color 0.18s;
+}
+.agenda-create svg {
+  width: 18px;
+  height: 18px;
+  stroke: #0057ff;
+}
+.agenda-create:hover {
+  color: #2e3192;
+}
+body.dark-mode .agenda-create {
+  color: #00e0ff;
+}
+body.dark-mode .agenda-create svg {
+  stroke: #00e0ff;
+}
+</style>
+<script>
+const eventos = [
+  {
+    data: '2025-08-25',
+    tipo: 'link',
+    titulo: 'Introdução HTML.',
+    desc: 'Dia todo'
+  },
+  {
+    data: '2025-08-25',
+    tipo: 'pdf',
+    titulo: 'MODELO - ATA DE REUNIÃO',
+    desc: 'Dia todo'
+  }
+];
+
+function getWeekDates(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  const monday = new Date(d.setDate(diff));
+  let week = [];
+  for (let i = 0; i < 7; i++) {
+    const dt = new Date(monday);
+    dt.setDate(monday.getDate() + i);
+    week.push(dt);
+  }
+  return week;
+}
+function formatDate(dt) {
+  return dt.toISOString().slice(0, 10);
+}
+function formatDay(dt) {
+  return ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][dt.getDay()];
+}
+function formatRange(week) {
+  const start = week[0];
+  const end = week[6];
+  return `${start.getDate()} ${start.toLocaleString('pt-BR', { month: 'short' })}. - ${end.getDate()} ${end.toLocaleString('pt-BR', { month: 'short' })}.`;
+}
+let selectedDate = new Date();
+let currentWeek = getWeekDates(selectedDate);
+
+function renderWeek() {
+  const weekDiv = document.getElementById('agendaWeek');
+  weekDiv.innerHTML = '';
+  currentWeek.forEach(dt => {
+    const btn = document.createElement('div');
+    btn.className = 'agenda-day' + (formatDate(dt) === formatDate(selectedDate) ? ' selected' : '');
+    btn.innerHTML = `<div>${formatDay(dt)}</div><div style="font-size:12px;color:#888;">${dt.getDate()}</div>`;
+    btn.onclick = () => {
+      selectedDate = dt;
+      renderWeek();
+      renderEvents();
+    };
+    weekDiv.appendChild(btn);
+  });
+  document.getElementById('weekRange').textContent = formatRange(currentWeek);
+}
+function renderEvents() {
+  const eventsDiv = document.getElementById('agendaEvents');
+  eventsDiv.innerHTML = '';
+  const todayEvents = eventos.filter(ev => ev.data === formatDate(selectedDate));
+  if (todayEvents.length === 0) {
+    eventsDiv.innerHTML = '<div style="color:#888;font-size:14px;">Nenhum evento para este dia.</div>';
+  } else {
+    todayEvents.forEach(ev => {
+      eventsDiv.innerHTML += `
+        <div class="agenda-event ${ev.tipo}">
+          <div class="event-title">${ev.titulo}</div>
+          <div class="event-desc">${ev.desc}</div>
+        </div>
+      `;
+    });
+  }
+}
+document.getElementById('prevWeekBtn').onclick = () => {
+  selectedDate.setDate(selectedDate.getDate() - 7);
+  currentWeek = getWeekDates(selectedDate);
+  renderWeek();
+  renderEvents();
+};
+document.getElementById('nextWeekBtn').onclick = () => {
+  selectedDate.setDate(selectedDate.getDate() + 7);
+  currentWeek = getWeekDates(selectedDate);
+  renderWeek();
+  renderEvents();
+};
+document.getElementById('todayBtn').onclick = () => {
+  selectedDate = new Date();
+  currentWeek = getWeekDates(selectedDate);
+  renderWeek();
+  renderEvents();
+};
+document.getElementById('createReminderBtn').onclick = () => {
+  alert('Funcionalidade de criar lembrete!');
+  // Aqui você pode abrir um modal ou formulário para criar um evento
+};
+renderWeek();
+renderEvents();
+</script>
