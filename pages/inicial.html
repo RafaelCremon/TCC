@@ -196,6 +196,7 @@
       <img src="../assets/imagens/spongebob.png" alt="Admin" class="admin-avatar">
       <span>Admin</span>
       <!-- Menu suspenso -->
+      <!--
       <div id="profileMenu" style="display:none; position:absolute; right:0; top:110%; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); min-width:120px; z-index:100;">
         <button id="toggleThemeBtn" class="profile-menu-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="#5b8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>
@@ -206,6 +207,7 @@
           Sair
         </button>
       </div>
+      -->
     </div>
   </header>
 
@@ -391,6 +393,314 @@
     }
   });
   </script>
-  </script>
+  <!-- Assistente Virtual Pop-up -->
+<div id="assistente-container" style="position:fixed;bottom:32px;right:32px;z-index:9999;">
+  <button id="abrirAssistente" style="background:#0057ff;color:#fff;border-radius:50%;width:56px;height:56px;border:none;font-size:28px;box-shadow:0 2px 8px rgba(44,92,255,0.10);cursor:pointer;">
+    💬
+  </button>
+  <div id="assistenteChat" style="display:none;flex-direction:column;background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(44,92,255,0.13);width:340px;max-width:90vw;padding:18px 16px 12px 16px;position:absolute;bottom:70px;right:0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <span style="font-weight:600;color:#0057ff;font-size:17px;">Assistente Virtual</span>
+      <button id="fecharAssistente" style="background:none;border:none;font-size:20px;cursor:pointer;color:#0057ff;">×</button>
+    </div>
+    <div id="assistenteMensagens" style="height:180px;overflow-y:auto;font-size:15px;margin-bottom:8px;background:#f7faff;border-radius:8px;padding:8px;"></div>
+    <div style="display:flex;gap:6px;">
+      <input id="assistenteInput" type="text" placeholder="Digite sua pergunta..." style="flex:1;padding:7px 10px;border-radius:8px;border:1px solid #e0eaff;font-size:15px;">
+      <button id="enviarAssistente" style="background:#0057ff;color:#fff;border:none;border-radius:8px;padding:7px 16px;font-weight:500;cursor:pointer;">Enviar</button>
+    </div>
+  </div>
+</div>
+<script>
+const btn = document.getElementById('abrirAssistente');
+const chat = document.getElementById('assistenteChat');
+const fechar = document.getElementById('fecharAssistente');
+btn.onclick = () => chat.style.display = 'flex';
+fechar.onclick = () => chat.style.display = 'none';
+
+async function obterRespostaIA(pergunta) {
+  // Substitua 'SUA_CHAVE_OPENAI' pela sua chave da OpenAI
+  const apiKey = 'SUA_CHAVE_OPENAI';
+  const endpoint = 'https://api.openai.com/v1/chat/completions';
+  const mensagens = [
+    { role: "system", content: "Você é uma assistente virtual amigável e útil para um site educacional." },
+    { role: "user", content: pergunta }
+  ];
+  try {
+    const resposta = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: mensagens,
+        max_tokens: 100
+      })
+    });
+    const dados = await resposta.json();
+    return dados.choices && dados.choices[0].message.content ? dados.choices[0].message.content : "Desculpe, não consegui responder agora.";
+  } catch (e) {
+    return "Desculpe, houve um erro ao tentar responder.";
+  }
+}
+
+document.getElementById('enviarAssistente').onclick = async function() {
+  const input = document.getElementById('assistenteInput');
+  const mensagens = document.getElementById('assistenteMensagens');
+  const pergunta = input.value.trim();
+  if (!pergunta) return;
+  mensagens.innerHTML += `<div style="margin-bottom:6px;"><b>Você:</b> ${pergunta}</div>`;
+  input.value = '';
+  mensagens.innerHTML += `<div style="margin-bottom:6px;color:#888;">Assistente digitando...</div>`;
+  mensagens.scrollTop = mensagens.scrollHeight;
+  const resposta = await obterRespostaIA(pergunta);
+  mensagens.innerHTML = mensagens.innerHTML.replace('Assistente digitando...', `<b>Assistente:</b> ${resposta}`);
+  mensagens.scrollTop = mensagens.scrollHeight;
+};
+</script>
+<!-- Adicione este bloco logo após o header -->
+<div id="miniPerfilPopup" style="display:none;position:fixed;top:70px;right:32px;z-index:9999;background:#fff;border-radius:22px;box-shadow:0 2px 12px rgba(44,92,255,0.13);width:340px;max-width:90vw;padding:22px 20px 18px 20px;">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+    <img src="../assets/imagens/spongebob.png" alt="Avatar Admin" style="width:64px;height:64px;border-radius:50%;box-shadow:0 2px 8px rgba(44,92,255,0.10);">
+    <div>
+      <span style="font-weight:600;font-size:18px;color:#0057ff;">Admin</span>
+      <div style="font-size:14px;color:#333;">RGM: 2012081</div>
+      <div style="font-size:14px;color:#333;">Série: 3ºJ</div>
+      <div style="font-size:14px;color:#333;">Colégio: COLEGIO CRUZEIRO DO SUL</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;justify-content:flex-end;">
+    <button id="btnCarteirinha" style="background:#eaf2ff;border:none;border-radius:8px;padding:7px 16px;font-weight:500;color:#0057ff;cursor:pointer;display:flex;align-items:center;gap:7px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0057ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="6" width="18" height="12" rx="3"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      Carteirinha
+    </button>
+    <button id="btnTrocarTema" style="background:#eaf2ff;border:none;border-radius:8px;padding:7px 16px;font-weight:500;color:#0057ff;cursor:pointer;display:flex;align-items:center;gap:7px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0057ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 2v2"/>
+        <path d="M12 20v2"/>
+        <path d="M4.93 4.93l1.41 1.41"/>
+        <path d="M17.66 17.66l1.41 1.41"/>
+        <path d="M2 12h2"/>
+        <path d="M20 12h2"/>
+        <path d="M4.93 19.07l1.41-1.41"/>
+        <path d="M17.66 6.34l1.41-1.41"/>
+      </svg>
+      Trocar tema
+    </button>
+    <button id="btnLogout" style="background:#ffd6d6;border:none;border-radius:8px;padding:7px 16px;font-weight:500;color:#d32f2f;cursor:pointer;">
+      Sair
+    </button>
+  </div>
+</div>
+
+<!-- Pop-up da carteirinha com alinhamento ajustado -->
+<div id="carteirinhaPopup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(0,0,0,0.18);align-items:center;justify-content:center;">
+  <div class="carteirinha-modelo">
+    <div class="carteirinha-topo">
+      <div class="carteirinha-logo">
+        <svg width="40" height="40" viewBox="0 0 60 60">
+          <polygon points="30,5 35,25 55,25 38,35 45,55 30,43 15,55 22,35 5,25 25,25" fill="#FFB800"/>
+        </svg>
+        <div class="carteirinha-colegio">
+          <span style="font-size:1.05rem;">Colégio</span><br>
+          <span style="font-size:1.35rem;font-weight:600;">Cruzeiro do Sul</span>
+        </div>
+      </div>
+      <div class="carteirinha-quantum">
+        <img src="../assets/imagens/LOGOBRANCA.png" alt="Quantum Education" style="height:90px;width:auto;object-fit:contain;display:block;margin-top:2px;">
+      </div>
+    </div>
+    <div class="carteirinha-conteudo">
+      <div class="carteirinha-foto">
+        <div class="foto-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="32" r="20" fill="#aaa"/>
+            <rect x="18" y="54" width="44" height="20" rx="10" fill="#aaa"/>
+          </svg>
+        </div>
+      </div>
+      <div class="carteirinha-dados">
+        <div class="carteirinha-nome">GUSTAVO MEDEIROS</div>
+        <div class="carteirinha-rgm">RGM: 2012081</div>
+        <div class="carteirinha-ensino">ENSINO MÉDIO</div>
+        <div class="carteirinha-serie">SÉRIE: 3°J</div>
+        <div class="carteirinha-validade">VALIDADE: ??????</div>
+      </div>
+    </div>
+  </div>
+  <button id="fecharCarteirinha" style="margin-top:18px;background:#0057ff;color:#fff;border:none;border-radius:8px;padding:7px 18px;font-weight:500;cursor:pointer;position:absolute;top:40px;right:calc(50vw - 170px);">Fechar</button>
+</div>
+
+<style>
+.carteirinha-modelo {
+  background: #06398c;
+  border-radius: 36px;
+  box-shadow: 0 2px 18px rgba(44,92,255,0.18);
+  width: 480px;
+  max-width: 95vw;
+  min-height: 320px;
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.carteirinha-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.carteirinha-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.carteirinha-colegio {
+  color: #fff;
+  line-height: 1.1;
+}
+.carteirinha-quantum {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-width: 120px;
+  height: 90px;
+}
+.carteirinha-quantum img {
+  max-height: 90px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.carteirinha-conteudo {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+.carteirinha-foto {
+  background: #d9d9d9;
+  border-radius: 8px;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.foto-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carteirinha-dados {
+  color: #fff;
+  font-size: 1.13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  position: relative;
+  min-width: 210px;
+}
+.carteirinha-nome {
+  font-weight: 600;
+  font-size: 1.18rem;
+  margin-bottom: 2px;
+}
+.carteirinha-rgm,
+.carteirinha-ensino,
+.carteirinha-serie,
+.carteirinha-validade {
+  font-size: 1.03rem;
+  margin-bottom: 2px;
+  font-weight: 400;
+}
+.carteirinha-serie {
+  margin-top: 4px;
+  margin-bottom: 0;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+.carteirinha-validade {
+  margin-top: 4px;
+  font-size: 1.03rem;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 600px) {
+  .carteirinha-modelo {
+    width: 98vw;
+    padding: 18px 8px 18px 8px;
+    border-radius: 18px;
+  }
+  #fecharCarteirinha {
+    right: 12px !important;
+    top: 12px !important;
+  }
+  .carteirinha-conteudo {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .carteirinha-validade {
+    margin-top: 0;
+  }
+}
+</style>
+
+<script>
+// Botão Carteirinha
+document.getElementById('btnCarteirinha').onclick = function() {
+  document.getElementById('carteirinhaPopup').style.display = 'flex';
+};
+// Fechar Carteirinha
+document.getElementById('fecharCarteirinha').onclick = function() {
+  document.getElementById('carteirinhaPopup').style.display = 'none';
+};
+// Fechar ao clicar fora
+document.getElementById('carteirinhaPopup').onclick = function(e) {
+  if (e.target === this) this.style.display = 'none';
+};
+</script>
+<script>
+// Mini perfil popup funcional
+const adminProfile = document.getElementById('adminProfile');
+const miniPerfilPopup = document.getElementById('miniPerfilPopup');
+
+// Abre/fecha o mini perfil ao clicar na foto
+adminProfile.onclick = function(e) {
+  e.stopPropagation();
+  miniPerfilPopup.style.display = miniPerfilPopup.style.display === 'none' || miniPerfilPopup.style.display === '' ? 'block' : 'none';
+};
+
+// Fecha o mini perfil ao clicar fora dele
+document.addEventListener('click', function(e) {
+  if (miniPerfilPopup.style.display === 'block') {
+    // Só fecha se o clique não for dentro do popup
+    if (!miniPerfilPopup.contains(e.target) && e.target !== adminProfile) {
+      miniPerfilPopup.style.display = 'none';
+    }
+  }
+});
+
+// Botão Trocar tema
+document.getElementById('btnTrocarTema').onclick = function() {
+  document.body.classList.toggle('dark-mode');
+  miniPerfilPopup.style.display = 'none';
+};
+
+// Botão Logout
+document.getElementById('btnLogout').onclick = function() {
+  window.location.href = '../login.html';
+};
+</script>
 </body>
 </html>
