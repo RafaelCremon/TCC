@@ -1,18 +1,22 @@
-// Lógica original para o menu de opções dos blocos
-const mapButton = document.getElementById("mapButton");
-const optionsMenu = document.getElementById("optionsMenu");
+// Aguardar o DOM carregar antes de executar os scripts
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Lógica original para o menu de opções dos blocos
+  const mapButton = document.getElementById("mapButton");
+  const optionsMenu = document.getElementById("optionsMenu");
 
-mapButton.addEventListener("click", () => {
-    optionsMenu.classList.toggle("active");
-});
+  if (mapButton && optionsMenu) {
+    mapButton.addEventListener("click", () => {
+        optionsMenu.classList.toggle("active");
+    });
+  }
 
+  // --- CÓDIGO PARA CONTROLAR A SIDEBAR ---
 
-// --- NOVO CÓDIGO PARA CONTROLAR A SIDEBAR ---
-
-// Seleciona os novos elementos do DOM
-const toggleButton = document.getElementById('toggleSidebarBtn');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
+  // Seleciona os novos elementos do DOM
+  const toggleButton = document.getElementById('toggleSidebarBtn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
 
 // Função que abre/fecha a sidebar adicionando/removendo a classe 'visible'
 function toggleSidebar() {
@@ -65,8 +69,10 @@ window.carregarAtalhos = function() {
   const atalhos = JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
   const container = document.querySelector('.shortcut-buttons');
   if (!container) return;
+  
   container.innerHTML = '';
-  atalhos.slice(0, 4).forEach(atalho => {
+  
+  atalhos.slice(0, 4).forEach((atalho, index) => {
     if (atalho && atalho.nome && atalho.src) {
       const btn = document.createElement('button');
       btn.className = 'add-shortcut-btn atalho-preenchido';
@@ -122,6 +128,8 @@ window.carregarAtalhos = function() {
       container.appendChild(btn);
     }
   });
+  
+  // Preencher slots restantes
   for (let i = atalhos.length; i < 4; i++) {
     const btn = document.createElement('button');
     btn.className = 'add-shortcut-btn';
@@ -130,3 +138,5 @@ window.carregarAtalhos = function() {
     container.appendChild(btn);
   }
 }
+
+}); // Fim do DOMContentLoaded

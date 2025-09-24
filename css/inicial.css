@@ -84,7 +84,8 @@ body::before{
 /* --- NOVO ESTILO PARA OS ÍCONES SVG --- */
 .sidebar-icon {
   width: 36px; height: 36px;
-  fill: #2a5cff; /* Cor do preenchimento do ícone */
+  stroke: #2a5cff; /* Cor do contorno do ícone */
+  fill: none; /* Remove o preenchimento para ícones de linha */
   filter: drop-shadow(0 4px 8px rgba(20,30,120,.2));
 }
 .profile-menu-btn svg {
@@ -118,8 +119,17 @@ body::before{
 .options button{
   text-align:left; border:none; border-radius:10px; padding:10px 12px; cursor:pointer; color:#1a2d6a;
   background:#f2f6ff; transition:background .2s;
+  display: flex; align-items: center; gap: 8px; /* Para alinhar ícone e texto */
 }
-.options button:hover{ background:#e6efff }
+.options button svg {
+  width: 16px; height: 16px; stroke: #2a5cff; flex-shrink: 0;
+}
+.options button:hover{ 
+  background:#e6efff;
+}
+.options button:hover svg {
+  stroke: #0057ff;
+}
 
 .content{ 
   margin-left: 0; padding: 22px; display: flex;
@@ -180,7 +190,7 @@ body.dark-mode #profileMenu {
 body.dark-mode .sidebar-item,
 body.dark-mode .sidebar-icon {
   color: #c3bfff !important;
-  fill: #7f5cff !important;
+  stroke: #7f5cff !important;
 }
 
 body.dark-mode .sidebar-item:hover {
@@ -213,9 +223,17 @@ body.dark-mode .options button {
   color: #00e0ff;
 }
 
+body.dark-mode .options button svg {
+  stroke: #7f5cff;
+}
+
 body.dark-mode .options button:hover {
   background: #7f5cff;
   color: #fff;
+}
+
+body.dark-mode .options button:hover svg {
+  stroke: #fff;
 }
 
 body.dark-mode .overlay {
