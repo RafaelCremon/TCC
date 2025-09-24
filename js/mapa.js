@@ -5,6 +5,9 @@ const viewer = new Marzipano.Viewer(document.getElementById('pano'), {
   }
 });
 
+// Variável para controlar a cena atual
+let currentSceneIndex = 0;
+
 // Apenas fotos do Bloco A cadastradas
 const panoData = [
   // Bloco A
@@ -116,35 +119,157 @@ const scenes = panoFiltrado.map((data, index) => {
   const view = new Marzipano.RectilinearView(initialViewParams, limiter);
   const scene = viewer.createScene({ source, geometry, view });
 
-  // Hotspot Avançar (próxima cena)
+  // Sistema de navegação aprimorado - Setas direcionais grandes
   if (index < panoFiltrado.length - 1) {
     const nextHotspot = document.createElement('div');
-    nextHotspot.className = 'hotspot arrow next';
-    nextHotspot.title = "Próxima";
+    nextHotspot.className = 'nav-arrow next-arrow';
+    nextHotspot.innerHTML = `
+      <div class="arrow-circle">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="white">
+          <path d="M8 5l7 7-7 7" stroke="white" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="arrow-label">Avançar</div>
+    `;
+    nextHotspot.title = `Ir para: ${panoFiltrado[index + 1].name}`;
     nextHotspot.addEventListener('click', () => {
-      scenes[index + 1].scene.switchTo();
+      currentSceneIndex = index + 1;
+      scenes[currentSceneIndex].scene.switchTo({ transitionDuration: 500 });
+      updateNavigationUI();
     });
-    scene.hotspotContainer().createHotspot(nextHotspot, { yaw: 1.0, pitch: 0 });
+    scene.hotspotContainer().createHotspot(nextHotspot, { yaw: 1.2, pitch: -0.1 });
   }
 
-  // Hotspot Voltar (cena anterior)
   if (index > 0) {
     const prevHotspot = document.createElement('div');
-    prevHotspot.className = 'hotspot arrow prev';
-    prevHotspot.title = "Voltar";
+    prevHotspot.className = 'nav-arrow prev-arrow';
+    prevHotspot.innerHTML = `
+      <div class="arrow-circle">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="white">
+          <path d="M16 19l-7-7 7-7" stroke="white" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="arrow-label">Voltar</div>
+    `;
+    prevHotspot.title = `Voltar para: ${panoFiltrado[index - 1].name}`;
     prevHotspot.addEventListener('click', () => {
-      scenes[index - 1].scene.switchTo();
+      currentSceneIndex = index - 1;
+      scenes[currentSceneIndex].scene.switchTo({ transitionDuration: 500 });
+      updateNavigationUI();
     });
-    scene.hotspotContainer().createHotspot(prevHotspot, { yaw: -1.0, pitch: 0 });
+    scene.hotspotContainer().createHotspot(prevHotspot, { yaw: -1.2, pitch: -0.1 });
+  }
+
+  // Hotspots de navegação rápida (pontos de interesse)
+  if (panoFiltrado.length > 2) {
+    // Adiciona hotspots para pular para locais específicos
+    if (index === 0 && panoFiltrado.length > 2) {
+      const skipHotspot = document.createElement('div');
+      skipHotspot.className = 'nav-point skip-point';
+      skipHotspot.innerHTML = `
+        <div class="point-circle">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+            <circle cx="12" cy="12" r="8" fill="rgba(255,255,255,0.9)"/>
+            <path d="M12 6v6l4 2" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      `;
+      skipHotspot.title = `Pular para: ${panoFiltrado[Math.floor(panoFiltrado.length/2)].name}`;
+      skipHotspot.addEventListener('click', () => {
+        currentSceneIndex = Math.floor(panoFiltrado.length/2);
+        scenes[currentSceneIndex].scene.switchTo({ transitionDuration: 700 });
+        updateNavigationUI();
+      });
+      scene.hotspotContainer().createHotspot(skipHotspot, { yaw: 0, pitch: -0.3 });
+    }
   }
 
   return {
     name: data.name,
-    scene: scene
+    scene: scene,
+    index: index
   };
+});
+
+// Função para atualizar a UI de navegação
+function updateNavigationUI() {
+  const navInfo = document.getElementById('nav-info');
+  if (navInfo && scenes.length > 0) {
+    navInfo.innerHTML = `
+      <div class="current-location">${scenes[currentSceneIndex].name}</div>
+      <div class="location-counter">${currentSceneIndex + 1} de ${scenes.length}</div>
+    `;
+  }
+}
+
+// Adiciona controles de teclado estilo Google Street View
+document.addEventListener('keydown', (e) => {
+  if (scenes.length === 0) return;
+  
+  switch(e.key) {
+    case 'ArrowRight':
+    case 'ArrowUp':
+      if (currentSceneIndex < scenes.length - 1) {
+        currentSceneIndex++;
+        scenes[currentSceneIndex].scene.switchTo({ transitionDuration: 400 });
+        updateNavigationUI();
+      }
+      break;
+    case 'ArrowLeft':
+    case 'ArrowDown':
+      if (currentSceneIndex > 0) {
+        currentSceneIndex--;
+        scenes[currentSceneIndex].scene.switchTo({ transitionDuration: 400 });
+        updateNavigationUI();
+      }
+      break;
+    case 'Home':
+      currentSceneIndex = 0;
+      scenes[0].scene.switchTo({ transitionDuration: 600 });
+      updateNavigationUI();
+      break;
+    case 'End':
+      currentSceneIndex = scenes.length - 1;
+      scenes[currentSceneIndex].scene.switchTo({ transitionDuration: 600 });
+      updateNavigationUI();
+      break;
+  }
 });
 
 // Só inicia se houver cenas (fotos)
 if (scenes.length > 0) {
+  currentSceneIndex = 0;
   scenes[0].scene.switchTo();
+  
+  // Cria a UI de navegação
+  const navUI = document.createElement('div');
+  navUI.id = 'nav-info';
+  navUI.className = 'navigation-ui';
+  document.body.appendChild(navUI);
+  
+  updateNavigationUI();
+  
+  // Adiciona instruções de navegação
+  const instructions = document.createElement('div');
+  instructions.className = 'navigation-instructions';
+  instructions.innerHTML = `
+    <div class="instructions-content">
+      <div class="instruction-item">
+        <span class="key">↑ ↓ ← →</span> Navegar entre locais
+      </div>
+      <div class="instruction-item">
+        <span class="key">Clique</span> nas setas para avançar/voltar
+      </div>
+      <div class="instruction-item">
+        <span class="key">Home/End</span> Ir ao início/fim
+      </div>
+    </div>
+  `;
+  document.body.appendChild(instructions);
+  
+  // Remove instruções após alguns segundos
+  setTimeout(() => {
+    instructions.style.opacity = '0';
+    setTimeout(() => instructions.remove(), 500);
+  }, 4000);
 }

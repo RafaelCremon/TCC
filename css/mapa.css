@@ -13,7 +13,212 @@ html,body{ height:100%; margin:0; padding:0; overflow:hidden; font-family:Inter,
   background: #000; /* Marzipano pano */
 }
 
-/* Hotspots maiores e com vidro */
+/* Sistema de navegação estilo Google Street View */
+.nav-arrow {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.nav-arrow:hover {
+  transform: scale(1.15);
+}
+
+.arrow-circle {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover .arrow-circle {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: var(--brand);
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(91, 140, 255, 0.4);
+}
+
+.arrow-label {
+  margin-top: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover .arrow-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pontos de navegação rápida */
+.nav-point {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.point-circle {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--brand);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.nav-point:hover .point-circle {
+  transform: scale(1.2);
+  background: var(--brand);
+  box-shadow: 0 4px 15px rgba(91, 140, 255, 0.5);
+}
+
+.nav-point:hover .point-circle svg {
+  fill: white;
+}
+
+/* UI de navegação (contador e localização atual) */
+.navigation-ui {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.current-location {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--brand);
+}
+
+.location-counter {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Instruções de navegação */
+.navigation-instructions {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease;
+}
+
+.instructions-content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.instruction-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.key {
+  background: var(--brand);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 11px;
+  box-shadow: 0 2px 6px rgba(91, 140, 255, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .nav-arrow {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .arrow-circle {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .arrow-circle svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .navigation-ui {
+    top: 10px;
+    padding: 8px 16px;
+  }
+  
+  .current-location {
+    font-size: 14px;
+  }
+  
+  .navigation-instructions {
+    bottom: 10px;
+    padding: 12px 16px;
+  }
+  
+  .instructions-content {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Hotspots antigos (mantidos para compatibilidade) */
 .hotspot{
   width:70px; height:70px; position:absolute; cursor:pointer; z-index:1000; user-select:none;
   border-radius:999px; backdrop-filter: blur(4px);
@@ -24,7 +229,7 @@ html,body{ height:100%; margin:0; padding:0; overflow:hidden; font-family:Inter,
 }
 .hotspot:hover{ transform:scale(1.06); background: rgba(255,255,255,.3) }
 
-/* Setas (mantém sua lógica prev/next) */
+/* Setas antigas (mantém sua lógica prev/next) */
 .hotspot.arrow::before{
   content:""; display:block; width:0; height:0; border-style:solid;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,.8));
