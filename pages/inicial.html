@@ -559,6 +559,51 @@
     color: #6b21a8;
   }
   
+  /* Scroll horizontal personalizado para tabela de usuários */
+  .users-table-container {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+  }
+  
+  .users-table-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .users-table-container::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 4px;
+  }
+  
+  .users-table-container::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+  }
+  
+  .users-table-container::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+  
+  /* Indicador visual de scroll */
+  .users-table-container::after {
+    content: "← Deslize para ver mais →";
+    position: sticky;
+    right: 0;
+    bottom: -25px;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+    display: block;
+    animation: slideHint 2s ease-in-out infinite;
+  }
+  
+  @keyframes slideHint {
+    0%, 100% { opacity: 0.7; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(5px); }
+  }
+  
   .log-item {
     padding: 12px 16px;
     border-bottom: 1px solid #e5e7eb;
@@ -623,6 +668,38 @@
   body.dark-mode .permission-card {
     background: #334155 !important;
     border-color: #475569 !important;
+  }
+  
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    #usersManagementModal > div {
+      max-width: 98% !important;
+      width: 98% !important;
+      margin: 10px;
+      max-height: 95vh !important;
+    }
+    
+    .users-table-container {
+      font-size: 14px;
+    }
+    
+    .users-table-container table {
+      min-width: 1000px;
+    }
+    
+    .users-tab {
+      font-size: 13px !important;
+      padding: 12px 16px !important;
+    }
+  }
+  
+  /* Destaque visual quando há scroll disponível */
+  .users-table-container {
+    position: relative;
+  }
+  
+  .users-table-container:hover::after {
+    opacity: 1 !important;
   }
   
   /* Popup compacto e estilizado para opções Mini Mapa */
@@ -821,18 +898,16 @@
       </div>
     </div>
       <!-- Menu suspenso -->
-      <!--
-      <div id="profileMenu" style="display:none; position:absolute; right:0; top:110%; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); min-width:120px; z-index:100;">
+      <div id="profileMenu" style="display:none; position:absolute; right:0; top:110%; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); min-width:180px; z-index:100;">
         <button id="toggleThemeBtn" class="profile-menu-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="#5b8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>
-          Alternar modo claro/escuro
+          Alternar Tema
         </button>
         <button id="btnSair" class="profile-menu-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="#d32f2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          Sair
+          Sair da Conta
         </button>
       </div>
-      -->
     </div>
   </header>
 
@@ -941,7 +1016,7 @@
       <span>Usuários</span>
     </div>
 
-    <a href="#" class="sidebar-item">
+    <a href="#" class="sidebar-item" id="preferencesBtn">
       <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="3"/>
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -1081,6 +1156,14 @@
   });
   
   window.addEventListener('DOMContentLoaded', function() {
+    // Verificar se usuário está logado
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (!currentUser.username && !currentUser.name) {
+      // Se não há usuário logado, redirecionar para login
+      window.location.href = '../login.html';
+      return;
+    }
+    
     // Apple-style card animation
     var card = document.getElementById('shortcutsCard');
     if(card) {
@@ -1091,9 +1174,104 @@
     var welcomeDiv = document.getElementById('welcomeAnimation');
     var welcomeText = document.getElementById('welcomeText');
     var cardWelcome = document.getElementById('cardWelcome');
-    var text = 'Bem-vindo, Admin!';
+    var headerWelcome = document.getElementById('headerWelcome');
+    
+    // Obter informações do usuário logado
+    const userName = currentUser.name || 'Admin';
+    const userRole = currentUser.role || 'admin';
+    
+    // Função para obter saudação baseada no horário
+    function getGreeting() {
+      const hour = new Date().getHours();
+      if (hour < 12) return 'Bom dia';
+      if (hour < 18) return 'Boa tarde';
+      return 'Boa noite';
+    }
+    
+    // Função para obter título baseado no papel do usuário
+    function getRoleTitle(role) {
+      const titles = {
+        'admin': 'Administrador',
+        'professor': 'Professor',
+        'aluno': 'Estudante',
+        'responsavel': 'Responsável'
+      };
+      return titles[role] || 'Usuário';
+    }
+    
+    var text = `Bem-vindo, ${userName}!`;
+    var headerText = `${getGreeting()}, ${userName}`;
+    var cardText = `${getGreeting()}, ${getRoleTitle(userRole)}`;
+    
     var jaViuBoasVindas = localStorage.getItem('jaViuBoasVindas');
+    
+    // Função para configurar permissões da interface
+    function setupUserPermissions() {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const userRole = currentUser.role || 'admin';
+      
+      console.log('Configurando permissões para:', userRole);
+      
+      // Elementos que só administradores podem acessar
+      const adminOnlyElements = [
+        'usersManagementBtn', // Botão de gerenciar usuários
+        'preferencesBtn', // Botão de preferências do sistema
+        // Adicionar outros elementos admin-only aqui
+      ];
+      
+      // Se não for admin, esconder elementos admin-only
+      if (userRole !== 'admin') {
+        adminOnlyElements.forEach(elementId => {
+          const element = document.getElementById(elementId);
+          if (element) {
+            element.style.display = 'none';
+            console.log(`Elemento ${elementId} ocultado para usuário ${userRole}`);
+          }
+        });
+        
+        // Personalizar mensagem de boas-vindas baseada no papel
+        const welcomeDesc = document.querySelector('.welcome-desc');
+        if (welcomeDesc) {
+          const descriptions = {
+            'professor': 'Acesse recursos educacionais e gerencie suas turmas.',
+            'aluno': 'Explore o ambiente escolar e utilize as ferramentas disponíveis.',
+            'responsavel': 'Acompanhe as atividades e informações do seu filho.'
+          };
+          welcomeDesc.textContent = descriptions[userRole] || 'Acesse os recursos da plataforma.';
+        }
+        
+        // Personalizar mensagem do assistente virtual baseada no papel
+        setTimeout(() => {
+          const assistenteMessages = document.querySelector('#assistenteMessages');
+          if (assistenteMessages && assistenteMessages.children.length === 0) {
+            const roleWelcomes = {
+              'professor': '👨‍🏫 Olá, Professor(a)! Como posso ajudá-lo hoje? Posso auxiliar com informações sobre a escola, localização de salas e recursos educacionais.',
+              'aluno': '🎓 Oi! Sou seu assistente virtual da escola. Posso te ajudar a encontrar salas, ver o cardápio da lanchonete, usar o mapa da escola e muito mais!',
+              'responsavel': '👨‍👩‍👧‍👦 Olá! Posso te ajudar com informações sobre a escola, localização de ambientes e outras questões relacionadas ao acompanhamento escolar.'
+            };
+            
+            if (roleWelcomes[userRole] && typeof adicionarMensagem === 'function') {
+              adicionarMensagem('assistant', roleWelcomes[userRole]);
+            }
+          }
+        }, 2000);
+        
+      } else {
+        console.log('Usuário administrador - acesso total liberado');
+      }
+      
+      // Atualizar nome no perfil baseado no usuário real
+      const adminProfileSpan = document.querySelector('#adminProfile span');
+      if (adminProfileSpan && currentUser.name) {
+        const firstName = currentUser.name.split(' ')[0];
+        adminProfileSpan.textContent = firstName;
+      }
+    }
+    
     function initAppFeatures() {
+      // Configurar permissões primeiro
+      setupUserPermissions();
+      
       // Atalhos
       setTimeout(() => {
         if (typeof carregarAtalhos === 'function') {
@@ -1167,6 +1345,24 @@
       // Botão sair do perfil
       if (btnSair) {
         btnSair.onclick = function() {
+          // Registrar logout no log de atividades
+          const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+          if (currentUser.name) {
+            const activityLogs = JSON.parse(localStorage.getItem('activityLogs') || '[]');
+            activityLogs.push({
+              id: Date.now(),
+              timestamp: new Date().toISOString(),
+              action: 'logout',
+              user: currentUser.name,
+              details: 'Logout realizado com sucesso'
+            });
+            localStorage.setItem('activityLogs', JSON.stringify(activityLogs));
+          }
+          
+          // Limpar sessão atual
+          localStorage.removeItem('currentUser');
+          
+          // Animação de saída e redirecionamento
           document.querySelector('.shortcuts-card').classList.add('apple-animate');
           document.getElementById('appleOverlay').classList.add('apple-transition-active');
           setTimeout(function() {
@@ -1213,8 +1409,13 @@
           welcomeDiv.style.opacity = '0';
           setTimeout(function() {
             welcomeDiv.style.display = 'none';
-            cardWelcome.textContent = text;
+            cardWelcome.textContent = cardText;
             cardWelcome.style.opacity = '1';
+            // Atualizar header também
+            if (headerWelcome) {
+              headerWelcome.textContent = headerText;
+              headerWelcome.style.opacity = '1';
+            }
             localStorage.setItem('jaViuBoasVindas', 'true');
             initAppFeatures();
           }, 700);
@@ -1222,14 +1423,24 @@
       } else {
         // Já viu, mostra direto no card
         if (welcomeDiv) welcomeDiv.style.display = 'none';
-        cardWelcome.textContent = text;
+        cardWelcome.textContent = cardText;
         cardWelcome.style.opacity = '1';
+        // Atualizar header também
+        if (headerWelcome) {
+          headerWelcome.textContent = headerText;
+          headerWelcome.style.opacity = '1';
+        }
         initAppFeatures();
       }
     } else if (cardWelcome) {
       // Fallback: sempre mostra o texto no card
-      cardWelcome.textContent = text;
+      cardWelcome.textContent = cardText;
       cardWelcome.style.opacity = '1';
+      // Atualizar header também
+      if (headerWelcome) {
+        headerWelcome.textContent = headerText;
+        headerWelcome.style.opacity = '1';
+      }
       initAppFeatures();
     } else {
       // Se não houver animação, inicializa recursos normalmente
@@ -2519,7 +2730,73 @@ class UserManagementSystem {
     this.users = this.loadUsers();
     this.permissions = this.loadPermissions();
     this.activityLogs = this.loadActivityLogs();
+    
+    // Verificar e corrigir hashes de senha se necessário
+    this.validateUserHashes();
+    
     this.init();
+  }
+  
+  // Método para validar e corrigir hashes de usuários existentes
+  validateUserHashes() {
+    console.log('Verificando hashes de usuários...');
+    console.log('Usuários carregados:', this.users.length);
+    
+    // Sempre recriar dados de exemplo na primeira vez para garantir compatibilidade
+    const hashesValidated = localStorage.getItem('hashesValidated');
+    if (!hashesValidated || this.users.length === 0) {
+      console.log('Recreando usuários com hashes corretos...');
+      
+      // Limpar usuários existentes e recarregar com hash correto
+      this.users = [];
+      this.loadSampleData();
+      
+      // Marcar como validado
+      localStorage.setItem('hashesValidated', 'true');
+      console.log('✅ Usuários recriados com hashes corretos!');
+    } else {
+      console.log('✅ Hashes já validados anteriormente');
+    }
+  }
+  
+  // Verificar se o usuário atual é administrador
+  isCurrentUserAdmin() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return currentUser.role === 'admin';
+  }
+  
+  // Função para verificar permissões antes de executar ações
+  checkPermission(actionName) {
+    if (!this.isCurrentUserAdmin()) {
+      alert(`❌ Acesso negado!\n\nApenas administradores podem ${actionName}.`);
+      return false;
+    }
+    return true;
+  }
+  
+  // Método para criar hash simples da senha (em produção, usar bcrypt)
+  hashPassword(password) {
+    // Hash simples usando base64 com salt - DEVE SER IGUAL AO login.js
+    const salt = 'escola2024';
+    return btoa(salt + password + salt);
+  }
+  
+  // Método para verificar senha
+  verifyPassword(password, hash) {
+    return this.hashPassword(password) === hash;
+  }
+  
+  // Método para autenticar usuário
+  authenticateUser(username, password) {
+    const user = this.users.find(u => u.username === username && u.status === 'active');
+    if (user && this.verifyPassword(password, user.password)) {
+      // Atualizar último acesso
+      user.lastAccess = new Date().toISOString();
+      this.saveUsers();
+      this.logActivity('login', user.name, `Login realizado com sucesso`);
+      return user;
+    }
+    return null;
   }
   
   init() {
@@ -2536,6 +2813,13 @@ class UserManagementSystem {
     const usersBtn = document.getElementById('usersManagementBtn');
     if (usersBtn) {
       usersBtn.addEventListener('click', () => {
+        // Verificar permissões antes de abrir
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        if (currentUser.role !== 'admin') {
+          alert('❌ Acesso negado!\n\nApenas administradores podem gerenciar usuários.');
+          return;
+        }
+        
         console.log('Opening users modal...');
         this.openModal();
       });
@@ -2620,6 +2904,23 @@ class UserManagementSystem {
     if (exportLogsBtn) {
       exportLogsBtn.addEventListener('click', () => this.exportLogs());
     }
+    
+    // Event listener para mostrar/ocultar senha (será adicionado dinamicamente)
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'togglePassword') {
+        const passwordInput = document.getElementById('userPassword');
+        const toggleBtn = document.getElementById('togglePassword');
+        if (passwordInput && toggleBtn) {
+          if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleBtn.textContent = '🙈';
+          } else {
+            passwordInput.type = 'password';
+            toggleBtn.textContent = '👁️';
+          }
+        }
+      }
+    });
   }
   
   openModal() {
@@ -2667,12 +2968,12 @@ class UserManagementSystem {
   }
   
   loadUsers() {
-    const saved = localStorage.getItem('systemUsers');
+    const saved = localStorage.getItem('users'); // Mesma chave do login.js
     return saved ? JSON.parse(saved) : [];
   }
   
   saveUsers() {
-    localStorage.setItem('systemUsers', JSON.stringify(this.users));
+    localStorage.setItem('users', JSON.stringify(this.users)); // Mesma chave do login.js
   }
   
   loadPermissions() {
@@ -2762,6 +3063,8 @@ class UserManagementSystem {
           id: 1,
           name: 'Gustavo Medeiros',
           email: 'admin@escola.com',
+          username: 'admin',
+          password: this.hashPassword('admin123'),
           role: 'admin',
           phone: '(11) 99999-9999',
           status: 'active',
@@ -2774,6 +3077,8 @@ class UserManagementSystem {
           id: 2,
           name: 'Prof. Maria Silva',
           email: 'maria.silva@escola.com',
+          username: 'maria.prof',
+          password: this.hashPassword('prof123'),
           role: 'professor',
           phone: '(11) 98888-8888',
           status: 'active',
@@ -2789,6 +3094,8 @@ class UserManagementSystem {
           id: 3,
           name: 'João Santos',
           email: 'joao.santos@aluno.escola.com',
+          username: 'joao.aluno',
+          password: this.hashPassword('aluno123'),
           role: 'aluno',
           phone: '(11) 97777-7777',
           status: 'active',
@@ -2804,6 +3111,8 @@ class UserManagementSystem {
           id: 4,
           name: 'Ana Oliveira',
           email: 'ana.oliveira@email.com',
+          username: 'ana.resp',
+          password: this.hashPassword('resp123'),
           role: 'responsavel',
           phone: '(11) 96666-6666',
           status: 'inactive',
@@ -2976,11 +3285,20 @@ class UserManagementSystem {
   handleCreateUser(e) {
     e.preventDefault();
     
-    const formData = new FormData(e.target);
+    // Verificar permissões
+    if (!this.checkPermission('criar usuários')) {
+      return;
+    }
+    
+    const username = document.getElementById('userUsername').value;
+    const password = document.getElementById('userPassword').value;
+    
     const userData = {
       id: Date.now(),
       name: document.getElementById('userName').value,
       email: document.getElementById('userEmail').value,
+      username: username,
+      password: this.hashPassword(password), // Hash da senha
       role: document.getElementById('userRole').value,
       phone: document.getElementById('userPhone').value,
       status: 'active',
@@ -2991,13 +3309,23 @@ class UserManagementSystem {
     };
     
     // Validações
-    if (!userData.name || !userData.email || !userData.role) {
+    if (!userData.name || !userData.email || !userData.role || !username || !password) {
       this.showToast('Preencha todos os campos obrigatórios!', 'error');
+      return;
+    }
+    
+    if (password.length < 6) {
+      this.showToast('A senha deve ter pelo menos 6 caracteres!', 'error');
       return;
     }
     
     if (this.users.some(user => user.email === userData.email)) {
       this.showToast('Email já cadastrado!', 'error');
+      return;
+    }
+    
+    if (this.users.some(user => user.username === username)) {
+      this.showToast('Nome de usuário já existe!', 'error');
       return;
     }
     
@@ -3039,6 +3367,11 @@ class UserManagementSystem {
   }
   
   editUser(userId) {
+    // Verificar permissões
+    if (!this.checkPermission('editar usuários')) {
+      return;
+    }
+    
     const user = this.users.find(u => u.id === userId);
     if (!user) return;
     
@@ -3048,6 +3381,11 @@ class UserManagementSystem {
   }
   
   toggleUserStatus(userId) {
+    // Verificar permissões
+    if (!this.checkPermission('alterar status de usuários')) {
+      return;
+    }
+    
     const user = this.users.find(u => u.id === userId);
     if (!user) return;
     
@@ -3238,7 +3576,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Modal de Gestão de Usuários -->
 <div id="usersManagementModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); z-index: 10000; align-items: center; justify-content: center;">
-  <div style="background: #fff; border-radius: 20px; max-width: 900px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+  <div style="background: #fff; border-radius: 20px; max-width: 1200px; width: 95%; max-height: 95vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
     
     <!-- Header do Modal -->
     <div style="padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
@@ -3283,17 +3621,17 @@ document.addEventListener('DOMContentLoaded', function() {
           <span id="usersCount" style="color: #64748b; font-size: 14px;">0 usuários encontrados</span>
         </div>
 
-        <div style="background: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;">
-          <table style="width: 100%; border-collapse: collapse;">
+        <div class="users-table-container" style="background: #f8fafc; border-radius: 12px; overflow-x: auto; border: 1px solid #e2e8f0; max-width: 100%;">
+          <table style="width: 100%; min-width: 800px; border-collapse: collapse;">
             <thead style="background: #f1f5f9;">
               <tr>
-                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Avatar</th>
-                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Nome</th>
-                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Email</th>
-                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Perfil</th>
-                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Status</th>
-                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Último Acesso</th>
-                <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb;">Ações</th>
+                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 80px;">Avatar</th>
+                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 180px;">Nome</th>
+                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 200px;">Email</th>
+                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 120px;">Perfil</th>
+                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 100px;">Status</th>
+                <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 140px;">Último Acesso</th>
+                <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; min-width: 200px;">Ações</th>
               </tr>
             </thead>
             <tbody id="usersTableBody">
@@ -3314,6 +3652,18 @@ document.addEventListener('DOMContentLoaded', function() {
             <div>
               <label style="display: block; margin-bottom: 6px; font-weight: 500; color: #374151;">Email *</label>
               <input type="email" id="userEmail" required style="width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 6px; font-weight: 500; color: #374151;">Nome de Usuário *</label>
+              <input type="text" id="userUsername" required style="width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;" placeholder="Ex: gustavo.medeiros">
+              <small style="color: #6b7280; font-size: 12px;">Será usado para fazer login</small>
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 6px; font-weight: 500; color: #374151;">Senha *</label>
+              <div style="position: relative;">
+                <input type="password" id="userPassword" required style="width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;" placeholder="Mínimo 6 caracteres">
+                <button type="button" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6b7280;">👁️</button>
+              </div>
             </div>
             <div>
               <label style="display: block; margin-bottom: 6px; font-weight: 500; color: #374151;">Perfil *</label>

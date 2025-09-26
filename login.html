@@ -134,6 +134,23 @@
 
     <!-- Botão entrar -->
     <button onclick="login()">Entrar</button>
+    
+    <!-- Painel de credenciais para teste -->
+    <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 12px;">
+      <p style="margin: 0 0 10px 0; font-weight: 600; color: #374151;">🔐 Credenciais de Teste:</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px;">
+        <div style="padding: 6px; background: white; border-radius: 4px; text-align: center; cursor: pointer;" onclick="fillCredentials('admin', 'admin123')">
+          <strong>Admin</strong><br>admin / admin123
+        </div>
+        <div style="padding: 6px; background: white; border-radius: 4px; text-align: center; cursor: pointer;" onclick="fillCredentials('maria.prof', 'prof123')">
+          <strong>Prof</strong><br>maria.prof / prof123
+        </div>
+        <div style="padding: 6px; background: white; border-radius: 4px; text-align: center; cursor: pointer;" onclick="fillCredentials('joao.aluno', 'aluno123')">
+          <strong>Aluno</strong><br>joao.aluno / aluno123
+        </div>
+      </div>
+      <p style="margin: 8px 0 0 0; font-size: 10px; color: #6b7280;">Clique em um cartão para preencher automaticamente</p>
+    </div>
   </div>
   
   <!-- Botão de alternância de tema -->
@@ -144,6 +161,27 @@
   <!-- Conexão JavaScript -->
   <script src="js/login.js"></script>
   <script>
+    // Função para preencher credenciais automaticamente
+    function fillCredentials(username, password) {
+      document.getElementById('usuario').value = username;
+      document.getElementById('senha').value = password;
+      
+      // Limpar erros
+      document.getElementById('erroUsuario').textContent = '';
+      document.getElementById('erroSenha').textContent = '';
+      
+      // Destacar visualmente
+      const usuarioInput = document.getElementById('usuario');
+      const senhaInput = document.getElementById('senha');
+      usuarioInput.style.background = '#e0f2fe';
+      senhaInput.style.background = '#e0f2fe';
+      
+      setTimeout(() => {
+        usuarioInput.style.background = '';
+        senhaInput.style.background = '';
+      }, 1000);
+    }
+
     // Alternância do ícone de senha
     window.addEventListener('DOMContentLoaded', function() {
       var senhaInput = document.getElementById('senha');
