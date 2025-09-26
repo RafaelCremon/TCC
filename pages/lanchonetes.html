@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="../css/lanchonetes.css">
 </head>
 <body>
+  <!-- Carregar tema salvo -->
+  <script>
+    // Aplicar tema salvo imediatamente para evitar flash
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+  
   <script src="../js/lanchonetes.js"></script>
   <div class="lanchonetes-card">
     <button class="voltar-btn" onclick="voltar()">← Voltar</button>

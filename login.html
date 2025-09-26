@@ -103,6 +103,14 @@
   </style>
 </head>
 <body>
+  <!-- Carregar tema salvo -->
+  <script>
+    // Aplicar tema salvo imediatamente para evitar flash
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+  
   <!-- Card de login -->
   <div class="card" id="loginCard" style="padding:32px 32px 24px 32px; margin-top:40px;">
     <div class="card-head">
@@ -235,10 +243,14 @@
         themeIcon.alt = 'Modo escuro';
         logoImg.src = 'assets/imagens/LOGOSEMFUNDO.png'; // Logo para tema claro
       }
+      // Salvar preferência no localStorage
+      localStorage.setItem('darkMode', dark ? 'enabled' : 'disabled');
       updateSenhaIcon();
     }
-    // Inicialmente modo claro
-    setTheme(false);
+    // Inicializar com tema salvo ou padrão
+    const savedTheme = localStorage.getItem('darkMode');
+    const isDarkMode = savedTheme === 'enabled';
+    setTheme(isDarkMode);
     themeBtn.addEventListener('click', function() {
       const isDark = document.body.classList.contains('dark-mode');
       setTheme(!isDark);

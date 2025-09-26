@@ -814,9 +814,416 @@
       background: #eaf2ff;
       box-shadow: 0 2px 12px rgba(44,92,255,0.10);
     }
+    
+    /* Calendário Moderno */
+    .calendar-section {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      padding: 24px;
+      margin-bottom: 24px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    
+    .calendar-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e3f2fd;
+    }
+    
+    .calendar-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1565c0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+    }
+    
+    .calendar-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .calendar-nav-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      color: #1565c0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .calendar-nav-btn:hover {
+      background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba(25,118,210,0.3);
+    }
+    
+    .calendar-month {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #424242;
+      min-width: 140px;
+      text-align: center;
+    }
+    
+    .calendar-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    
+    .calendar-widget {
+      background: linear-gradient(135deg, #f8fbff 0%, #f0f8ff 100%);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #e1f4fd;
+    }
+    
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      margin-top: 16px;
+      max-height: 240px;
+      overflow: hidden;
+    }
+    
+    .calendar-day-header {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #666;
+      padding: 8px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      color: #424242;
+    }
+    
+    .calendar-day:hover {
+      background: rgba(25,118,210,0.1);
+      transform: scale(1.05);
+    }
+    
+    .calendar-day.today {
+      background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(25,118,210,0.4);
+    }
+    
+    .calendar-day.has-event {
+      background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+      color: white;
+      font-weight: 600;
+    }
+    
+    .calendar-day.has-event:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba(76,175,80,0.4);
+    }
+    
+    .calendar-day.other-month {
+      color: #bdbdbd;
+      cursor: default;
+    }
+    
+    .calendar-day.other-month:hover {
+      transform: none;
+      background: none;
+    }
+    
+    .events-panel {
+      max-height: 280px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #1976d2 #e3f2fd;
+    }
+    
+    .events-panel::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .events-panel::-webkit-scrollbar-track {
+      background: #e3f2fd;
+      border-radius: 3px;
+    }
+    
+    .events-panel::-webkit-scrollbar-thumb {
+      background: #1976d2;
+      border-radius: 3px;
+    }
+    
+    .event-item {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 10px;
+      border-left: 5px solid #1976d2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    
+    .event-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border-left-color: #4caf50;
+    }
+    
+    .event-date {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    
+    .event-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1565c0;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    
+    .event-description {
+      font-size: 0.75rem;
+      color: #666;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    
+    .event-type {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+    }
+    
+    .event-type.prova {
+      background: #ffebee;
+      color: #c62828;
+    }
+    
+    .event-type.evento {
+      background: #e8f5e8;
+      color: #2e7d32;
+    }
+    
+    .event-type.feriado {
+      background: #fff3e0;
+      color: #e65100;
+    }
+    
+    .no-events {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      padding: 40px 20px;
+    }
+    
+    .add-event-btn {
+      background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 8px;
+      width: 32px;
+      height: 32px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .add-event-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(76,175,80,0.3);
+    }
+    
+    .calendar-fade-in {
+      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .day-slide-in {
+      animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    /* Dark Mode para Calendário */
+    body.dark-mode .calendar-section {
+      background: #1e2746;
+      box-shadow: 0 8px 32px rgba(0,224,255,0.1);
+    }
+    
+    body.dark-mode .calendar-title {
+      color: #64b5f6;
+    }
+    
+    body.dark-mode .calendar-month {
+      color: #e0e0e0;
+    }
+    
+    body.dark-mode .calendar-widget {
+      background: linear-gradient(135deg, #2a3f5f 0%, #1e2746 100%);
+      border-color: #354b6b;
+    }
+    
+    body.dark-mode .calendar-day {
+      color: #e0e0e0;
+    }
+    
+    body.dark-mode .calendar-day:hover {
+      background: rgba(100,181,246,0.2);
+    }
+    
+    body.dark-mode .event-item {
+      background: #2a3f5f;
+      border-left-color: #64b5f6;
+    }
+    
+    body.dark-mode .event-title {
+      color: #90caf9;
+    }
+    
+    body.dark-mode .event-description,
+    body.dark-mode .event-date {
+      color: #b0bec5;
+    }
+    
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .calendar-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .calendar-section {
+        padding: 16px;
+      }
+      
+      .calendar-title {
+        font-size: 1.2rem;
+      }
+      
+      .main-content-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    
+    /* Layout principal em grid */
+    .main-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 650px;
+      gap: 24px;
+      align-items: start;
+    }
+    
+    .left-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .right-sidebar {
+      position: sticky;
+      top: 20px;
+    }
+    
+    /* Ajustar calendário para sidebar */
+    .calendar-section {
+      margin-bottom: 0;
+    }
+    
+    .calendar-container {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 24px;
+      align-items: start;
+      min-height: 320px;
+      max-height: 400px;
+    }
+    
+    .calendar-widget {
+      padding: 16px;
+    }
+    
+    .events-panel {
+      max-height: 400px;
+    }
   </style>
 </head>
 <body>
+  <!-- Carregar tema salvo -->
+  <script>
+    // Aplicar tema salvo imediatamente para evitar flash
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
+  
   <div class="apple-transition-overlay" id="appleOverlay"></div>
   <div id="welcomeAnimation" style="position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;z-index:10000;background:rgba(44,92,255,0.18);backdrop-filter:blur(2px);transition:opacity 0.7s;opacity:1;">
     <h2 id="welcomeText" style="margin:0;font-size:2.6rem;font-weight:600;letter-spacing:0.03em;background:linear-gradient(90deg,#5b8cff 0%,#2e3192 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;opacity:0;white-space:nowrap;overflow:hidden;border-right:2px solid #5b8cff;"></h2>
@@ -1026,32 +1433,70 @@
   </aside>
 
   <main class="content">
-    <div class="shortcuts-card" id="shortcutsCard">
-      <div style="display: flex; align-items: center; justify-content: space-between;">
-        <h3 style="margin: 0;">Atalhos</h3>
-        <button 
-          id="editShortcutsBtn"
-          title="Editar atalhos" 
-          style="background: none; border: none; cursor: pointer; padding: 4px;"
-          aria-label="Editar atalhos"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0057ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 20h9" />
-            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
-          </svg>
-        </button>
+    <div class="main-content-grid">
+      <!-- Conteúdo principal à esquerda -->
+      <div class="left-content">
+        <div class="shortcuts-card" id="shortcutsCard">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <h3 style="margin: 0;">Atalhos</h3>
+            <button 
+              id="editShortcutsBtn"
+              title="Editar atalhos" 
+              style="background: none; border: none; cursor: pointer; padding: 4px;"
+              aria-label="Editar atalhos"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0057ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="shortcut-buttons">
+            <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+            <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+            <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+            <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+          </div>
+        </div>
+        
+        <div class="opcoes-grid" id="opcoes">
+          <!-- Cada opção de atalho deve ter uma classe .opcao-atalho e um id único, ex: id="opcao-1" -->
+        </div>
       </div>
-      <div class="shortcut-buttons">
-        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
-        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
-        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
-        <button class="add-shortcut-btn" onclick="window.location.href='atalhos.html'">+</button>
+      
+      <!-- Sidebar direita com calendário -->
+      <div class="right-sidebar">
+        <div class="calendar-section calendar-fade-in">
+          <div class="calendar-header">
+            <h3 class="calendar-title">
+              📅 Calendário
+            </h3>
+            <div class="calendar-nav">
+              <button class="calendar-nav-btn" id="prevMonth">‹</button>
+              <div class="calendar-month" id="currentMonth"></div>
+              <button class="calendar-nav-btn" id="nextMonth">›</button>
+            </div>
+          </div>
+          
+          <div class="calendar-container">
+            <div class="calendar-widget">
+              <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+            
+            <div class="calendar-widget">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h4 style="margin: 0; color: #1565c0; font-size: 1rem;">🎯 Eventos</h4>
+                <button class="add-event-btn" onclick="addNewEvent()">
+                  <span>+</span>
+                </button>
+              </div>
+              <div class="events-panel" id="eventsPanel">
+                <div class="no-events" id="noEvents">Nenhum evento próximo</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-
-    <div class="opcoes-grid" id="opcoes">
-      <!-- Cada opção de atalho deve ter uma classe .opcao-atalho e um id único, ex: id="opcao-1" -->
     </div>
   </main>
 
@@ -1059,6 +1504,259 @@
   
   <script src="../js/inicial.js"></script>
   <script>
+  // Sistema de Calendário Moderno
+  class ModernCalendar {
+    constructor() {
+      this.currentDate = new Date();
+      this.today = new Date();
+      this.events = this.loadEvents();
+      this.monthNames = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+      this.dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+      
+      this.init();
+    }
+    
+    loadEvents() {
+      const saved = localStorage.getItem('schoolEvents');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+      
+      // Eventos exemplo
+      return [
+        {
+          id: 1,
+          date: '2025-09-28',
+          title: 'Prova de Matemática',
+          description: 'Avaliação do 3º bimestre - Capítulos 5 e 6',
+          type: 'prova'
+        },
+        {
+          id: 2,
+          date: '2025-10-02',
+          title: 'Feira de Ciências',
+          description: 'Apresentação dos projetos científicos dos alunos',
+          type: 'evento'
+        },
+        {
+          id: 3,
+          date: '2025-10-12',
+          title: 'Feriado - Nossa Sra. Aparecida',
+          description: 'Dia da Padroeira do Brasil',
+          type: 'feriado'
+        },
+        {
+          id: 4,
+          date: '2025-10-15',
+          title: 'Dia dos Professores',
+          description: 'Homenagem aos educadores',
+          type: 'evento'
+        },
+        {
+          id: 5,
+          date: '2025-10-31',
+          title: 'Halloween na Escola',
+          description: 'Festa à fantasia para todos os alunos',
+          type: 'evento'
+        }
+      ];
+    }
+    
+    saveEvents() {
+      localStorage.setItem('schoolEvents', JSON.stringify(this.events));
+    }
+    
+    init() {
+      this.render();
+      this.bindEvents();
+      this.renderEvents();
+    }
+    
+    bindEvents() {
+      document.getElementById('prevMonth').addEventListener('click', () => {
+        this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+        this.render();
+      });
+      
+      document.getElementById('nextMonth').addEventListener('click', () => {
+        this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+        this.render();
+      });
+    }
+    
+    render() {
+      this.renderHeader();
+      this.renderCalendar();
+      this.renderEvents();
+    }
+    
+    renderHeader() {
+      const monthElement = document.getElementById('currentMonth');
+      monthElement.textContent = `${this.monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+    }
+    
+    renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+      
+      // Cabeçalhos dos dias
+      this.dayNames.forEach(day => {
+        const dayHeader = document.createElement('div');
+        dayHeader.className = 'calendar-day-header';
+        dayHeader.textContent = day;
+        grid.appendChild(dayHeader);
+      });
+      
+      const firstDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+      const lastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+      const startDate = new Date(firstDay);
+      startDate.setDate(startDate.getDate() - firstDay.getDay());
+      
+      for (let i = 0; i < 42; i++) {
+        const date = new Date(startDate);
+        date.setDate(startDate.getDate() + i);
+        
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day day-slide-in';
+        dayElement.textContent = date.getDate();
+        dayElement.style.animationDelay = `${i * 0.01}s`;
+        
+        // Classes condicionais
+        if (date.getMonth() !== this.currentDate.getMonth()) {
+          dayElement.classList.add('other-month');
+        }
+        
+        if (this.isSameDay(date, this.today)) {
+          dayElement.classList.add('today');
+        }
+        
+        if (this.hasEvent(date)) {
+          dayElement.classList.add('has-event');
+        }
+        
+        dayElement.addEventListener('click', () => {
+          if (!dayElement.classList.contains('other-month')) {
+            this.showDayEvents(date);
+          }
+        });
+        
+        grid.appendChild(dayElement);
+      }
+    }
+    
+    renderEvents() {
+      const panel = document.getElementById('eventsPanel');
+      const noEvents = document.getElementById('noEvents');
+      
+      const upcomingEvents = this.events
+        .filter(event => new Date(event.date) >= this.today)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(0, 5);
+      
+      if (upcomingEvents.length === 0) {
+        noEvents.style.display = 'block';
+        return;
+      }
+      
+      noEvents.style.display = 'none';
+      
+      upcomingEvents.forEach((event, index) => {
+        const eventElement = document.createElement('div');
+        eventElement.className = 'event-item';
+        eventElement.style.animationDelay = `${index * 0.1}s`;
+        
+        const eventDate = new Date(event.date);
+        const formattedDate = eventDate.toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: 'short'
+        });
+        
+        eventElement.innerHTML = `
+          <div class="event-date">${formattedDate.toUpperCase()}</div>
+          <div class="event-title">${event.title}</div>
+          <div class="event-description">${event.description}</div>
+          <span class="event-type ${event.type}">${event.type}</span>
+        `;
+        
+        eventElement.addEventListener('click', () => {
+          this.showEventDetails(event);
+        });
+        
+        panel.appendChild(eventElement);
+      });
+    }
+    
+    hasEvent(date) {
+      const dateStr = date.toISOString().split('T')[0];
+      return this.events.some(event => event.date === dateStr);
+    }
+    
+    isSameDay(date1, date2) {
+      return date1.toDateString() === date2.toDateString();
+    }
+    
+    showDayEvents(date) {
+      const dateStr = date.toISOString().split('T')[0];
+      const dayEvents = this.events.filter(event => event.date === dateStr);
+      
+      if (dayEvents.length === 0) {
+        alert(`Nenhum evento em ${date.toLocaleDateString('pt-BR')}`);
+        return;
+      }
+      
+      const eventsList = dayEvents.map(event => 
+        `• ${event.title} (${event.type})`
+      ).join('\n');
+      
+      alert(`Eventos em ${date.toLocaleDateString('pt-BR')}:\n\n${eventsList}`);
+    }
+    
+    showEventDetails(event) {
+      const eventDate = new Date(event.date);
+      alert(`📅 ${event.title}\n\n📍 Data: ${eventDate.toLocaleDateString('pt-BR')}\n\n📝 ${event.description}\n\n🏷️ Tipo: ${event.type}`);
+    }
+  }
+  
+  // Função para adicionar novo evento
+  function addNewEvent() {
+    const title = prompt('Título do evento:');
+    if (!title) return;
+    
+    const date = prompt('Data (AAAA-MM-DD):');
+    if (!date) return;
+    
+    const description = prompt('Descrição:') || '';
+    const type = prompt('Tipo (prova/evento/feriado):') || 'evento';
+    
+    const newEvent = {
+      id: Date.now(),
+      date: date,
+      title: title,
+      description: description,
+      type: type
+    };
+    
+    calendar.events.push(newEvent);
+    calendar.saveEvents();
+    calendar.render();
+    
+    // Feedback visual
+    const section = document.querySelector('.calendar-section');
+    section.style.transform = 'scale(1.02)';
+    setTimeout(() => {
+      section.style.transform = 'scale(1)';
+    }, 200);
+  }
+  
+  // Inicializar calendário
+  let calendar;
+  document.addEventListener('DOMContentLoaded', () => {
+    calendar = new ModernCalendar();
+  });
+  
   // Função de backup caso o script externo não carregue
   if (typeof carregarAtalhos === 'undefined') {
     window.carregarAtalhos = function() {
@@ -1542,7 +2240,9 @@ function inicializarChat() {
         pergunta: 'Como ativar o modo escuro?',
         acao: () => {
           document.body.classList.toggle('dark-mode');
-          const modo = document.body.classList.contains('dark-mode') ? 'escuro' : 'claro';
+          const isDarkMode = document.body.classList.contains('dark-mode');
+          localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+          const modo = isDarkMode ? 'escuro' : 'claro';
           adicionarMensagem('assistant', `🎨 Perfeito! Tema alterado para modo ${modo}. Você pode alternar sempre que quiser!`);
           document.getElementById('assistenteChat').style.display = 'none';
         }
@@ -1957,13 +2657,17 @@ function sugerirAcoes(pergunta, resposta) {
           // Simular alternar tema
           setTimeout(() => {
             document.body.classList.toggle('dark-mode');
-            adicionarMensagem('assistant', `🎨 Tema alterado para ${document.body.classList.contains('dark-mode') ? 'escuro' : 'claro'}!`);
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            adicionarMensagem('assistant', `🎨 Tema alterado para ${isDarkMode ? 'escuro' : 'claro'}!`);
           }, 500);
           document.getElementById('assistenteChat').style.display = 'none';
         } else {
           // Alternar tema diretamente se não encontrar o perfil
           document.body.classList.toggle('dark-mode');
-          adicionarMensagem('assistant', `🎨 Tema alterado para ${document.body.classList.contains('dark-mode') ? 'escuro' : 'claro'}!`);
+          const isDarkMode = document.body.classList.contains('dark-mode');
+          localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+          adicionarMensagem('assistant', `🎨 Tema alterado para ${isDarkMode ? 'escuro' : 'claro'}!`);
         }
       }
     });
@@ -2273,6 +2977,8 @@ document.addEventListener('click', function(e) {
 // Botão Trocar tema
 document.getElementById('btnTrocarTema').onclick = function() {
   document.body.classList.toggle('dark-mode');
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
   miniPerfilPopup.style.display = 'none';
 };
 
