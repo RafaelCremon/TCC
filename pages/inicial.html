@@ -2530,16 +2530,44 @@ class UserManagementSystem {
   }
   
   setupEventListeners() {
+    console.log('Setting up event listeners...');
+    
     // Botão para abrir modal
     const usersBtn = document.getElementById('usersManagementBtn');
     if (usersBtn) {
-      usersBtn.addEventListener('click', () => this.openModal());
+      usersBtn.addEventListener('click', () => {
+        console.log('Opening users modal...');
+        this.openModal();
+      });
+      console.log('Users button listener added');
+    } else {
+      console.error('Users button not found!');
     }
     
     // Botão para fechar modal
     const closeBtn = document.getElementById('closeUsersModal');
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => this.closeModal());
+      closeBtn.addEventListener('click', () => {
+        console.log('Closing users modal...');
+        this.closeModal();
+      });
+      console.log('Close button listener added');
+    } else {
+      console.error('Close button not found!');
+    }
+    
+    // Fechar modal clicando fora dele
+    const modal = document.getElementById('usersManagementModal');
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          console.log('Closing modal by clicking outside...');
+          this.closeModal();
+        }
+      });
+      console.log('Modal backdrop listener added');
+    } else {
+      console.error('Modal not found!');
     }
     
     // Navegação por abas
@@ -2595,17 +2623,25 @@ class UserManagementSystem {
   }
   
   openModal() {
+    console.log('openModal called');
     const modal = document.getElementById('usersManagementModal');
     if (modal) {
       modal.style.display = 'flex';
       this.renderUsersList();
+      console.log('Modal opened successfully');
+    } else {
+      console.error('Modal element not found in openModal');
     }
   }
   
   closeModal() {
+    console.log('closeModal called');
     const modal = document.getElementById('usersManagementModal');
     if (modal) {
       modal.style.display = 'none';
+      console.log('Modal closed successfully');
+    } else {
+      console.error('Modal element not found in closeModal');
     }
   }
   
@@ -2829,10 +2865,10 @@ class UserManagementSystem {
         </td>
         <td style="padding: 12px 16px; text-align: center;">
           <div style="display: flex; gap: 8px; justify-content: center;">
-            <button onclick="userManagement.editUser(${user.id})" style="background: #3b82f6; color: white; border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px;" title="Editar">
+            <button onclick="window.userManagement.editUser(${user.id})" style="background: #3b82f6; color: white; border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px;" title="Editar">
               ✏️ Editar
             </button>
-            <button onclick="userManagement.toggleUserStatus(${user.id})" style="background: ${user.status === 'active' ? '#ef4444' : '#10b981'}; color: white; border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px;" title="${user.status === 'active' ? 'Desativar' : 'Ativar'}">
+            <button onclick="window.userManagement.toggleUserStatus(${user.id})" style="background: ${user.status === 'active' ? '#ef4444' : '#10b981'}; color: white; border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px;" title="${user.status === 'active' ? 'Desativar' : 'Ativar'}">
               ${user.status === 'active' ? '🚫 Desativar' : '✅ Ativar'}
             </button>
           </div>
@@ -3191,8 +3227,13 @@ class UserManagementSystem {
   }
 }
 
-// Inicializar sistema de gestão de usuários
-const userManagement = new UserManagementSystem();
+// Inicializar sistema de gestão de usuários após o DOM estar pronto
+document.addEventListener('DOMContentLoaded', function() {
+  // Aguardar um pouco mais para garantir que tudo está carregado
+  setTimeout(() => {
+    window.userManagement = new UserManagementSystem();
+  }, 100);
+});
 </script>
 
 <!-- Modal de Gestão de Usuários -->
