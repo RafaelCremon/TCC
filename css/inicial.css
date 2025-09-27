@@ -31,7 +31,7 @@ body::before{
 @keyframes dots{ to{ background-position:180px 160px } }
 @media (prefers-reduced-motion: reduce){ body::before{ animation:none } }
 
-/* Top-bar com vidro */
+/* Top-bar com vidro e animações */
 .top-bar{
   position:sticky; top:0; z-index:998;
   display:flex; align-items:center; justify-content:space-between; gap:16px;
@@ -39,22 +39,126 @@ body::before{
   background:linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.7));
   border-bottom:1px solid rgba(176,198,255,.4);
   backdrop-filter:saturate(1.1) blur(8px);
+  animation: slideInFromTop 0.6s ease-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.brand{ display:flex; align-items:center; gap:16px }
-.logo{ width:24px; height:24px; border-radius:8px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:0 6px 18px rgba(76,92,255,.35) }
-.top-bar h1{ font-size:18px; margin:0 }
+
+.top-bar:hover {
+  background:linear-gradient(to bottom, rgba(255,255,255,.95), rgba(255,255,255,.8));
+  box-shadow: 0 4px 20px rgba(44, 92, 255, 0.1);
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.brand{ 
+  display:flex; 
+  align-items:center; 
+  gap:16px;
+  animation: fadeInScale 0.8s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.logo{ 
+  width:24px; 
+  height:24px; 
+  border-radius:8px; 
+  background:linear-gradient(135deg, var(--brand), var(--brand-2)); 
+  box-shadow:0 6px 18px rgba(76,92,255,.35);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow:0 8px 25px rgba(76,92,255,.5);
+}
+
+.top-bar h1{ 
+  font-size:18px; 
+  margin:0;
+  animation: slideInFromRight 0.6s ease-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+  transition: color 0.3s ease;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 .admin-profile { display: flex; align-items: center; gap: 8px; }
 .admin-avatar { width: 32px; height: 32px; border-radius: 99px; background: #eee; border: 2px solid #fff; }
 
 .menu-button {
-  background: transparent; border: none; cursor: pointer; padding: 4px;
+  background: transparent; border: none; cursor: pointer; padding: 8px;
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink); border-radius: 99px; transition: background-color 0.2s;
+  color: var(--ink); border-radius: 12px; 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
-.menu-button:hover { background-color: rgba(0, 0, 0, 0.05); }
 
-/* --- ESTILO DA SIDEBAR --- */
+.menu-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(91, 140, 255, 0.2) 0%, transparent 70%);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.menu-button:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.menu-button:hover { 
+  background-color: rgba(91, 140, 255, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(91, 140, 255, 0.15);
+}
+
+/* --- ESTILO DA SIDEBAR COM ANIMAÇÕES --- */
 .sidebar{
   position:fixed; top: 0; left: 0; width: 88px; height: 100vh;
   padding: 80px 8px 12px;
@@ -64,29 +168,73 @@ body::before{
   display:flex; flex-direction:column; align-items:center; gap: 16px;
   box-shadow:4px 0 24px rgba(0,0,0,.15);
   z-index: 1000;
-  transform: translateX(-100%); transition: transform 0.3s ease-in-out;
-}
-.sidebar.visible {
-  transform: translateX(0);
+  transform: translateX(-100%); 
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Estilo para cada item/atalho na sidebar */
+.sidebar.visible {
+  transform: translateX(0);
+  animation: sidebarSlideIn 0.5s ease-out;
+}
+
+@keyframes sidebarSlideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Estilo para cada item/atalho na sidebar com animações */
 .sidebar-item {
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   cursor: pointer; text-decoration: none; color: #1b2b66; font-size: 12px;
   font-weight: 500; padding: 8px; border-radius: 12px; width: 100%;
-  transition: background-color 0.2s;
-}
-.sidebar-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.5s ease-out forwards;
 }
 
-/* --- NOVO ESTILO PARA OS ÍCONES SVG --- */
+.sidebar-item:nth-child(1) { animation-delay: 0.1s; }
+.sidebar-item:nth-child(2) { animation-delay: 0.2s; }
+.sidebar-item:nth-child(3) { animation-delay: 0.3s; }
+.sidebar-item:nth-child(4) { animation-delay: 0.4s; }
+.sidebar-item:nth-child(5) { animation-delay: 0.5s; }
+.sidebar-item:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sidebar-item:hover {
+  background-color: rgba(91, 140, 255, 0.1);
+  transform: translateX(4px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(91, 140, 255, 0.15);
+}
+
+/* --- ANIMAÇÕES PARA OS ÍCONES SVG --- */
 .sidebar-icon {
   width: 36px; height: 36px;
-  stroke: #2a5cff; /* Cor do contorno do ícone */
-  fill: none; /* Remove o preenchimento para ícones de linha */
+  stroke: #2a5cff;
+  fill: none;
   filter: drop-shadow(0 4px 8px rgba(20,30,120,.2));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-item:hover .sidebar-icon {
+  stroke: #0057ff;
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 6px 12px rgba(0,87,255,.3));
 }
 .profile-menu-btn svg {
   width: 20px;
@@ -137,18 +285,145 @@ body::before{
 }
 
 .shortcuts-card {
-  background-color: #fff; border-radius: var(--radius); padding: 24px;
-  box-shadow: var(--shadow); width: min(400px, 90vw);
-  animation: fadeInUp 0.6s ease-out forwards; animation-delay: 0.4s;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 40px rgba(44, 92, 255, 0.12), 0 2px 8px rgba(44, 92, 255, 0.04);
+  width: min(480px, 90vw);
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: 0.4s;
+  border: 1px solid rgba(91, 140, 255, 0.08);
+  position: relative;
+  overflow: hidden;
 }
-.shortcuts-card h3 { margin: 0 0 16px; font-weight: 600; color: var(--ink); }
-.shortcut-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.shortcuts-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #5b8cff 0%, #7049ff 50%, #00e0ff 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shortcuts-card:hover::before {
+  opacity: 1;
+}
+.shortcuts-card h3 {
+  margin: 0 0 24px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, #1b2b66 0%, #5b8cff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shortcuts-card h3::before {
+  content: '⚡';
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #5b8cff, #7049ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.shortcut-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  animation: slideInGrid 0.8s ease-out;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+@keyframes slideInGrid {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .add-shortcut-btn {
-  background-color: #f0f4ff; border: 1px dashed #cdd8f3; border-radius: 12px;
-  font-size: 24px; font-weight: bold; color: #849ae0; cursor: pointer;
-  aspect-ratio: 1 / 1; transition: background-color 0.2s;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef6ff 100%);
+  border: 2px solid rgba(91, 140, 255, 0.2);
+  border-radius: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #849ae0;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 80px;
+  animation: bounceIn 0.6s ease-out;
+  animation-fill-mode: both;
 }
-.add-shortcut-btn:hover { background-color: #e6efff; border-color: #b4c7f0; }
+
+.add-shortcut-btn:nth-child(1) { animation-delay: 0.1s; }
+.add-shortcut-btn:nth-child(2) { animation-delay: 0.2s; }
+.add-shortcut-btn:nth-child(3) { animation-delay: 0.3s; }
+.add-shortcut-btn:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) rotate(2deg);
+  }
+  70% {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.add-shortcut-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.add-shortcut-btn:hover::before {
+  left: 100%;
+}
+
+.add-shortcut-btn:hover {
+  background: linear-gradient(135deg, #e6efff 0%, #dae8ff 100%);
+  border-color: #5b8cff;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(91, 140, 255, 0.2), 0 4px 8px rgba(91, 140, 255, 0.1);
+  color: #5b8cff;
+}
+
+.add-shortcut-btn:active {
+  transform: translateY(-2px) scale(0.98);
+  transition: all 0.1s;
+}
 
 .overlay {
   position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.4); z-index: 999;
@@ -157,11 +432,57 @@ body::before{
 .overlay.visible { opacity: 1; pointer-events: auto; }
 
 @keyframes fadeInUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { 
+    transform: translateY(30px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
 }
 
-/* --- MODO ESCURO IRADO --- */
+/* Responsividade aprimorada para atalhos */
+@media (max-width: 768px) {
+  .shortcuts-card {
+    width: min(95vw, 100%);
+    padding: 24px;
+    margin: 0 10px;
+  }
+  
+  .shortcut-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .add-shortcut-btn {
+    min-height: 70px;
+    font-size: 20px;
+  }
+  
+  .shortcuts-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shortcut-buttons {
+    gap: 12px;
+  }
+  
+  .add-shortcut-btn {
+    min-height: 60px;
+    font-size: 18px;
+    border-radius: 12px;
+  }
+  
+  .shortcuts-card {
+    padding: 20px;
+  }
+}
+
+/* --- MODO ESCURO COM ANIMAÇÕES --- */
 body.dark-mode {
   --bg-1: #181c2f;
   --bg-2: #232a4d;
@@ -176,41 +497,214 @@ body.dark-mode {
     radial-gradient(1200px 600px at 10% -10%, #2e1a47 0%, transparent 60%),
     linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 60%);
   color: var(--ink);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode::before{
+  background-image: radial-gradient(circle at center, rgba(0,224,255,.15) 0 2px, transparent 2.5px);
+  animation: darkDots 36s linear infinite;
+}
+
+@keyframes darkDots { 
+  to{ background-position:180px 160px; filter: hue-rotate(45deg); } 
 }
 
 body.dark-mode .top-bar,
-body.dark-mode .sidebar,
+body.dark-mode .sidebar {
+  background: linear-gradient(135deg, #232a4d 80%, #2e1a47 100%) !important;
+  color: var(--ink) !important;
+  border-color: rgba(127, 92, 255, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode .top-bar:hover {
+  background: linear-gradient(135deg, #2a3759 80%, #3a2557 100%) !important;
+  box-shadow: 0 4px 20px rgba(0, 224, 255, 0.15);
+}
+
 body.dark-mode .shortcuts-card,
 body.dark-mode #profileMenu {
   background: linear-gradient(135deg, #232a4d 80%, #2e1a47 100%) !important;
   color: var(--ink) !important;
-  border-color: #3a4a7a !important;
+  border-color: rgba(127, 92, 255, 0.2) !important;
+  box-shadow: 0 10px 40px rgba(0, 224, 255, 0.15), 0 2px 8px rgba(127, 92, 255, 0.1) !important;
 }
 
 body.dark-mode .sidebar-item,
 body.dark-mode .sidebar-icon {
-  color: #c3bfff !important;
+  color: #00e0ff !important;
   stroke: #7f5cff !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.dark-mode .sidebar-item:hover {
-  background: rgba(127,92,255,0.12);
+  background: rgba(0, 224, 255, 0.15);
+  transform: translateX(6px) scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 224, 255, 0.2);
+}
+
+body.dark-mode .sidebar-item:hover .sidebar-icon {
+  stroke: #00e0ff !important;
+  transform: scale(1.15) rotate(8deg);
+  filter: drop-shadow(0 6px 12px rgba(0,224,255,.4)) !important;
+}
+
+body.dark-mode .shortcuts-card {
+  background: linear-gradient(135deg, #232a4d 0%, #1a1f3a 100%) !important;
+  border: 1px solid rgba(127, 92, 255, 0.2) !important;
+  box-shadow: 0 10px 40px rgba(0, 224, 255, 0.15), 0 2px 8px rgba(127, 92, 255, 0.1) !important;
+}
+
+body.dark-mode .shortcuts-card::before {
+  background: linear-gradient(90deg, #7f5cff 0%, #00e0ff 50%, #5b8cff 100%);
+}
+
+body.dark-mode .shortcuts-card h3 {
+  background: linear-gradient(135deg, #00e0ff 0%, #7f5cff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .shortcuts-card h3::before {
+  background: linear-gradient(135deg, #00e0ff, #7f5cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 body.dark-mode .add-shortcut-btn {
-  background: linear-gradient(135deg, #2e1a47 60%, #00e0ff 100%);
-  border: 1px dashed #7f5cff;
+  background: linear-gradient(135deg, #2e1a47 0%, #232a4d 100%);
+  border: 2px solid rgba(127, 92, 255, 0.3);
   color: #00e0ff;
+}
+
+body.dark-mode .add-shortcut-btn:hover {
+  background: linear-gradient(135deg, #3a2557 0%, #2e3759 100%);
+  border-color: #00e0ff;
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(0, 224, 255, 0.2), 0 4px 8px rgba(127, 92, 255, 0.1);
 }
 
 body.dark-mode .add-shortcut-btn.atalho-preenchido {
-  background: linear-gradient(135deg, #7f5cff 60%, #00e0ff 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #7f5cff 0%, #00e0ff 100%) !important;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(127, 92, 255, 0.4);
 }
 
-body.dark-mode .shortcuts-card h3,
-body.dark-mode .shortcuts-card span {
-  color: #00e0ff;
+body.dark-mode .add-shortcut-btn.atalho-preenchido:hover {
+  background: linear-gradient(135deg, #8f65ff 0%, #10f0ff 100%) !important;
+  box-shadow: 0 16px 32px rgba(0, 224, 255, 0.3), 0 8px 16px rgba(127, 92, 255, 0.2);
+}
+
+body.dark-mode .add-shortcut-btn.atalho-preenchido span {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1f3a;
+}
+
+.add-shortcut-btn.atalho-preenchido {
+  background: linear-gradient(135deg, #5b8cff 0%, #7049ff 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(91, 140, 255, 0.3);
+}
+
+.add-shortcut-btn.atalho-preenchido img {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.add-shortcut-btn.atalho-preenchido:hover {
+  background: linear-gradient(135deg, #4a7bff 0%, #6038ff 100%);
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 16px 32px rgba(91, 140, 255, 0.4), 0 8px 16px rgba(91, 140, 255, 0.2);
+}
+
+.add-shortcut-btn.atalho-preenchido:hover img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.add-shortcut-btn.atalho-preenchido span {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1b2b66;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.add-shortcut-btn.atalho-preenchido:hover span {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+}
+
+/* Animações especiais para interações */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 4px 16px rgba(91, 140, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(91, 140, 255, 0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.add-shortcut-btn.atalho-preenchido::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.add-shortcut-btn.atalho-preenchido:hover::after {
+  opacity: 1;
+}
+
+.shortcuts-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 45px rgba(44, 92, 255, 0.15), 0 5px 15px rgba(44, 92, 255, 0.08);
+}
+
+/* Efeito de respiração para botões vazios */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.8;
+  }
+}
+
+.add-shortcut-btn:not(.atalho-preenchido):hover {
+  animation: breathe 2s ease-in-out infinite;
 }
 
 body.dark-mode .options {
@@ -240,46 +734,156 @@ body.dark-mode .overlay {
   background-color: rgba(0,0,0,0.7);
 }
 
-/* Novos estilos para o cartão de boas-vindas */
+/* Welcome card com animações espetaculares */
 .welcome-card {
   display: flex;
   align-items: center;
   gap: 22px;
-  background: #fff;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
   border-radius: 22px;
-  box-shadow: 0 8px 32px rgba(44, 92, 255, 0.10);
+  box-shadow: 0 12px 40px rgba(44, 92, 255, 0.15), 0 4px 12px rgba(44, 92, 255, 0.08);
   padding: 28px 36px;
   max-width: 420px;
   margin: 32px auto 0 auto;
-  animation: fadeInUp 0.7s;
+  animation: welcomeEntrance 1s ease-out;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(91, 140, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes welcomeEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9) rotateX(10deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.02) rotateX(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -50%;
+  width: 200%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #5b8cff, #7049ff, #00e0ff, transparent);
+  animation: shimmerTop 3s ease-in-out infinite;
+}
+
+@keyframes shimmerTop {
+  0% { left: -50%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 50%; opacity: 0; }
+}
+
+.welcome-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(44, 92, 255, 0.2), 0 8px 20px rgba(44, 92, 255, 0.1);
+  border-color: rgba(91, 140, 255, 0.3);
 }
 .welcome-avatar {
   width: 72px;
   height: 72px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 2px 12px rgba(44,92,255,0.10);
-  background: #eaf2ff;
+  box-shadow: 0 4px 16px rgba(44,92,255,0.15);
+  background: linear-gradient(135deg, #eaf2ff 0%, #dae8ff 100%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: avatarFloat 4s ease-in-out infinite;
 }
+
+@keyframes avatarFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(3px) rotate(-1deg);
+  }
+}
+
+.welcome-card:hover .welcome-avatar {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 24px rgba(44,92,255,0.25);
+}
+
 .welcome-title {
   font-size: 2rem;
   font-weight: 800;
-  color: #1b2b66;
+  background: linear-gradient(135deg, #1b2b66 0%, #5b8cff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 6px 0;
   line-height: 1.1;
+  animation: titleSlideIn 0.8s ease-out;
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
 }
+
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .welcome-desc {
   font-size: 1rem;
   color: #5b6b8b;
   margin: 0;
+  animation: descriptionFadeIn 0.8s ease-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes descriptionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 body.dark-mode .welcome-card {
-  background: linear-gradient(135deg, #232a4d 80%, #2e1a47 100%);
+  background: linear-gradient(135deg, #232a4d 0%, #1a1f3a 100%);
+  border: 1px solid rgba(0, 224, 255, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 224, 255, 0.15), 0 4px 12px rgba(127, 92, 255, 0.1);
   color: #fff;
 }
-body.dark-mode .welcome-title {
-  color: #00e0ff;
+
+body.dark-mode .welcome-card::before {
+  background: linear-gradient(90deg, transparent, #7f5cff, #00e0ff, #5b8cff, transparent);
 }
+
+body.dark-mode .welcome-card:hover {
+  box-shadow: 0 20px 50px rgba(0, 224, 255, 0.2), 0 8px 20px rgba(127, 92, 255, 0.15);
+  border-color: rgba(0, 224, 255, 0.4);
+}
+
+body.dark-mode .welcome-title {
+  background: linear-gradient(135deg, #00e0ff 0%, #7f5cff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 body.dark-mode .welcome-desc {
   color: #8fa2d9;
 }

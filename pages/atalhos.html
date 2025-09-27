@@ -12,22 +12,128 @@
       color: #222;
       min-height: 100vh;
       transition: background 0.3s, color 0.3s;
+      animation: pageEntrance 0.8s ease-out;
+      padding: 20px;
+    }
+    
+    /* Animações Globais Modernas */
+    @keyframes pageEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    @keyframes slideInGrid {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) rotateX(10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+      }
+    }
+    
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.05) rotate(2deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 4px 24px rgba(0,87,255,0.07);
+        transform: translateY(0);
+      }
+      50% {
+        box-shadow: 0 8px 32px rgba(0,87,255,0.15);
+        transform: translateY(-2px);
+      }
+    }
+    
+    @keyframes fadeOutScale {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-10deg);
+      }
     }
     .atalhos-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       margin-bottom: 32px;
-      background: #fff;
-      padding: 18px;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      background: linear-gradient(135deg, #fff 0%, #f8faff 100%);
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 
+        0 8px 32px rgba(0,0,0,0.08),
+        0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: both;
+    }
+    
+    .atalhos-grid::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+      );
+      animation: shimmer 2s infinite;
+      animation-delay: 1s;
     }
     .atalho-slot {
-      background: #f0f3fa;
+      background: linear-gradient(135deg, #f0f3fa 0%, #e8ecf7 100%);
       border: 2px dashed #b3b8c7;
-      border-radius: 12px;
-      min-height: 80px;
+      border-radius: 16px;
+      min-height: 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -35,13 +141,66 @@
       font-size: 15px;
       color: #888;
       position: relative;
-      transition: background 0.3s, border 0.3s;
-      padding: 12px 4px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 16px 8px;
+      cursor: pointer;
+      animation: slideInGrid 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    .atalho-slot:nth-child(1) { animation-delay: 0.4s; }
+    .atalho-slot:nth-child(2) { animation-delay: 0.5s; }
+    .atalho-slot:nth-child(3) { animation-delay: 0.6s; }
+    .atalho-slot:nth-child(4) { animation-delay: 0.7s; }
+    .atalho-slot:nth-child(5) { animation-delay: 0.8s; }
+    .atalho-slot:nth-child(6) { animation-delay: 0.9s; }
+    
+    .atalho-slot:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 
+        0 12px 24px rgba(0,87,255,0.15),
+        0 4px 8px rgba(0,87,255,0.1);
+      border-color: #0057ff;
     }
     .atalho-slot.preenchido {
-      background: #e6eaff;
+      background: linear-gradient(135deg, #e6eaff 0%, #d1d9ff 100%);
       border: 2px solid #0057ff;
       color: #222;
+      position: relative;
+      overflow: hidden;
+      animation: bounceIn 0.6s ease-out;
+    }
+    
+    .atalho-slot.preenchido::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,87,255,0.1),
+        transparent
+      );
+      animation: shimmer 3s infinite;
+    }
+    
+    .atalho-slot.preenchido:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 
+        0 16px 32px rgba(0,87,255,0.2),
+        0 8px 16px rgba(0,87,255,0.1);
+      animation: pulseGlow 2s infinite;
+    }
+    
+    .atalho-slot.preenchido img {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .atalho-slot.preenchido:hover img {
+      transform: scale(1.1) rotate(5deg);
     }
     .atalho-slot .remover {
       position: absolute;
@@ -65,74 +224,336 @@
     }
     .opcoes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 18px;
       margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out;
+      animation-delay: 0.6s;
+      animation-fill-mode: both;
     }
     .opcao-atalho {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      background: linear-gradient(135deg, #fff 0%, #f8faff 100%);
+      border-radius: 14px;
+      box-shadow: 
+        0 4px 16px rgba(0,0,0,0.06),
+        0 2px 4px rgba(0,0,0,0.04);
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
+      gap: 12px;
+      padding: 14px 16px;
       font-size: 15px;
       color: #222;
       justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      animation: slideInGrid 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    .opcao-atalho:nth-child(1) { animation-delay: 0.8s; }
+    .opcao-atalho:nth-child(2) { animation-delay: 0.9s; }
+    .opcao-atalho:nth-child(3) { animation-delay: 1.0s; }
+    .opcao-atalho:nth-child(4) { animation-delay: 1.1s; }
+    .opcao-atalho:nth-child(5) { animation-delay: 1.2s; }
+    
+    .opcao-atalho::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,87,255,0.05),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+    
+    .opcao-atalho:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 
+        0 8px 24px rgba(0,87,255,0.12),
+        0 4px 8px rgba(0,87,255,0.08);
+    }
+    
+    .opcao-atalho:hover::before {
+      left: 100%;
     }
     .opcao-atalho button {
-      background: #f0f3fa;
-      border: 1px solid #0057ff;
+      background: linear-gradient(135deg, #f0f3fa 0%, #e8ecf7 100%);
+      border: 2px solid #0057ff;
       color: #0057ff;
-      border-radius: 6px;
-      font-size: 18px;
-      width: 28px;
-      height: 28px;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .opcao-atalho button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(0,87,255,0.2) 0%, transparent 70%);
+      transition: all 0.4s ease;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    
+    .opcao-atalho button:hover {
+      background: linear-gradient(135deg, #0057ff 0%, #0040cc 100%);
+      color: white;
+      transform: scale(1.1) rotate(-5deg);
+      box-shadow: 
+        0 6px 16px rgba(0,87,255,0.3),
+        0 2px 4px rgba(0,87,255,0.2);
+    }
+    
+    .opcao-atalho button:hover::before {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .opcao-atalho button:active {
+      transform: scale(0.95) rotate(-2deg);
     }
     .opcao-atalho button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
     .salvar-btn {
-      background: linear-gradient(135deg, #0057ff 60%, #00e0ff 100%);
+      background: linear-gradient(135deg, #0057ff 0%, #00e0ff 100%);
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 10px 28px;
-      font-size: 16px;
-      font-weight: bold;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
-      margin-bottom: 18px;
-      float: right;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: background 0.2s;
+      box-shadow: 
+        0 8px 24px rgba(0,87,255,0.3),
+        0 4px 8px rgba(0,224,255,0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: slideInGrid 0.8s ease-out;
+      animation-delay: 0.4s;
+      animation-fill-mode: both;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.5px;
+    }
+    
+    .salvar-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+    
+    .salvar-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      transition: all 0.4s ease;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    
+    .salvar-btn:hover {
+      background: linear-gradient(135deg, #0040cc 0%, #00b8cc 100%);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 12px 32px rgba(0,87,255,0.4),
+        0 8px 16px rgba(0,224,255,0.3);
+    }
+    
+    .salvar-btn:hover::before {
+      left: 100%;
+    }
+    
+    .salvar-btn:hover::after {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .salvar-btn:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+    
+    .salvar-btn svg {
+      transition: transform 0.3s ease;
+    }
+    
+    .salvar-btn:hover svg {
+      transform: rotate(10deg) scale(1.1);
     }
     .salvar-btn:hover {
       background: linear-gradient(135deg, #0037aa 60%, #00b8cc 100%);
     }
     .voltar-btn {
-      background: #fff;
+      background: linear-gradient(135deg, #fff 0%, #f8faff 100%);
       color: #0057ff;
-      border: 1px solid #0057ff;
-      border-radius: 8px;
-      padding: 8px 18px;
-      font-size: 15px;
+      border: 2px solid #0057ff;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      margin-bottom: 18px;
-      transition: background 0.2s, color 0.2s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0,87,255,0.1);
+      animation: slideInGrid 0.8s ease-out;
+      animation-delay: 0.3s;
+      animation-fill-mode: both;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .voltar-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,87,255,0.1),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+    
     .voltar-btn:hover {
-      background: #e6eaff;
+      background: linear-gradient(135deg, #e6eaff 0%, #d1d9ff 100%);
       color: #0037aa;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 16px rgba(0,87,255,0.2);
     }
+    
+    .voltar-btn:hover::before {
+      left: 100%;
+    }
+    
+    .voltar-btn svg {
+      transition: transform 0.3s ease;
+    }
+    
+    .voltar-btn:hover svg {
+      transform: translateX(-2px);
+    }
+    
     .section-title {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: bold;
-      margin: 28px 0 10px 0;
+      margin: 32px 0 16px 0;
       color: #0057ff;
+      animation: fadeInUp 0.6s ease-out;
+      animation-fill-mode: both;
+      position: relative;
+    }
+    
+    .section-title:nth-of-type(1) { animation-delay: 0.3s; }
+    .section-title:nth-of-type(2) { animation-delay: 0.7s; }
+    
+    /* === HEADER MODERNO === */
+    .header-container {
+      background: linear-gradient(135deg, #fff 0%, #f8faff 100%);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 
+        0 8px 32px rgba(0,0,0,0.08),
+        0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    .header-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0057ff 0%, #00e0ff 50%, #7f5cff 100%);
+      animation: shimmer 3s infinite;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    
+    .header-left {
+      flex: 1;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 12px 0;
+      background: linear-gradient(135deg, #0057ff 0%, #00e0ff 60%, #7f5cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease-out;
+      animation-delay: 0.1s;
+      animation-fill-mode: both;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    
+    p {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+      line-height: 1.6;
+      animation: fadeInUp 0.8s ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: both;
+      max-width: 500px;
     }
 
     /* --- MODO ESCURO IRADO --- */
@@ -152,32 +573,180 @@
       color: var(--ink);
     }
     body.dark-mode .atalhos-grid {
-      background: linear-gradient(135deg, #232a4d 80%, #2e1a47 100%);
+      background: linear-gradient(135deg, #232a4d 0%, #2e1a47 100%);
+      box-shadow: 
+        0 12px 40px rgba(0,0,0,0.3),
+        0 4px 12px rgba(127,92,255,0.1);
+    }
+    
+    body.dark-mode .atalhos-grid::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,224,255,0.1),
+        transparent
+      );
     }
     body.dark-mode .atalho-slot {
-      background-color: #232a4d;
+      background: linear-gradient(135deg, #232a4d 0%, #1e2442 100%);
       border-color: #7f5cff;
       color: #f1f1f1;
     }
-    body.dark-mode .atalho-slot.preenchido {
-      background-color: #2e1a47;
+    
+    body.dark-mode .atalho-slot:hover {
+      box-shadow: 
+        0 12px 24px rgba(127,92,255,0.2),
+        0 4px 8px rgba(127,92,255,0.1);
       border-color: #00e0ff;
+    }
+    
+    body.dark-mode .atalho-slot.preenchido {
+      background: linear-gradient(135deg, #2e1a47 0%, #3a1f5c 100%);
+      border-color: #00e0ff;
+    }
+    
+    body.dark-mode .atalho-slot.preenchido::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,224,255,0.15),
+        transparent
+      );
+    }
+    
+    body.dark-mode .atalho-slot.preenchido:hover {
+      box-shadow: 
+        0 16px 32px rgba(0,224,255,0.25),
+        0 8px 16px rgba(127,92,255,0.15);
     }
     body.dark-mode .atalho-slot .remover {
       background: #3a4a7a;
       color: #ff6b6b;
     }
     body.dark-mode .opcao-atalho {
-      background-color: #232a4d;
+      background: linear-gradient(135deg, #232a4d 0%, #1e2442 100%);
       color: #f1f1f1;
+      box-shadow: 
+        0 4px 16px rgba(0,0,0,0.2),
+        0 2px 4px rgba(127,92,255,0.1);
     }
+    
+    body.dark-mode .opcao-atalho::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,224,255,0.1),
+        transparent
+      );
+    }
+    
+    body.dark-mode .opcao-atalho:hover {
+      box-shadow: 
+        0 8px 24px rgba(0,224,255,0.15),
+        0 4px 8px rgba(127,92,255,0.1);
+    }
+    
     body.dark-mode .opcao-atalho span {
       color: #00e0ff;
     }
+    
     body.dark-mode .opcao-atalho button {
-      background-color: #232a4d;
+      background: linear-gradient(135deg, #232a4d 0%, #1e2442 100%);
       color: #00e0ff;
-      border: 1px solid #00e0ff;
+      border: 2px solid #00e0ff;
+    }
+    
+    body.dark-mode .opcao-atalho button:hover {
+      background: linear-gradient(135deg, #00e0ff 0%, #7f5cff 100%);
+      color: #232a4d;
+      box-shadow: 
+        0 6px 16px rgba(0,224,255,0.4),
+        0 2px 4px rgba(127,92,255,0.3);
+    }
+    
+    body.dark-mode .salvar-btn {
+      background: linear-gradient(135deg, #7f5cff 0%, #00e0ff 100%);
+      box-shadow: 
+        0 8px 24px rgba(127,92,255,0.4),
+        0 4px 8px rgba(0,224,255,0.3);
+    }
+    
+    body.dark-mode .salvar-btn:hover {
+      background: linear-gradient(135deg, #6b47ff 0%, #00b8cc 100%);
+      box-shadow: 
+        0 12px 32px rgba(127,92,255,0.5),
+        0 8px 16px rgba(0,224,255,0.4);
+    }
+    
+    body.dark-mode .voltar-btn {
+      background: linear-gradient(135deg, #232a4d 0%, #1e2442 100%);
+      color: #00e0ff;
+      border-color: #00e0ff;
+      box-shadow: 0 2px 8px rgba(0,224,255,0.15);
+    }
+    
+    body.dark-mode .voltar-btn:hover {
+      background: linear-gradient(135deg, #2e1a47 0%, #3a1f5c 100%);
+      box-shadow: 0 6px 16px rgba(0,224,255,0.25);
+    }
+    
+    /* === TEMA ESCURO PARA HEADER === */
+    body.dark-mode .header-container {
+      background: linear-gradient(135deg, #232a4d 0%, #2e1a47 100%);
+      box-shadow: 
+        0 12px 40px rgba(0,0,0,0.3),
+        0 4px 12px rgba(127,92,255,0.1);
+    }
+    
+    body.dark-mode .header-container::before {
+      background: linear-gradient(90deg, #7f5cff 0%, #00e0ff 50%, #0057ff 100%);
+    }
+    
+    body.dark-mode h1 {
+      background: linear-gradient(135deg, #00e0ff 0%, #7f5cff 60%, #ff6b9d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    body.dark-mode p {
+      color: #8fa2d9;
+    }
+    
+    body.dark-mode .voltar-btn {
+      background: linear-gradient(135deg, #232a4d 0%, #1e2442 100%);
+      color: #00e0ff;
+      border-color: #00e0ff;
+      box-shadow: 0 2px 8px rgba(0,224,255,0.15);
+    }
+    
+    body.dark-mode .voltar-btn::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,224,255,0.1),
+        transparent
+      );
+    }
+    
+    body.dark-mode .voltar-btn:hover {
+      background: linear-gradient(135deg, #2e1a47 0%, #3a1f5c 100%);
+      box-shadow: 0 6px 16px rgba(0,224,255,0.25);
+      color: #00f0ff;
+    }
+    
+    body.dark-mode .salvar-btn {
+      background: linear-gradient(135deg, #7f5cff 0%, #00e0ff 100%);
+      box-shadow: 
+        0 8px 24px rgba(127,92,255,0.4),
+        0 4px 8px rgba(0,224,255,0.3);
+    }
+    
+    body.dark-mode .salvar-btn:hover {
+      background: linear-gradient(135deg, #6b47ff 0%, #00b8cc 100%);
+      box-shadow: 
+        0 12px 32px rgba(127,92,255,0.5),
+        0 8px 16px rgba(0,224,255,0.4);
     }
     body.dark-mode .opcao-atalho button:disabled {
       opacity: 0.5;
@@ -186,13 +755,81 @@
       background: linear-gradient(135deg, #7f5cff 60%, #00e0ff 100%);
       color: #fff;
     }
-    body.dark-mode .section-title {
-      color: #00e0ff;
+    /* === RESPONSIVIDADE === */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      .header-actions {
+        align-self: stretch;
+        justify-content: space-between;
+      }
+      
+      .header-container {
+        padding: 24px 20px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      p {
+        font-size: 14px;
+      }
+      
+      .voltar-btn,
+      .salvar-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
     }
     body.dark-mode .voltar-btn {
       background: #232a4d;
       color: #00e0ff;
       border: 1px solid #00e0ff;
+    }
+    
+    /* === RESPONSIVIDADE === */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      .header-actions {
+        align-self: stretch;
+        justify-content: space-between;
+      }
+      
+      .header-container {
+        padding: 24px 20px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      p {
+        font-size: 14px;
+      }
+      
+      .voltar-btn,
+      .salvar-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+      
+      .atalhos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+      }
+      
+      .opcoes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 14px;
+      }
     }
   </style>
 </head>
@@ -202,12 +839,42 @@
     if(localStorage.getItem('darkMode') === 'enabled') {
       document.body.classList.add('dark-mode');
     }
+
+    // Sistema de animações aprimorado - apenas efeito ripple integrado
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes rippleEffect {
+        0% { transform: scale(0); opacity: 1; }
+        100% { transform: scale(4); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 
-  <button class="voltar-btn" id="voltarBtn" onclick="window.location.href='inicial.html'">Voltar</button>
-  <button class="salvar-btn" id="salvarAtalhosBtn">Salvar</button>
-  <h1>Edição de atalhos</h1>
-  <p>Adicione, remova e ordene os seus atalhos favoritos.</p>
+  <div class="header-container">
+    <div class="header-content">
+      <div class="header-left">
+        <h1>Edição de Atalhos</h1>
+        <p>Personalize sua experiência adicionando, removendo e organizando seus atalhos favoritos.</p>
+      </div>
+      <div class="header-actions">
+        <button class="voltar-btn" id="voltarBtn" onclick="window.location.href='inicial.html'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Voltar
+        </button>
+        <button class="salvar-btn" id="salvarAtalhosBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17,21 17,13 7,13 7,21"/>
+            <polyline points="7,3 7,8 15,8"/>
+          </svg>
+          Salvar Alterações
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="section-title">Selecionados <span id="contadorSelecionados" style="font-weight: normal;">0 de 6</span></div>
   <div class="atalhos-grid" id="slots"></div>
@@ -280,25 +947,84 @@
     function atualizarBotoes() {
       const slots = document.querySelectorAll('.atalho-slot.preenchido .nome');
       const nomesSelecionados = Array.from(slots).map(el => el.textContent);
+      
       document.querySelectorAll('.opcao-atalho').forEach(opcao => {
         const botao = opcao.querySelector('button');
-        botao.disabled = nomesSelecionados.includes(opcao.dataset.nome) || nomesSelecionados.length >= 6;
+        const jaSelecionado = nomesSelecionados.includes(opcao.dataset.nome);
+        const slotsLotados = nomesSelecionados.length >= 6;
+        
+        if (jaSelecionado || slotsLotados) {
+          botao.disabled = true;
+          botao.style.opacity = '0.5';
+          botao.style.cursor = 'not-allowed';
+        } else {
+          botao.disabled = false;
+          botao.style.opacity = '1';
+          botao.style.cursor = 'pointer';
+        }
       });
     }
 
     // Adiciona eventos aos botões de adicionar/remover
     function adicionarEventos() {
-      // Adicionar
+      // Limpar eventos anteriores para evitar duplicação
       document.querySelectorAll('.opcao-atalho button').forEach(botao => {
-        botao.onclick = function() {
-          const nome = this.parentElement.dataset.nome;
-          const src = this.parentElement.dataset.src;
-          const alt = this.parentElement.dataset.alt;
+        // Remover listeners antigos clonando o elemento
+        const novoBotao = botao.cloneNode(true);
+        botao.parentNode.replaceChild(novoBotao, botao);
+      });
+      
+      // Adicionar eventos aos botões de adicionar
+      document.querySelectorAll('.opcao-atalho button').forEach((botao, index) => {
+        botao.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          if (this.disabled) return;
+          
+          // Efeito ripple
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+            z-index: 1000;
+          `;
+          
+          this.style.position = 'relative';
+          this.style.overflow = 'hidden';
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            if (ripple.parentNode) {
+              ripple.parentNode.removeChild(ripple);
+            }
+          }, 600);
+          
+          // Lógica de adicionar atalho
+          const opcaoElement = this.closest('.opcao-atalho');
+          const nome = opcaoElement.dataset.nome;
+          const src = opcaoElement.dataset.src;
+          const alt = opcaoElement.dataset.alt;
+          
           // Adiciona no primeiro slot vazio
           const slots = document.querySelectorAll('.atalho-slot');
           for (let slot of slots) {
             if (!slot.classList.contains('preenchido')) {
               slot.classList.add('preenchido');
+              slot.style.animation = 'bounceIn 0.6s ease-out';
               slot.innerHTML = `
                 <button class="remover" title="Remover">−</button>
                 <img src="${src}" alt="${alt}" style="width:32px; height:32px; margin-bottom:4px;">
@@ -307,26 +1033,71 @@
               break;
             }
           }
+          
           atualizarContador();
           atualizarBotoes();
           adicionarEventos();
-        };
+        });
       });
-      // Remover
+      
+      // Adicionar eventos aos botões de remover
       document.querySelectorAll('.atalho-slot.preenchido .remover').forEach(botao => {
-        botao.onclick = function() {
+        botao.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Efeito ripple
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            background: radial-gradient(circle, rgba(255,92,107,0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+            z-index: 1000;
+          `;
+          
+          this.style.position = 'relative';
+          this.style.overflow = 'hidden';
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            if (ripple.parentNode) {
+              ripple.parentNode.removeChild(ripple);
+            }
+          }, 600);
+          
+          // Lógica de remover atalho
           const slot = this.parentElement;
-          slot.className = 'atalho-slot vazio';
-          slot.textContent = 'Escolha uma opção';
-          atualizarContador();
-          atualizarBotoes();
-          adicionarEventos();
-        };
+          slot.style.animation = 'fadeOutScale 0.4s ease-in';
+          
+          setTimeout(() => {
+            slot.className = 'atalho-slot vazio';
+            slot.textContent = 'Escolha uma opção';
+            slot.style.animation = 'slideInGrid 0.6s ease-out';
+            atualizarContador();
+            atualizarBotoes();
+            adicionarEventos();
+          }, 400);
+        });
       });
     }
 
     // Salvar atalhos
-    document.getElementById('salvarAtalhosBtn').onclick = function() {
+    const salvarBtn = document.getElementById('salvarAtalhosBtn');
+    salvarBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
       const slots = document.querySelectorAll('.atalho-slot');
       const atalhos = Array.from(slots).map(slot => {
         if (slot.classList.contains('preenchido')) {
@@ -341,17 +1112,23 @@
       });
       
       localStorage.setItem('atalhosSelecionados', JSON.stringify(atalhos));
-      window.location.href = 'inicial.html';
-    };
+      
+      // Animação de sucesso
+      this.style.animation = 'pulseGlow 0.6s ease-out';
+      this.textContent = 'Salvando...';
+      
+      setTimeout(() => {
+        this.textContent = 'Salvo!';
+        setTimeout(() => {
+          window.location.href = 'inicial.html';
+        }, 300);
+      }, 600);
+    });
 
     // Inicialização
     carregarAtalhosSelecionados();
     carregarOpcoes();
     adicionarEventos();
-
-    // Sempre que atualizar slots/opções, reatribua eventos
-    slotsContainer.addEventListener('DOMSubtreeModified', adicionarEventos);
-    opcoesContainer.addEventListener('DOMSubtreeModified', adicionarEventos);
   </script>
 </body>
 </html>
