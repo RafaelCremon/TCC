@@ -664,13 +664,13 @@
         <div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(91,140,255,0.1),transparent);animation:shimmerSweep 3s ease-in-out infinite;pointer-events:none;"></div>
         
         <div class="modal-icon" style="font-size:3.5rem;margin-bottom:20px;animation:bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;">🍔</div>
-        <div style="font-size:1.8rem;font-weight:700;margin-bottom:8px;text-align:center;color:#1a2980;">Confirmar Pedido</div>
-        <div style="font-size:1.3rem;font-weight:600;margin-bottom:12px;text-align:center;color:#333;">Item: <span id="modalItemUnicantina" style="color:#5b8cff;font-weight:700;">[comida]</span></div>
-        <div style="font-size:1.1rem;margin-bottom:25px;text-align:center;color:#666;line-height:1.4;">O pagamento será realizado presencialmente na lanchonete</div>
+        <div style="font-size:1.8rem;font-weight:700;margin-bottom:8px;text-align:center;color:#000000;">Confirmar Pedido</div>
+        <div style="font-size:1.3rem;font-weight:600;margin-bottom:12px;text-align:center;color:#000000;">Item: <span id="modalItemUnicantina" style="color:#000000;font-weight:700;">[comida]</span></div>
+        <div style="font-size:1.1rem;margin-bottom:25px;text-align:center;color:#000000;line-height:1.4;">O pagamento será realizado presencialmente na lanchonete</div>
         
         <button id="btnConfirmarUnicantina" class="modal-btn primary" style="width:100%;background:linear-gradient(135deg,#1a2980 0%,#2e3192 50%,#5b8cff 100%);color:#fff;font-weight:700;font-size:1.3rem;padding:14px 0;border:none;border-radius:25px;cursor:pointer;margin-bottom:12px;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 4px 15px rgba(91,140,255,0.3);">Confirmar Pedido</button>
         
-        <button id="btnCancelarUnicantina" class="modal-btn secondary" style="width:100%;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.2rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:25px;cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">Cancelar</button>
+        <button id="btnCancelarUnicantina" class="modal-btn secondary" style="width:100%;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.2rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:25px;cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">Cancelar</button>
       </div>
     </div>
       <div class="cardapio-novo-topo" style="width:100vw;height:180px;background:linear-gradient(135deg,#0f1419 0%,#1a2980 20%,#2e3192 40%,#5b8cff 70%,#7dd3fc 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 30px rgba(0,0,0,0.2);">
@@ -721,7 +721,7 @@
         <label for="horarioUnicantina" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioUnicantina" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(91,140,255,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoUnicantina()" style="width:100%;background:linear-gradient(135deg,#5b8cff 0%,#1a2980 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(91,140,255,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharUnicantina()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharUnicantina()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
@@ -747,36 +747,36 @@
             <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Massas 🍝</td><td style="padding:12px 20px;font-weight:600;color:#000000;">A partir de R$ 22,00</td></tr>
             <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Calzone</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
             <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Íscas de Frango (Frito)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">A partir de R$ 15,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;">Argentina (Atum, cebola, palmito)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;"><td style="padding:12px 20px;font-weight:500;">Atum (Atum e cebola)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 42,00 / R$ 20,90</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;"><td style="padding:12px 20px;font-weight:500;">Atussela (Atum, coberto com mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;"><td style="padding:12px 20px;font-weight:500;">Bacon (Bacon coberto com mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;"><td style="padding:12px 20px;font-weight:500;">Baiacatu (Calabresa moída, ovos, catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 21,90</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1s both;"><td style="padding:12px 20px;font-weight:500;">Baiana (Calabresa moída, ovos, cebola e pimenta)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 21,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Brócolis (Brócolis, mussarela, alho e tomate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Calabresa (Calabresa fatiada e cebola)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Caipira (Frango, milho e catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Catupiry (Catupiry, orégano e azeitona)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 42,00 / R$ 20,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Cheddar (Mussarela e cheddar)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 21,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Chefe (Frango desfiado, milho, bacon e mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Dois Queijos (Mussarela e catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Dona Gema (Calabresa fatiada, cobertura de mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 50,90 / R$ 26,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Francesa (Presunto, ovos, mussarela, catupiry, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 47,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frango com Catupiry (Frango desfiado, catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frango com Mussarela (Frango desfiado, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Grega (Presunto, palmito, ervilha, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Milho Verde (Milho, mussarela ou catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Mussarela</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Napolitana (Mussarela, alho, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 21,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Palmito (Palmito, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 47,00 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pizza Chiken (Palmito, frango desfiado, mussarela, bacon, alho frito)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 50,00 / R$ 26,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Portuguesa (Presunto, ervilha, ovos, cebola, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 49,00 / R$ 25,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Saborosa (Presunto, calabresa, bacon, cebola, mussarela, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 51,90 / R$ 27,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Siciliana (Mussarela, parmesão, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Toscana (Calabresa moída, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 46,90 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Três Queijos (Mussarela, parmesão, catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Vegetariana (Palmito, milho, ervilha, mussarela, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 48,00 / R$ 23,90</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Chocolate (Broto fechado com chocolate e cobertura de chocolate)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 22,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Argentina (Atum, cebola, palmito)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Atum (Atum e cebola)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 42,00 / R$ 20,90</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Atussela (Atum, coberto com mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Bacon (Bacon coberto com mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Baiacatu (Calabresa moída, ovos, catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 21,90</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Baiana (Calabresa moída, ovos, cebola e pimenta)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 21,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Brócolis (Brócolis, mussarela, alho e tomate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Calabresa (Calabresa fatiada e cebola)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Caipira (Frango, milho e catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Catupiry (Catupiry, orégano e azeitona)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 42,00 / R$ 20,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Cheddar (Mussarela e cheddar)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 21,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Chefe (Frango desfiado, milho, bacon e mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Dois Queijos (Mussarela e catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Dona Gema (Calabresa fatiada, cobertura de mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 50,90 / R$ 26,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Francesa (Presunto, ovos, mussarela, catupiry, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 47,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frango com Catupiry (Frango desfiado, catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frango com Mussarela (Frango desfiado, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Grega (Presunto, palmito, ervilha, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Milho Verde (Milho, mussarela ou catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Mussarela</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Napolitana (Mussarela, alho, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 21,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Palmito (Palmito, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 47,00 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pizza Chiken (Palmito, frango desfiado, mussarela, bacon, alho frito)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 50,00 / R$ 26,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Portuguesa (Presunto, ervilha, ovos, cebola, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 49,00 / R$ 25,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Saborosa (Presunto, calabresa, bacon, cebola, mussarela, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 51,90 / R$ 27,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Siciliana (Mussarela, parmesão, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Toscana (Calabresa moída, mussarela)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 46,90 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Três Queijos (Mussarela, parmesão, catupiry)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Vegetariana (Palmito, milho, ervilha, mussarela, tomate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 48,00 / R$ 23,90</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Chocolate (Broto fechado com chocolate e cobertura de chocolate)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 22,00</td></tr>
           </tbody>
         </table>
       </div>
@@ -784,7 +784,7 @@
         <!-- Shimmer effect -->
         <div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(91,140,255,0.1),transparent);animation:shimmerSweep 3s ease-in-out infinite;pointer-events:none;"></div>
         
-        <label for="itemPizzaChicken" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#1a2980;position:relative;z-index:1;">Selecionar Item:</label>
+        <label for="itemPizzaChicken" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Selecionar Item:</label>
         <select id="itemPizzaChicken" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(91,140,255,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
           <option>Fatia 🍕</option>
           <option>Massas 🍝</option>
@@ -821,10 +821,10 @@
           <option>Vegetariana (Palmito, milho, ervilha, mussarela, tomate)</option>
           <option>Chocolate (Broto fechado com chocolate e cobertura de chocolate)</option>
         </select>
-        <label for="horarioPizzaChicken" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#1a2980;position:relative;z-index:1;">Horário de Retirada:</label>
+        <label for="horarioPizzaChicken" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioPizzaChicken" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(91,140,255,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoPizzaChicken()" style="width:100%;background:linear-gradient(135deg,#5b8cff 0%,#1a2980 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(91,140,255,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharPizzaChicken()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharPizzaChicken()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
@@ -845,51 +845,51 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;">X-Burger</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 15,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;">X-Salada</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 18,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;">X-Egg</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 19,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;">X-Bacon</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 19,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;">X-Tudo</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 22,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;"><td style="padding:12px 20px;font-weight:500;">Calabacon</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 22,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frangão</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 21,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Fricassê</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 21,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Coco c/ leite condensado</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Coco c/ chocolate</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Banana c/ canela</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Banana c/ chocolate</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Morango c/ chocolate</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Morango c/ leite condensado</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Mussarela (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pizza (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Presunto c/ queijo (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Calabresa c/ queijo (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frango c/ catupiry (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Carne seca c/ queijo (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pizza (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Calabresa (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Bauru (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frango (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Carne moída (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frango c/ catupiry (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frango c/ mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Carne moída c/ mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Calabresa c/ mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Carne, queijo e catupiry (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 15,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Especial (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 15,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Dog tradicional</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 13,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Dogão especial</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 19,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pão na chapa</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 6,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Mortadela</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 10,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Mistão quente</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pão c/ ovo</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 10,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pão c/ ovo e queijo</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Americano</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 16,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Bauru</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Mistão quente c/ queijo</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Batata frita pequena</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 14,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Batata frita grande</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 16,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Adicionais batata</td><td style="padding:12px 20px;font-weight:600;color:#1a2980;">R$ 2,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">X-Burger</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 15,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">X-Salada</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 18,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">X-Egg</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 19,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">X-Bacon</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 19,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">X-Tudo</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 22,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Calabacon</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 22,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frangão</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 21,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Fricassê</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 21,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Coco c/ leite condensado</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Coco c/ chocolate</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Banana c/ canela</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Banana c/ chocolate</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Morango c/ chocolate</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Morango c/ leite condensado</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Mussarela (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pizza (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Presunto c/ queijo (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Calabresa c/ queijo (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frango c/ catupiry (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Carne seca c/ queijo (tapioca)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pizza (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Calabresa (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Bauru (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frango (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Carne moída (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frango c/ catupiry (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frango c/ mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Carne moída c/ mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Calabresa c/ mussarela (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Carne, queijo e catupiry (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 15,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Especial (pastel)</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 15,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Dog tradicional</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 13,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Dogão especial</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 19,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pão na chapa</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 6,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Mortadela</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 10,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Mistão quente</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pão c/ ovo</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 10,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pão c/ ovo e queijo</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Americano</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 16,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Bauru</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Mistão quente c/ queijo</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Batata frita pequena</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 14,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Batata frita grande</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 16,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Adicionais batata</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 2,50</td></tr>
           </tbody>
         </table>
       </div>
@@ -897,7 +897,7 @@
         <!-- Shimmer effect -->
         <div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(91,140,255,0.1),transparent);animation:shimmerSweep 3s ease-in-out infinite;pointer-events:none;"></div>
         
-        <label for="itemImperatriz" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#1a2980;position:relative;z-index:1;">Selecionar Item:</label>
+        <label for="itemImperatriz" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Selecionar Item:</label>
         <select id="itemImperatriz" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(91,140,255,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
           <option>X-Burger</option>
           <option>X-Salada</option>
@@ -945,10 +945,10 @@
           <option>Batata frita grande</option>
           <option>Adicionais batata</option>
         </select>
-        <label for="horarioImperatriz" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#1a2980;position:relative;z-index:1;">Horário de Retirada:</label>
+        <label for="horarioImperatriz" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioImperatriz" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(91,140,255,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoImperatriz()" style="width:100%;background:linear-gradient(135deg,#5b8cff 0%,#1a2980 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(91,140,255,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharImperatriz()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharImperatriz()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
@@ -971,16 +971,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;">Café Expresso</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 3,50</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;">Café com Leite</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 4,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;">Cappuccino</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 6,50</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;">Café Gelado</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 5,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;">Mocha</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 7,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Frappé</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 8,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Macchiato</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 6,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Americano</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 4,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Pão de Açúcar</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 3,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Croissant</td><td style="padding:12px 20px;font-weight:600;color:#8B4513;">R$ 5,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Café Expresso</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 3,50</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Café com Leite</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 4,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Cappuccino</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 6,50</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Café Gelado</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 5,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Mocha</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 7,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Frappé</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 8,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Macchiato</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 6,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Americano</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 4,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Pão de Açúcar</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 3,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Croissant</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 5,50</td></tr>
           </tbody>
         </table>
       </div>
@@ -988,7 +988,7 @@
         <!-- Shimmer effect -->
         <div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(139,69,19,0.1),transparent);animation:shimmerSweep 3s ease-in-out infinite;pointer-events:none;"></div>
         
-        <label for="itemCafeBomGosto" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#8B4513;position:relative;z-index:1;">Selecionar Item:</label>
+        <label for="itemCafeBomGosto" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Selecionar Item:</label>
         <select id="itemCafeBomGosto" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(139,69,19,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
           <option>Café Expresso</option>
           <option>Café com Leite</option>
@@ -1001,10 +1001,10 @@
           <option>Pão de Açúcar</option>
           <option>Croissant</option>
         </select>
-        <label for="horarioCafeBomGosto" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#8B4513;position:relative;z-index:1;">Horário de Retirada:</label>
+        <label for="horarioCafeBomGosto" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioCafeBomGosto" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(139,69,19,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoCafeBomGosto()" style="width:100%;background:linear-gradient(135deg,#CD853F 0%,#8B4513 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(139,69,19,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharCafeBomGosto()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharCafeBomGosto()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
@@ -1025,16 +1025,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;">Brigadeiro Gourmet</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 4,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;">Brownie</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 6,50</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;">Cheesecake</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 8,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;">Mousse de Chocolate</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 7,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;">Tiramisu</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 9,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Café Especial</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 5,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Smoothie</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 8,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Milk Shake</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 9,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Cupcake</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 5,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Macaron</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 3,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Brigadeiro Gourmet</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 4,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Brownie</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 6,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Cheesecake</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 8,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Mousse de Chocolate</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 7,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Tiramisu</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 9,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Café Especial</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 5,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Smoothie</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 8,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Milk Shake</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 9,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Cupcake</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 5,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Macaron</td><td style="padding:12px 20px;font-weight:600;color:#FF1493;">R$ 3,50</td></tr>
           </tbody>
         </table>
       </div>
@@ -1056,7 +1056,7 @@
         <label for="horarioAtCafe" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#FF1493;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioAtCafe" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,20,147,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoAtCafe()" style="width:100%;background:linear-gradient(135deg,#FFB6C1 0%,#FF1493 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(255,20,147,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharAtCafe()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharAtCafe()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
@@ -1077,22 +1077,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;">Suco de Laranja</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 5,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;">Suco Verde</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 7,50</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;">Vitamina de Banana</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 6,00</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;">Água de Coco</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 4,50</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;">Smoothie Detox</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 8,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Suco de Acerola</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 5,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Água Saborizada</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 3,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Isotônico Natural</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 6,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Chá Gelado</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 4,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Kombucha</td><td style="padding:12px 20px;font-weight:600;color:#228B22;">R$ 9,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Suco de Laranja</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 5,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Suco Verde</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 7,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Vitamina de Banana</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 6,00</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Água de Coco</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 4,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Smoothie Detox</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 8,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Suco de Acerola</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 5,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Água Saborizada</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 3,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Isotônico Natural</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 6,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Chá Gelado</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 4,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Kombucha</td><td style="padding:12px 20px;font-weight:600;color:#000000;">R$ 9,00</td></tr>
           </tbody>
         </table>
       </div>
       <div class="pedido-bot" style="max-width:420px;margin:40px auto 0 auto;background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.1);padding:32px 40px;display:flex;flex-direction:column;gap:16px;align-items:center;border:1px solid rgba(0,0,0,0.05);position:relative;overflow:hidden;">
         <div style="position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(34,139,34,0.1),transparent);animation:shimmerSweep 3s ease-in-out infinite;pointer-events:none;"></div>
-        <label for="itemDema" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#228B22;position:relative;z-index:1;">Selecionar Item:</label>
+        <label for="itemDema" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Selecionar Item:</label>
         <select id="itemDema" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(34,139,34,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
           <option>Suco de Laranja</option>
           <option>Suco Verde</option>
@@ -1105,10 +1105,10 @@
           <option>Chá Gelado</option>
           <option>Kombucha</option>
         </select>
-        <label for="horarioDema" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#228B22;position:relative;z-index:1;">Horário de Retirada:</label>
+        <label for="horarioDema" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#000000;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioDema" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(34,139,34,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoDema()" style="width:100%;background:linear-gradient(135deg,#00FF7F 0%,#228B22 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(34,139,34,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharDema()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharDema()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
@@ -1129,16 +1129,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;">Croissant Tradicional</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 6,50</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;">Pain au Chocolat</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 8,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;">Éclair</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 9,50</td></tr>
-            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;">Madeleine</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 5,00</td></tr>
-            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;">Tarte aux Fruits</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 12,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Millefeuille</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 11,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Chouquette</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 4,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Financier</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 6,00</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Paris-Brest</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 10,50</td></tr>
-            <tr><td style="padding:12px 20px;font-weight:500;">Canelé</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 7,50</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Croissant Tradicional</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 6,50</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Pain au Chocolat</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 8,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Éclair</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 9,50</td></tr>
+            <tr style="animation:slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Madeleine</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 5,00</td></tr>
+            <tr style="animation:slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;"><td style="padding:12px 20px;font-weight:500;color:#000000;">Tarte aux Fruits</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 12,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Millefeuille</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 11,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Chouquette</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 4,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Financier</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 6,00</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Paris-Brest</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 10,50</td></tr>
+            <tr><td style="padding:12px 20px;font-weight:500;color:#000000;">Canelé</td><td style="padding:12px 20px;font-weight:600;color:#8A2BE2;">R$ 7,50</td></tr>
           </tbody>
         </table>
       </div>
@@ -1160,7 +1160,7 @@
         <label for="horarioBonnier" style="font-weight:700;font-size:1.2rem;align-self:flex-start;color:#8A2BE2;position:relative;z-index:1;">Horário de Retirada:</label>
         <input type="time" id="horarioBonnier" style="width:100%;padding:12px 16px;border-radius:12px;border:2px solid rgba(138,43,226,0.2);font-size:1.1rem;background:#fff;position:relative;z-index:1;">
         <button onclick="enviarPedidoBonnier()" style="width:100%;background:linear-gradient(135deg,#DDA0DD 0%,#8A2BE2 100%);color:#fff;font-weight:700;font-size:1.2rem;padding:14px 0;border:none;border-radius:12px;cursor:pointer;position:relative;z-index:1;box-shadow:0 4px 15px rgba(138,43,226,0.3);">🛒 Enviar Pedido</button>
-        <button onclick="fecharBonnier()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#666;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
+        <button onclick="fecharBonnier()" style="width:100%;margin-top:8px;background:rgba(0,0,0,0.05);color:#000000;font-weight:600;font-size:1.1rem;padding:12px 0;border:1px solid rgba(0,0,0,0.1);border-radius:12px;cursor:pointer;position:relative;z-index:1;">← Voltar</button>
       </div>
     </div>
   </div>
