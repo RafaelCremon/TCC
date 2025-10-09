@@ -835,10 +835,11 @@
 </head>
 <body class="page-enter">
   <script>
+    // TODO: Carregar tema do banco de dados
     // Aplica o tema salvo ANTES de qualquer renderização
-    if(localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
+    // if(temaDoUsuario === 'dark') {
+    //   document.body.classList.add('dark-mode');
+    // }
 
     // Sistema de animações aprimorado - apenas efeito ripple integrado
     const style = document.createElement('style');
@@ -899,7 +900,8 @@
 
     // Carrega atalhos salvos
     function carregarAtalhosSelecionados() {
-      const salvos = JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
+      // TODO: Carregar atalhos do banco de dados
+      const salvos = []; // JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
       slotsContainer.innerHTML = '';
       for (let i = 0; i < 6; i++) {
         const atalho = salvos[i];
@@ -1111,7 +1113,8 @@
         }
       });
       
-      localStorage.setItem('atalhosSelecionados', JSON.stringify(atalhos));
+      // TODO: Salvar atalhos no banco de dados
+      console.log('Atalhos serão salvos no banco:', atalhos);
       
       // Animação de sucesso
       this.style.animation = 'pulseGlow 0.6s ease-out';

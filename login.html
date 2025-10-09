@@ -246,7 +246,7 @@
 
     
     /* Botão modernizado com efeitos premium */
-    button[onclick="login()"] {
+    #loginButton {
       background: linear-gradient(135deg, #447eff 0%, #00e0ff 100%);
       color: white;
       border: none;
@@ -269,7 +269,7 @@
       margin-top: 8px;
     }
     
-    button[onclick="login()"]::before {
+    #loginButton::before {
       content: '';
       position: absolute;
       top: 0;
@@ -285,7 +285,7 @@
       transition: left 0.6s ease;
     }
     
-    button[onclick="login()"]::after {
+    #loginButton::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -298,7 +298,7 @@
       border-radius: 50%;
     }
     
-    button[onclick="login()"]:hover {
+    #loginButton:hover {
       background: linear-gradient(135deg, #3366cc 0%, #00b8cc 100%);
       transform: translateY(-3px) scale(1.02);
       box-shadow: 
@@ -306,16 +306,16 @@
         0 8px 16px rgba(0,224,255,0.3);
     }
     
-    button[onclick="login()"]:hover::before {
+    #loginButton:hover::before {
       left: 100%;
     }
     
-    button[onclick="login()"]:hover::after {
+    #loginButton:hover::after {
       width: 100px;
       height: 100px;
     }
     
-    button[onclick="login()"]:active {
+    #loginButton:active {
       transform: translateY(-1px) scale(0.98);
     }
     
@@ -597,14 +597,14 @@
       background: rgba(0,224,255,0.15);
     }
     
-    body.dark-mode button[onclick="login()"] {
+    body.dark-mode #loginButton {
       background: linear-gradient(135deg, #7f5cff 0%, #00e0ff 100%);
       box-shadow: 
         0 8px 24px rgba(127,92,255,0.4),
         0 4px 8px rgba(0,224,255,0.3);
     }
     
-    body.dark-mode button[onclick="login()"]:hover {
+    body.dark-mode #loginButton:hover {
       background: linear-gradient(135deg, #6b47ff 0%, #00b8cc 100%);
       box-shadow: 
         0 12px 32px rgba(127,92,255,0.5),
@@ -658,6 +658,51 @@
     body.dark-mode .credentials-note {
       background: rgba(0,224,255,0.1);
       border-color: #00e0ff;
+    }
+
+    /* Alert Styles */
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid;
+      animation: alertFadeIn 0.3s ease-out;
+    }
+
+    .alert-danger {
+      background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
+      color: #d32f2f;
+      border-color: #f44336;
+    }
+
+    .alert-success {
+      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      color: #2e7d32;
+      border-color: #4caf50;
+    }
+
+    body.dark-mode .alert-danger {
+      background: linear-gradient(135deg, #3d1a1a 0%, #4a1e1e 100%);
+      color: #f87171;
+      border-color: #dc2626;
+    }
+
+    body.dark-mode .alert-success {
+      background: linear-gradient(135deg, #1a3d1a 0%, #1e4a1e 100%);
+      color: #86efac;
+      border-color: #16a34a;
+    }
+
+    @keyframes alertFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     body.dark-mode .credentials-note p {
@@ -838,10 +883,11 @@
 <body>
   <!-- Carregar tema salvo -->
   <script>
+    // TODO: Carregar tema do banco de dados
     // Aplicar tema salvo imediatamente para evitar flash
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
+    // if (temaDoUsuario === 'dark') {
+    //   document.body.classList.add('dark-mode');
+    // }
   </script>
   
   <!-- Container principal com layout lado a lado -->
@@ -858,25 +904,31 @@
         <p class="sub">Acesse sua conta</p>
       </div>
 
-      <!-- Campo do Usuário -->
-      <div class="campo">
-        <label for="usuario">Usuário</label>
-        <input type="text" id="usuario" placeholder="Digite seu usuário" />
-        <div class="mensagem-erro" id="erroUsuario"></div>
-      </div>
+      <!-- Formulário de Login -->
+      <form id="loginForm">
+        <!-- Campo do Usuário -->
+        <div class="campo">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" placeholder="Digite seu usuário" />
+          <div class="mensagem-erro" id="erroUsuario"></div>
+        </div>
 
-      <!-- Campo da Senha -->
-      <div class="campo pwd-wrap">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" placeholder="Digite sua senha" />
-        <span class="toggle-senha" id="toggleSenhaBtn" style="display:flex;align-items:center;cursor:pointer;">
-    <img id="senhaIcon" src="assets/imagens/OLHO.jpg" alt="Mostrar/Ocultar Senha" style="width:22px;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(44,92,255,0.10));">
-        </span>
-        <div class="mensagem-erro" id="erroSenha"></div>
-      </div>
+        <!-- Campo da Senha -->
+        <div class="campo pwd-wrap">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Digite sua senha" />
+          <span class="toggle-senha" id="togglePassword" style="display:flex;align-items:center;cursor:pointer;">
+      <img id="senhaIcon" src="assets/imagens/OLHO.jpg" alt="Mostrar/Ocultar Senha" style="width:22px;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(44,92,255,0.10));">
+          </span>
+          <div class="mensagem-erro" id="erroSenha"></div>
+        </div>
 
-      <!-- Botão entrar -->
-      <button onclick="login()">Entrar</button>
+        <!-- Mensagem de erro/sucesso -->
+        <div id="error-message" style="display: none; margin: 10px 0; padding: 10px; border-radius: 4px;"></div>
+
+        <!-- Botão entrar -->
+        <button type="submit" id="loginButton" onclick="login(); return false;">Entrar</button>
+      </form>
     </div>
     
     <!-- Painel de credenciais lateral -->
@@ -886,12 +938,12 @@
         <p class="credentials-description">Use estas credenciais para testar diferentes níveis de acesso:</p>
         
         <div class="credentials-list">
-          <div class="credential-card" onclick="fillCredentials('admin', 'admin123')">
+          <div class="credential-card" onclick="fillCredentials('admin', '123456')">
             <div class="credential-icon">💼</div>
             <div class="credential-info">
               <strong>Administrador</strong>
               <span class="credential-login">admin</span>
-              <span class="credential-password">admin123</span>
+              <span class="credential-password">123456</span>
               <p class="credential-desc">Acesso completo ao sistema</p>
             </div>
           </div>
@@ -930,20 +982,21 @@
   </button>
   
   <!-- Conexão JavaScript -->
-  <script src="js/login.js"></script>
+  <script src="js/login_simple.js"></script>
   <script>
     // Função para preencher credenciais automaticamente
     function fillCredentials(username, password) {
-      document.getElementById('usuario').value = username;
-      document.getElementById('senha').value = password;
+      document.getElementById('username').value = username;
+      document.getElementById('password').value = password;
       
       // Limpar erros
-      document.getElementById('erroUsuario').textContent = '';
-      document.getElementById('erroSenha').textContent = '';
+      if (typeof hideError === 'function') {
+        hideError();
+      }
       
       // Destacar visualmente
-      const usuarioInput = document.getElementById('usuario');
-      const senhaInput = document.getElementById('senha');
+      const usuarioInput = document.getElementById('username');
+      const senhaInput = document.getElementById('password');
       usuarioInput.style.background = '#e0f2fe';
       senhaInput.style.background = '#e0f2fe';
       
@@ -955,9 +1008,9 @@
 
     // Alternância do ícone de senha
     window.addEventListener('DOMContentLoaded', function() {
-      var senhaInput = document.getElementById('senha');
+      var senhaInput = document.getElementById('password');
       var senhaIcon = document.getElementById('senhaIcon');
-      var toggleBtn = document.getElementById('toggleSenhaBtn');
+      var toggleBtn = document.getElementById('togglePassword');
       if (senhaInput && senhaIcon && toggleBtn) {
         toggleBtn.addEventListener('click', function() {
           if (senhaInput.type === 'password') {
@@ -1003,13 +1056,13 @@
         themeIcon.alt = 'Modo escuro';
         logoImg.src = 'assets/imagens/LOGOSEMFUNDO.png'; // Logo para tema claro
       }
-      // Salvar preferência no localStorage
-      localStorage.setItem('darkMode', dark ? 'enabled' : 'disabled');
+      // TODO: Salvar preferência de tema no banco de dados
+      console.log('Tema será salvo no banco:', dark ? 'escuro' : 'claro');
       updateSenhaIcon();
     }
+    // TODO: Carregar tema do banco de dados
     // Inicializar com tema salvo ou padrão
-    const savedTheme = localStorage.getItem('darkMode');
-    const isDarkMode = savedTheme === 'enabled';
+    const isDarkMode = false; // Será carregado do banco
     setTheme(isDarkMode);
     themeBtn.addEventListener('click', function() {
       const isDark = document.body.classList.contains('dark-mode');
@@ -1018,7 +1071,7 @@
 
     // Função para atualizar o ícone do olho conforme o tema e estado da senha
     function updateSenhaIcon() {
-      var senhaInput = document.getElementById('senha');
+      var senhaInput = document.getElementById('password');
       var senhaIcon = document.getElementById('senhaIcon');
       if (!senhaInput || !senhaIcon) return;
       if (senhaInput.type === 'password') {
@@ -1042,8 +1095,6 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="../pages/inicial.html">
-  <!-- Script de transição Apple removido -->
   
 </body>
 </html>

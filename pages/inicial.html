@@ -1490,10 +1490,11 @@
 <body>
   <!-- Carregar tema salvo -->
   <script>
+    // TODO: Carregar tema do banco de dados
     // Aplicar tema salvo imediatamente para evitar flash
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
+    // if (temaDoUsuario === 'dark') {
+    //   document.body.classList.add('dark-mode');
+    // }
   </script>
   
   <div class="apple-transition-overlay" id="appleOverlay"></div>
@@ -1508,6 +1509,9 @@
   <img src="../assets/imagens/LOGO.png" alt="Logo Quantum" class="logo" id="headerLogo" style="width:32px;height:32px;border-radius:50%;margin-right:10px;vertical-align:middle;box-shadow:0 2px 8px rgba(44,92,255,0.10);">
       <h1>Quantum Edu.</h1>
   <h2 class="welcome-header" id="headerWelcome" style="font-size:16px; font-weight:400; margin:4px 0 0 0; color:#5b8cff; opacity:0; transition:opacity 0.5s;"></h2>
+  
+  <!-- Botão temporário para debug -->
+  <button onclick="localStorage.removeItem('jaViuBoasVindas'); location.reload();" style="position: fixed; top: 10px; right: 10px; z-index: 9999; background: red; color: white; padding: 5px; border: none; border-radius: 3px; font-size: 12px;">Reset Boas-vindas</button>
     </div>
     
     <!-- Container para Notificações e Perfil -->
@@ -1774,6 +1778,7 @@
 
   <div class="overlay" id="overlay"></div>
   
+  <script src="../js/api.js"></script>
   <script src="../js/inicial.js"></script>
   <script>
   // Sistema de Calendário Moderno
@@ -1792,10 +1797,7 @@
     }
     
     loadEvents() {
-      const saved = localStorage.getItem('schoolEvents');
-      if (saved) {
-        return JSON.parse(saved);
-      }
+      // TODO: Carregar eventos do banco de dados
       
       // Eventos exemplo
       return [
@@ -1838,7 +1840,8 @@
     }
     
     saveEvents() {
-      localStorage.setItem('schoolEvents', JSON.stringify(this.events));
+      // TODO: Salvar eventos no banco de dados
+      console.log('Eventos serão salvos no banco:', this.events);
     }
     
     init() {
@@ -2033,7 +2036,8 @@
   if (typeof carregarAtalhos === 'undefined') {
     window.carregarAtalhos = function() {
       try {
-        const atalhos = JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
+        // TODO: Carregar atalhos do banco de dados
+        const atalhos = []; // JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
         const container = document.querySelector('.shortcut-buttons');
         if (!container) return;
         
@@ -2126,13 +2130,15 @@
   });
   
   window.addEventListener('DOMContentLoaded', function() {
-    // Verificar se usuário está logado
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    if (!currentUser.username && !currentUser.name) {
-      // Se não há usuário logado, redirecionar para login
-      window.location.href = '../login.html';
-      return;
-    }
+    console.log('DOM carregado');
+    
+    // TODO: Verificar se usuário está logado no banco de dados
+    // const currentUser = obterUsuarioLogado();
+    // if (!currentUser.username && !currentUser.name) {
+    //   // Se não há usuário logado, redirecionar para login
+    //   window.location.href = '../login.html';
+    //   return;
+    // }
     
     // Apple-style card animation
     var card = document.getElementById('shortcutsCard');
@@ -2146,7 +2152,8 @@
     var cardWelcome = document.getElementById('cardWelcome');
     var headerWelcome = document.getElementById('headerWelcome');
     
-    // Obter informações do usuário logado
+    // TODO: Obter informações do usuário logado do banco de dados
+    const currentUser = { name: 'Admin', role: 'admin' }; // Dados temporários
     const userName = currentUser.name || 'Admin';
     const userRole = currentUser.role || 'admin';
     
@@ -2173,13 +2180,12 @@
     var headerText = `${getGreeting()}, ${userName}`;
     var cardText = `${getGreeting()}, ${getRoleTitle(userRole)}`;
     
+    // TODO: Verificar no banco se usuário já viu boas-vindas
     var jaViuBoasVindas = localStorage.getItem('jaViuBoasVindas');
+    console.log('jaViuBoasVindas:', jaViuBoasVindas);
     
     // Função para configurar permissões da interface
     function setupUserPermissions() {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-      const userRole = currentUser.role || 'admin';
-      
       console.log('Configurando permissões para:', userRole);
       
       // Elementos que só administradores podem acessar
@@ -2315,22 +2321,11 @@
       // Botão sair do perfil
       if (btnSair) {
         btnSair.onclick = function() {
-          // Registrar logout no log de atividades
-          const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-          if (currentUser.name) {
-            const activityLogs = JSON.parse(localStorage.getItem('activityLogs') || '[]');
-            activityLogs.push({
-              id: Date.now(),
-              timestamp: new Date().toISOString(),
-              action: 'logout',
-              user: currentUser.name,
-              details: 'Logout realizado com sucesso'
-            });
-            localStorage.setItem('activityLogs', JSON.stringify(activityLogs));
-          }
+          // TODO: Registrar logout no banco de dados
+          console.log('Logout será registrado no banco de dados');
           
-          // Limpar sessão atual
-          localStorage.removeItem('currentUser');
+          // TODO: Limpar sessão do banco de dados
+          console.log('Sessão será removida do banco');
           
           // Animação de saída e redirecionamento
           document.querySelector('.shortcuts-card').classList.add('apple-animate');
@@ -2352,7 +2347,9 @@
       }
     }
     if (welcomeDiv && welcomeText && cardWelcome) {
+      console.log('Elementos encontrados, jaViuBoasVindas:', jaViuBoasVindas);
       if (!jaViuBoasVindas) {
+        console.log('Iniciando animação de boas-vindas');
         // Executa animação de boas-vindas
         welcomeText.textContent = '';
         let i = 0;
@@ -2391,6 +2388,7 @@
           }, 700);
         }
       } else {
+        console.log('Boas-vindas já foram vistas');
         // Já viu, mostra direto no card
         if (welcomeDiv) welcomeDiv.style.display = 'none';
         cardWelcome.textContent = cardText;
@@ -2513,7 +2511,8 @@ function inicializarChat() {
         acao: () => {
           document.body.classList.toggle('dark-mode');
           const isDarkMode = document.body.classList.contains('dark-mode');
-          localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+          // TODO: Salvar tema no banco de dados
+          console.log('Tema será salvo no banco:', isDarkMode ? 'escuro' : 'claro');
           const modo = isDarkMode ? 'escuro' : 'claro';
           adicionarMensagem('assistant', `🎨 Perfeito! Tema alterado para modo ${modo}. Você pode alternar sempre que quiser!`);
           document.getElementById('assistenteChat').style.display = 'none';
@@ -2930,7 +2929,8 @@ function sugerirAcoes(pergunta, resposta) {
           setTimeout(() => {
             document.body.classList.toggle('dark-mode');
             const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            // TODO: Salvar tema no banco de dados
+            console.log('Tema será salvo no banco:', isDarkMode ? 'escuro' : 'claro');
             adicionarMensagem('assistant', `🎨 Tema alterado para ${isDarkMode ? 'escuro' : 'claro'}!`);
           }, 500);
           document.getElementById('assistenteChat').style.display = 'none';
@@ -2938,7 +2938,8 @@ function sugerirAcoes(pergunta, resposta) {
           // Alternar tema diretamente se não encontrar o perfil
           document.body.classList.toggle('dark-mode');
           const isDarkMode = document.body.classList.contains('dark-mode');
-          localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+          // TODO: Salvar tema no banco de dados
+          console.log('Tema será salvo no banco:', isDarkMode ? 'escuro' : 'claro');
           adicionarMensagem('assistant', `🎨 Tema alterado para ${isDarkMode ? 'escuro' : 'claro'}!`);
         }
       }
@@ -3250,7 +3251,8 @@ document.addEventListener('click', function(e) {
 document.getElementById('btnTrocarTema').onclick = function() {
   document.body.classList.toggle('dark-mode');
   const isDarkMode = document.body.classList.contains('dark-mode');
-  localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+  // TODO: Salvar tema no banco de dados
+  console.log('Tema será salvo no banco:', isDarkMode ? 'escuro' : 'claro');
   miniPerfilPopup.style.display = 'none';
 };
 
@@ -3360,10 +3362,11 @@ document.getElementById('btnLogout').onclick = function() {
 // Sistema de Gamificação
 class GamificationSystem {
   constructor() {
-    this.points = parseInt(localStorage.getItem('userPoints') || '0');
-    this.level = parseInt(localStorage.getItem('userLevel') || '1');
-    this.badges = JSON.parse(localStorage.getItem('userBadges') || '[]');
-    this.actions = JSON.parse(localStorage.getItem('userActions') || '{}');
+    // TODO: Carregar dados de gamificação do banco de dados
+    this.points = 0; // parseInt(localStorage.getItem('userPoints') || '0');
+    this.level = 1; // parseInt(localStorage.getItem('userLevel') || '1');
+    this.badges = []; // JSON.parse(localStorage.getItem('userBadges') || '[]');
+    this.actions = {}; // JSON.parse(localStorage.getItem('userActions') || '{}');
     
     this.init();
   }
@@ -3556,21 +3559,13 @@ class GamificationSystem {
   }
   
   getDaysStreak() {
+    // TODO: Calcular streak de dias consecutivos a partir do banco de dados
     const today = new Date().toDateString();
-    const lastVisit = localStorage.getItem('lastVisitDate');
-    const streak = parseInt(localStorage.getItem('visitStreak') || '1');
+    // const lastVisit = obterUltimaVisitaUsuario();
+    // const streak = obterStreakUsuario();
     
-    if (lastVisit !== today) {
-      localStorage.setItem('lastVisitDate', today);
-      if (lastVisit && this.isConsecutiveDay(lastVisit, today)) {
-        const newStreak = streak + 1;
-        localStorage.setItem('visitStreak', newStreak.toString());
-        return newStreak;
-      } else {
-        localStorage.setItem('visitStreak', '1');
-        return 1;
-      }
-    }
+    console.log('Streak de dias será calculado a partir do banco');
+    return 1; // Valor padrão temporário
     return streak;
   }
   
@@ -3583,19 +3578,19 @@ class GamificationSystem {
   }
   
   getBlocksVisited() {
-    return JSON.parse(localStorage.getItem('visitedBlocks') || '[]').length;
+    // TODO: Obter blocos visitados do banco de dados
+    return 0; // JSON.parse(localStorage.getItem('visitedBlocks') || '[]').length;
   }
   
   trackBlockVisit(blockId) {
-    const visited = JSON.parse(localStorage.getItem('visitedBlocks') || '[]');
-    if (!visited.includes(blockId)) {
-      visited.push(blockId);
-      localStorage.setItem('visitedBlocks', JSON.stringify(visited));
-      
-      if (visited.length >= 6 && !this.badges.includes('navigator')) {
-        this.unlockBadge('navigator', 'Navegador Mestre!', 'Você visitou todos os blocos!', '🧭');
-      }
-    }
+    // TODO: Registrar visita ao bloco no banco de dados
+    console.log('Visita ao bloco será registrada no banco:', blockId);
+    
+    // TODO: Verificar conquistas baseadas em visitas
+    // const blocosVisitados = obterBlocosVisitadosUsuario();
+    // if (blocosVisitados.length >= 6 && !this.badges.includes('navigator')) {
+    //   this.unlockBadge('navigator', 'Navegador Mestre!', 'Você visitou todos os blocos!', '🧭');
+    // }
     this.updateBadgeDisplay();
   }
   
@@ -3650,10 +3645,13 @@ class GamificationSystem {
   }
   
   save() {
-    localStorage.setItem('userPoints', this.points.toString());
-    localStorage.setItem('userLevel', this.level.toString());
-    localStorage.setItem('userBadges', JSON.stringify(this.badges));
-    localStorage.setItem('userActions', JSON.stringify(this.actions));
+    // TODO: Salvar dados de gamificação no banco de dados
+    console.log('Dados de gamificação serão salvos no banco:', {
+      points: this.points,
+      level: this.level,
+      badges: this.badges,
+      actions: this.actions
+    });
   }
 }
 
@@ -3720,17 +3718,17 @@ class UserManagementSystem {
     console.log('Verificando hashes de usuários...');
     console.log('Usuários carregados:', this.users.length);
     
+    // TODO: Validação será feita no banco de dados
+    console.log('Validação de hashes será feita no backend');
     // Sempre recriar dados de exemplo na primeira vez para garantir compatibilidade
-    const hashesValidated = localStorage.getItem('hashesValidated');
-    if (!hashesValidated || this.users.length === 0) {
+    // const hashesValidated = obterStatusValidacaoHashes();
+    if (this.users.length === 0) {
       console.log('Recreando usuários com hashes corretos...');
       
       // Limpar usuários existentes e recarregar com hash correto
       this.users = [];
       this.loadSampleData();
       
-      // Marcar como validado
-      localStorage.setItem('hashesValidated', 'true');
       console.log('✅ Usuários recriados com hashes corretos!');
     } else {
       console.log('✅ Hashes já validados anteriormente');
@@ -3739,8 +3737,9 @@ class UserManagementSystem {
   
   // Verificar se o usuário atual é administrador
   isCurrentUserAdmin() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    return currentUser.role === 'admin';
+    // TODO: Verificar papel do usuário no banco de dados
+    const currentUser = {}; // obterUsuarioAtual();
+    return true; // currentUser.role === 'admin'; // Temporariamente admin para testes
   }
   
   // Função para verificar permissões antes de executar ações
@@ -3791,12 +3790,12 @@ class UserManagementSystem {
     const usersBtn = document.getElementById('usersManagementBtn');
     if (usersBtn) {
       usersBtn.addEventListener('click', () => {
-        // Verificar permissões antes de abrir
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-        if (currentUser.role !== 'admin') {
-          alert('❌ Acesso negado!\n\nApenas administradores podem gerenciar usuários.');
-          return;
-        }
+        // TODO: Verificar permissões do usuário no banco de dados
+        // const currentUser = obterUsuarioAtual();
+        // if (currentUser.role !== 'admin') {
+        //   alert('❌ Acesso negado!\n\nApenas administradores podem gerenciar usuários.');
+        //   return;
+        // }
         
         console.log('Opening users modal...');
         this.openModal();
@@ -3946,17 +3945,18 @@ class UserManagementSystem {
   }
   
   loadUsers() {
-    const saved = localStorage.getItem('users'); // Mesma chave do login.js
-    return saved ? JSON.parse(saved) : [];
+    // TODO: Carregar usuários do banco de dados
+    return []; // saved ? JSON.parse(saved) : [];
   }
   
   saveUsers() {
-    localStorage.setItem('users', JSON.stringify(this.users)); // Mesma chave do login.js
+    // TODO: Salvar usuários no banco de dados
+    console.log('Usuários serão salvos no banco:', this.users);
   }
   
   loadPermissions() {
-    const saved = localStorage.getItem('userPermissions');
-    return saved ? JSON.parse(saved) : {
+    // TODO: Carregar permissões do banco de dados
+    return {
       admin: ['manage_users', 'view_logs', 'configure_system', 'full_access'],
       professor: ['view_tour', 'view_students', 'manage_activities', 'view_reports'],
       aluno: ['view_tour', 'use_shortcuts', 'view_menu', 'participate_gamification'],
@@ -3982,7 +3982,8 @@ class UserManagementSystem {
     });
     
     this.permissions = permissions;
-    localStorage.setItem('userPermissions', JSON.stringify(permissions));
+    // TODO: Salvar permissões no banco de dados
+    console.log('Permissões serão salvas no banco:', permissions);
     
     this.logActivity('change_permissions', 'Admin', 'Permissões do sistema atualizadas');
     
@@ -4010,8 +4011,8 @@ class UserManagementSystem {
   }
   
   loadActivityLogs() {
-    const saved = localStorage.getItem('activityLogs');
-    return saved ? JSON.parse(saved) : [];
+    // TODO: Carregar logs de atividade do banco de dados
+    return []; // saved ? JSON.parse(saved) : [];
   }
   
   logActivity(action, user, details) {
@@ -4031,7 +4032,8 @@ class UserManagementSystem {
       this.activityLogs = this.activityLogs.slice(0, 1000);
     }
     
-    localStorage.setItem('activityLogs', JSON.stringify(this.activityLogs));
+    // TODO: Salvar logs de atividade no banco de dados
+    console.log('Logs de atividade serão salvos no banco:', this.activityLogs);
   }
   
   loadSampleData() {

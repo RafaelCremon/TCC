@@ -610,10 +610,11 @@
 <body>
   <!-- Carregar tema salvo -->
   <script>
+    // TODO: Carregar tema do banco de dados
     // Aplicar tema salvo imediatamente para evitar flash
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
+    // if (temaDoUsuario === 'dark') {
+    //   document.body.classList.add('dark-mode');
+    // }
   </script>
   
   <script src="../js/lanchonetes.js"></script>
@@ -1168,10 +1169,11 @@
   <script>
     // Inicialização com animações
     document.addEventListener('DOMContentLoaded', function() {
+      // TODO: Carregar tema do banco de dados
       // Aplicar tema escuro se estiver ativo
-      if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-      }
+      // if (temaDoUsuario === 'dark') {
+      //   document.body.classList.add('dark-mode');
+      // }
       
       // Configurar eventos do modal
       setupModalEvents();

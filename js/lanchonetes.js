@@ -1,7 +1,8 @@
+// TODO: Carregar tema do banco de dados
 // Aplica o tema salvo ANTES de qualquer renderização
-if(localStorage.getItem('theme') === 'dark') {
-  document.body.classList.add('dark-mode');
-}
+// if(temaDoUsuario === 'dark') {
+//   document.body.classList.add('dark-mode');
+// }
 
 function voltar() {
   document.body.style.animation = "fadeOutScale 0.5s cubic-bezier(.4,1.4,.6,1) forwards";

@@ -35,12 +35,12 @@ const toggleThemeBtn = document.getElementById('toggleThemeBtn');
 toggleThemeBtn.addEventListener('click', function(e) {
   e.stopPropagation();
   document.body.classList.toggle('dark-mode');
-  // Salva preferência no localStorage
+  // TODO: Salvar preferência de tema no banco de dados
   if(document.body.classList.contains('dark-mode')) {
-    localStorage.setItem('theme', 'dark');
+    console.log('Tema escuro será salvo no banco de dados');
     trocarLogoTema('dark');
   } else {
-    localStorage.setItem('theme', 'light');
+    console.log('Tema claro será salvo no banco de dados');
     trocarLogoTema('light');
   }
 });
@@ -56,17 +56,19 @@ function trocarLogoTema(theme) {
   }
 }
 
+// TODO: Carregar tema do banco de dados
 // Aplica o tema salvo ao carregar
-if(localStorage.getItem('theme') === 'dark') {
-  document.body.classList.add('dark-mode');
-  trocarLogoTema('dark');
-} else {
-  trocarLogoTema('light');
-}
+// if(temaDoUsuario === 'dark') {
+//   document.body.classList.add('dark-mode');
+//   trocarLogoTema('dark');
+// } else {
+//   trocarLogoTema('light');
+// }
 
 // Função de atalhos para ser chamada pelo HTML
 window.carregarAtalhos = function() {
-  const atalhos = JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
+  // TODO: Carregar atalhos do banco de dados
+  const atalhos = []; // JSON.parse(localStorage.getItem('atalhosSelecionados')) || [];
   const container = document.querySelector('.shortcut-buttons');
   if (!container) return;
   

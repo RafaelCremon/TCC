@@ -1,267 +1,240 @@
-// Classe para gerenciar autenticação (mesma do inicial.html)
-class UserManagementSystem {
-  constructor() {
-    this.users = this.loadUsers();
-    // Carregar dados de exemplo se não houver usuários
-    if (this.users.length === 0) {
-      this.loadSampleData();
-    }
-  }
+/**
+ * ============================================================================
+ * SISTEMA DE LOGIN - INTEGRADO COM API
+ * ============================================================================
+ */
 
-  loadUsers() {
-    const saved = localStorage.getItem('users');
-    return saved ? JSON.parse(saved) : [];
-  }
+// Função global de login para compatibilidade
+window.login = function() {
+    console.log('🔐 Função login() chamada');
+    doLogin();
+};
 
-  hashPassword(password) {
-    // Simples hash base64 com salt para demo
-    const salt = 'escola2024';
-    return btoa(salt + password + salt);
-  }
-
-  verifyPassword(password, hashedPassword) {
-    return this.hashPassword(password) === hashedPassword;
-  }
-
-  authenticateUser(username, password) {
-    console.log('Tentando autenticar:', username);
-    const user = this.users.find(u => u.username === username && u.status === 'active');
-    console.log('Usuário encontrado:', user ? user.username : 'Nenhum');
+// Aguardar o DOM carregar
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔐 Sistema de login carregado');
     
-    if (!user) {
-      console.log('Usuário não encontrado ou inativo');
-      return null;
+    // Se já estiver logado, redirecionar
+    if (typeof isLoggedIn === 'function' && isLoggedIn()) {
+        console.log('✅ Usuário já está logado, redirecionando...');
+        window.location.href = '/pages/inicial.html';
+        return;
     }
     
-    console.log('Verificando senha...');
-    const senhaCorreta = this.verifyPassword(password, user.password);
-    console.log('Senha correta:', senhaCorreta);
+    // Configurar eventos do formulário
+    setupLoginForm();
+    setupPasswordToggle();
+    setupAutoFocus();
+});
+
+/**
+ * Configurar formulário de login
+ */
+function setupLoginForm() {
+    const loginForm = document.getElementById('loginForm');
+    if (!loginForm) {
+        console.log('⚠️ Formulário não encontrado, usando evento no botão');
+        return;
+    }
     
-    if (senhaCorreta) {
-      // Atualizar último acesso
-      user.lastAccess = new Date().toISOString();
-      this.saveUsers();
-      return user;
-    }
-    return null;
-  }
-
-  saveUsers() {
-    localStorage.setItem('users', JSON.stringify(this.users));
-  }
-
-  loadSampleData() {
-    if (this.users.length === 0) {
-      this.users = [
-        {
-          id: 1,
-          name: 'Gustavo Medeiros',
-          email: 'admin@escola.com',
-          username: 'admin',
-          password: this.hashPassword('admin123'),
-          role: 'admin',
-          phone: '(11) 99999-9999',
-          status: 'active',
-          createdAt: '2024-01-15',
-          lastAccess: '2024-03-20T10:30:00',
-          avatar: null,
-          additionalInfo: {}
-        },
-        {
-          id: 2,
-          name: 'Prof. Maria Silva',
-          email: 'maria.silva@escola.com',
-          username: 'maria.prof',
-          password: this.hashPassword('prof123'),
-          role: 'professor',
-          phone: '(11) 98888-8888',
-          status: 'active',
-          createdAt: '2024-02-01',
-          lastAccess: '2024-03-19T14:20:00',
-          avatar: null,
-          additionalInfo: {
-            subject: 'Matemática',
-            department: 'Exatas'
-          }
-        },
-        {
-          id: 3,
-          name: 'João Santos',
-          email: 'joao.santos@aluno.escola.com',
-          username: 'joao.aluno',
-          password: this.hashPassword('aluno123'),
-          role: 'aluno',
-          phone: '(11) 97777-7777',
-          status: 'active',
-          createdAt: '2024-02-15',
-          lastAccess: '2024-03-20T08:15:00',
-          avatar: null,
-          additionalInfo: {
-            class: '3ºJ',
-            rgm: '2012082'
-          }
-        },
-        {
-          id: 4,
-          name: 'Ana Oliveira',
-          email: 'ana.oliveira@email.com',
-          username: 'ana.resp',
-          password: this.hashPassword('resp123'),
-          role: 'responsavel',
-          phone: '(11) 96666-6666',
-          status: 'inactive',
-          createdAt: '2024-03-01',
-          lastAccess: '2024-03-10T16:45:00',
-          avatar: null,
-          additionalInfo: {
-            studentName: 'Pedro Oliveira',
-            relationship: 'Mãe'
-          }
-        }
-      ];
-      this.saveUsers();
-      console.log('Dados de exemplo carregados:', this.users.length, 'usuários');
-    }
-  }
-}
-
-// Instância global do sistema de gerenciamento
-const userSystem = new UserManagementSystem();
-
-// função de login quando ativa "Ao clicar o botão", busca esses elementos:
-function login() {
-  const usuario = document.getElementById("usuario").value;
-  const senha = document.getElementById("senha").value;
-  const erroUsuario = document.getElementById("erroUsuario");
-  const erroSenha = document.getElementById("erroSenha");
-
-  // Debug: verificar se o sistema de usuários está funcionando
-  console.log('Tentativa de login:', { usuario, senha: senha ? '***' : 'vazia' });
-  console.log('Usuários disponíveis:', userSystem.users.length);
-  console.log('Usuários carregados:', userSystem.users.map(u => ({ username: u.username, status: u.status })));
-
-  // Limpa mensagens anteriores
-  erroUsuario.textContent = "";
-  erroSenha.textContent = "";
-
-  // Validações básicas
-  if (!usuario.trim()) {
-    erroUsuario.textContent = "Digite seu usuário";
-    return;
-  }
-
-  if (!senha.trim()) {
-    erroSenha.textContent = "Digite sua senha";
-    return;
-  }
-
-  // Tenta autenticar com o sistema de usuários criados
-  const user = userSystem.authenticateUser(usuario, senha);
-  console.log('Resultado da autenticação:', user ? 'Sucesso' : 'Falhou');
-  
-  if (user) {
-    // Salva informações da sessão
-    localStorage.setItem('currentUser', JSON.stringify({
-      id: user.id,
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      loginTime: new Date().toISOString()
-    }));
-
-    // Log da atividade
-    const activityLogs = JSON.parse(localStorage.getItem('activityLogs') || '[]');
-    activityLogs.push({
-      id: Date.now(),
-      timestamp: new Date().toISOString(),
-      action: 'login',
-      user: user.name,
-      details: 'Login realizado com sucesso'
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        await doLogin();
     });
-    localStorage.setItem('activityLogs', JSON.stringify(activityLogs));
+}
 
-    // Redireciona para a página inicial
-    if (window._appleLoginRedirect) {
-      window._appleLoginRedirect();
-    } else {
-      window.location.href = "pages/inicial.html";
+/**
+ * Processar login
+ */
+async function doLogin() {
+    console.log('🔄 doLogin() iniciado');
+    
+    // Buscar campos pelos IDs corretos
+    const usernameInput = document.getElementById('username') || document.getElementById('usuario');
+    const passwordInput = document.getElementById('password') || document.getElementById('senha');
+    const loginButton = document.getElementById('loginButton') || document.querySelector('button[onclick="login()"]');
+    const errorDiv = document.getElementById('error-message');
+    
+    console.log('🔍 Campos encontrados:', {
+        username: usernameInput?.id,
+        password: passwordInput?.id,
+        button: loginButton?.id || 'button with onclick',
+        error: errorDiv?.id
+    });
+    
+    // Validar campos
+    const username = usernameInput?.value?.trim();
+    const password = passwordInput?.value;
+    
+    console.log('📝 Valores:', { username: username || 'vazio', password: password ? '***' : 'vazio' });
+    
+    if (!username || !password) {
+        showError('Por favor, preencha todos os campos');
+        return;
     }
-  } else {
-    // Fallback para credenciais antigas (admin/1234)
-    if (usuario === "admin" && senha === "1234") {
-      // Salva sessão do admin legacy
-      localStorage.setItem('currentUser', JSON.stringify({
-        id: 0,
-        name: 'Administrador',
-        username: 'admin',
-        email: 'admin@sistema.com',
-        role: 'admin',
-        loginTime: new Date().toISOString()
-      }));
-
-      if (window._appleLoginRedirect) {
-        window._appleLoginRedirect();
-      } else {
-        window.location.href = "pages/inicial.html";
-      }
-    } else {
-      // Credenciais inválidas
-      erroUsuario.textContent = "Usuário ou senha incorretos";
-      erroSenha.textContent = "Verifique suas credenciais";
+    
+    // Mostrar loading
+    setLoginLoading(true);
+    hideError();
+    
+    try {
+        console.log('🔄 Tentando fazer login...');
+        
+        // Verificar se API está disponível
+        if (typeof api === 'undefined') {
+            throw new Error('API não está disponível');
+        }
+        
+        // Fazer login via API diretamente
+        const response = await api.post('/auth/login', { username, password });
+        
+        // Salvar token e dados do usuário
+        api.setAuthToken(response.token);
+        localStorage.setItem('userData', JSON.stringify(response.user));
+        
+        console.log('✅ Login realizado com sucesso!', response.user);
+        
+        // Mostrar sucesso
+        showSuccess('Login realizado com sucesso!');
+        
+        // Aguardar um pouco e redirecionar
+        setTimeout(() => {
+            window.location.href = '/pages/inicial.html';
+        }, 1000);
+        
+    } catch (error) {
+        console.error('❌ Erro no login:', error);
+        showError(error.message || 'Erro ao fazer login');
+        
+    } finally {
+        setLoginLoading(false);
     }
-  }
 }
 
-// NOVO: manter o ícone de olho funcionando
-function toggleSenha() {
-  const input = document.getElementById("senha");
-  if (!input) return;
-  input.type = input.type === "password" ? "text" : "password";
+/**
+ * Mostrar/ocultar senha
+ */
+function setupPasswordToggle() {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password') || document.getElementById('senha');
+    
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Trocar ícone
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            }
+        });
+    }
 }
 
-/* =======================
-   Bolhas originais (decorativas)
-   Mantidas, porém desativadas por padrão para evitar travamentos.
-   Para reativar, mude ENABLE_BUBBLES para true.
-======================= */
-const ENABLE_BUBBLES = false;
-const bolhas = document.getElementById("bolhas");
-const bubbleSize = 20;
-const maxScale = 1.4;
-const gap = bubbleSize * (maxScale - 1); // 8px
-
-function criarBolhas() {
-  if (!bolhas) return;
-  bolhas.innerHTML = "";
-
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  const cols = Math.ceil(width / (bubbleSize + gap));
-  const rows = Math.ceil(height / (bubbleSize + gap));
-  const total = rows * cols;
-  const maxDistance = cols + rows;
-
-  bolhas.style.gridTemplateColumns = `repeat(${cols}, ${bubbleSize}px)`;
-  bolhas.style.gridAutoRows = `${bubbleSize}px`;
-  bolhas.style.gap = `${gap}px`;
-
-  for (let i = 0; i < total; i++) {
-    const li = document.createElement("li");
-    const row = Math.floor(i / cols);
-    const col = i % cols;
-    const delay = (row + col) * 0.05;
-
-    const distance = col + row;
-    const scaleBase = 0.4 + (distance / maxDistance) * 1.0; // varia de 0.4 a 1.4
-    li.style.setProperty("--scale-base", scaleBase);
-    li.style.animationDelay = `${delay}s`;
-    bolhas.appendChild(li);
-  }
+/**
+ * Focar no primeiro campo
+ */
+function setupAutoFocus() {
+    const usernameInput = document.getElementById('username') || document.getElementById('usuario');
+    if (usernameInput) {
+        usernameInput.focus();
+    }
 }
 
-if (ENABLE_BUBBLES && bolhas) {
-  criarBolhas();
-  window.addEventListener("resize", criarBolhas);
+/**
+ * Controlar estado de loading do botão
+ */
+function setLoginLoading(loading) {
+    const loginButton = document.getElementById('loginButton') || document.querySelector('button[onclick="login()"]');
+    const buttonText = document.getElementById('button-text');
+    const buttonSpinner = document.getElementById('button-spinner');
+    
+    if (loginButton) {
+        loginButton.disabled = loading;
+    }
+    
+    if (buttonText) {
+        buttonText.textContent = loading ? 'Entrando...' : 'Entrar';
+    }
+    
+    if (buttonSpinner) {
+        buttonSpinner.style.display = loading ? 'inline-block' : 'none';
+    }
 }
+
+/**
+ * Mostrar erro
+ */
+function showError(message) {
+    const errorDiv = document.getElementById('error-message') || document.getElementById('erroUsuario');
+    if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        errorDiv.className = 'alert alert-danger';
+    }
+}
+
+/**
+ * Mostrar sucesso
+ */
+function showSuccess(message) {
+    const errorDiv = document.getElementById('error-message');
+    if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        errorDiv.className = 'alert alert-success';
+    }
+}
+
+/**
+ * Ocultar mensagem
+ */
+function hideError() {
+    const errorDiv = document.getElementById('error-message');
+    if (errorDiv) {
+        errorDiv.style.display = 'none';
+    }
+}
+
+/**
+ * ============================================================================
+ * FUNÇÕES DE TESTE E DEBUG
+ * ============================================================================
+ */
+
+// Função simples para testar se o JavaScript está funcionando
+window.testAlert = function() {
+    alert('JavaScript funcionando!');
+};
+
+// Função para testar login com dados de exemplo
+window.testLogin = function() {
+    console.log('🧪 Testando login...');
+    
+    const usernameField = document.getElementById('username') || document.getElementById('usuario');
+    const passwordField = document.getElementById('password') || document.getElementById('senha');
+    
+    if (usernameField && passwordField) {
+        usernameField.value = 'admin';
+        passwordField.value = '123456';
+        doLogin();
+    } else {
+        console.error('❌ Campos não encontrados');
+    }
+};
+
+// Verificar se API está carregada
+window.checkAPI = function() {
+    console.log('🔍 Verificando API...');
+    console.log('ApiClient disponível:', typeof ApiClient !== 'undefined');
+    console.log('api object disponível:', typeof api !== 'undefined');
+    console.log('isLoggedIn function disponível:', typeof isLoggedIn === 'function');
+};
+
+console.log('🔐 Sistema de login integrado com API carregado!');
+console.log('💡 Comandos de teste disponíveis:');
+console.log('   - testAlert() - Testa se JS está funcionando');
+console.log('   - testLogin() - Testa login com admin/123456'); 
+console.log('   - checkAPI() - Verifica se API está carregada');
